@@ -1,0 +1,8 @@
+@mixin common {
+	box-sizing: border-box;
+	color: #333;
+	font-size: 14px;
+}
+@mixin radius {
+	border-radius: 6px;
+}

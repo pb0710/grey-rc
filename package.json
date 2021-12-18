@@ -10,16 +10,16 @@
 		"test": "jest"
 	},
 	"dependencies": {
+		"@mdi/js": "^6.5.95",
+		"@mdi/react": "^1.5.0",
 		"gray-hook": "link:../gray-hook",
+		"gray-react-form": "link:../gray-react-form",
 		"gray-utils": "link:../gray-utils",
-		"gray-react-form": "link:../gray-react-form"
-	},
-	"peerDependencies": {
 		"react": "^17.0.2",
 		"react-dom": "^17.0.2"
 	},
+	"peerDependencies": {},
 	"devDependencies": {
-		"react-router-dom": "^6.1.1",
 		"@rollup/plugin-typescript": "^8.3.0",
 		"@types/jest": "^27.0.3",
 		"@types/react": "^17.0.37",
@@ -39,6 +39,7 @@
 		"pinst": "^2.1.6",
 		"prettier": "^2.5.1",
 		"pretty-quick": "^3.1.2",
+		"react-router-dom": "^6.1.1",
 		"rollup-plugin-analyzer": "^4.0.0",
 		"rollup-plugin-visualizer": "^5.5.2",
 		"sass": "^1.45.0",

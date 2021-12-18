@@ -1,0 +1,15 @@
+@use '../../../common.scss' as *;
+.g-divider {
+	width: 100%;
+	height: 1px;
+	background: #eee;
+	&.g-small {
+		margin: 8px 0;
+	}
+	&.g-medium {
+		margin: 16px 0;
+	}
+	&.g-large {
+		margin: 24px 0;
+	}
+}

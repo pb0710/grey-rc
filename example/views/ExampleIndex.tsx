@@ -1,6 +1,7 @@
 import React, { FC, FormEvent } from 'react'
 import { Field, useForm } from 'gray-react-form'
 import '../classes/index.scss'
+import { Button } from '../../src'
 
 interface CheckboxProps {
 	value?: boolean
@@ -73,7 +74,7 @@ const ExampleIndex: FC = () => {
 					</Field>
 				</label>
 				<br />
-				<button type="submit">submit</button>
+				<Button type="submit">submit</Button>
 			</form>
 		</>
 	)
