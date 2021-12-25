@@ -1,5 +1,6 @@
 @use '../../../common.scss' as *;
 .g-space-box {
+	@include common;
 	display: flex;
 	.g-space-item {
 		&.g-small {

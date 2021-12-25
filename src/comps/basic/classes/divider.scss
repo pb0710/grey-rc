@@ -1,5 +1,6 @@
 @use '../../../common.scss' as *;
 .g-divider {
+	@include common;
 	width: 100%;
 	height: 1px;
 	background: #eee;

@@ -1,5 +1,7 @@
 @use '../../../common.scss' as *;
 .g-button {
+	@include common;
+	@include radius;
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
@@ -9,11 +11,10 @@
 	border: 1px solid #eee;
 	border-bottom: 1px solid #ddd;
 	background: #fff;
+	user-select: none;
 	&:active {
 		filter: brightness(0.9);
 	}
-	@include common;
-	@include radius;
 	&.g-block {
 		display: flex;
 		width: 100%;

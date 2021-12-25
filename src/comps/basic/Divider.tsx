@@ -1,9 +1,8 @@
 import { cls } from 'gray-utils'
-import React, { FC } from 'react'
+import React, { FC, HTMLAttributes } from 'react'
 import './classes/divider.scss'
 
-interface DividerProps {
-	className?: string
+interface DividerProps extends HTMLAttributes<HTMLDivElement> {
 	size?: 'small' | 'medium' | 'large'
 }
 
