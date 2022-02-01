@@ -5,6 +5,9 @@ import './App.scss'
 import ExampleIndex from './views/ExampleIndex'
 import ButtonExample from './views/ButtonExample'
 import DatePickerExample from './views/DatePickerExample'
+import SwitchExample from './views/SwitchExample'
+import RadioExample from './views/RadioExample'
+import CheckboxExample from './views/CheckboxExample'
 
 const App: FC = () => {
 	const getNavCls = (props: { isActive: boolean }): string =>
@@ -23,6 +26,15 @@ const App: FC = () => {
 				<NavLink to="/date-picker" className={getNavCls}>
 					Date Picker
 				</NavLink>
+				<NavLink to="/switch" className={getNavCls}>
+					Switch
+				</NavLink>
+				<NavLink to="/radio" className={getNavCls}>
+					Radio
+				</NavLink>
+				<NavLink to="/checkbox" className={getNavCls}>
+					Checkbox
+				</NavLink>
 			</div>
 			<div className="content">
 				<Routes>
@@ -30,6 +42,9 @@ const App: FC = () => {
 						<Route index element={<ExampleIndex />} />
 						<Route path="button" element={<ButtonExample />} />
 						<Route path="date-picker" element={<DatePickerExample />} />
+						<Route path="switch" element={<SwitchExample />} />
+						<Route path="radio" element={<RadioExample />} />
+						<Route path="checkbox" element={<CheckboxExample />} />
 					</Route>
 				</Routes>
 			</div>

@@ -1,0 +1,65 @@
+@use '../../../common.scss' as *;
+.g-switch {
+	@include common;
+	position: relative;
+	width: 40px;
+	height: 20px;
+	background: lightgrey;
+	border-radius: 10px;
+	user-select: none;
+	cursor: pointer;
+	transition: background 0.2s;
+	&::before {
+		content: '';
+		top: 4px;
+		left: 22px;
+		color: white;
+	}
+	&::after {
+		content: '';
+		top: 2px;
+		left: 2px;
+		width: 16px;
+		height: 16px;
+		border-radius: 9px;
+		background: white;
+	}
+	&.g-disabled {
+		cursor: not-allowed;
+		opacity: 0.5;
+	}
+	&::before,
+	&::after {
+		transition: all 0.2s;
+		position: absolute;
+	}
+}
+.g-switch-input {
+	@include common;
+	&:checked {
+		& + .g-switch {
+			background: #333;
+			&::before {
+				content: '';
+				left: 6px;
+			}
+			&::after {
+				left: 22px;
+			}
+		}
+		&:active {
+			& + .g-switch {
+				&::after {
+					left: 15px;
+				}
+			}
+		}
+	}
+	&:active {
+		& + .g-switch {
+			&::after {
+				width: 23px;
+			}
+		}
+	}
+}
