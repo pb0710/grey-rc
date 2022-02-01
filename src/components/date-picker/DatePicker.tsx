@@ -1,9 +1,8 @@
 import React, { FC, InputHTMLAttributes, useEffect, useMemo, useRef, useState } from 'react'
 import { cls } from 'gray-utils'
 import './classes/date-picker.scss'
-import Icon from '@mdi/react'
 import { mdiCalendarBlank, mdiChevronDown, mdiChevronUp } from '@mdi/js'
-import { Button, Divider } from '../..'
+import { Button, Divider, Icon } from '../..'
 import { Calendar, DateUnit } from './calendar'
 
 interface DatePickerProps extends InputHTMLAttributes<HTMLInputElement> {

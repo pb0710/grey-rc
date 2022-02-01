@@ -1,4 +1,4 @@
-import { cls, is } from 'gray-utils'
+import { cls } from 'gray-utils'
 import React, { FC, HTMLAttributes, useContext, useEffect, useState } from 'react'
 import { useUuId } from '../../hooks'
 import './classes/checkbox.scss'

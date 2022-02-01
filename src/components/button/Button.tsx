@@ -1,8 +1,8 @@
 import React, { ButtonHTMLAttributes, FC, ReactElement } from 'react'
 import { cls } from 'gray-utils'
 import './classes/button.scss'
-import Icon from '@mdi/react'
 import { mdiLoading } from '@mdi/js'
+import { Icon } from '../..'
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 	block?: boolean

@@ -8,6 +8,7 @@ import DatePickerExample from './views/DatePickerExample'
 import SwitchExample from './views/SwitchExample'
 import RadioExample from './views/RadioExample'
 import CheckboxExample from './views/CheckboxExample'
+import InputExample from './views/InputExample'
 
 const App: FC = () => {
 	const getNavCls = (props: { isActive: boolean }): string =>
@@ -35,6 +36,9 @@ const App: FC = () => {
 				<NavLink to="/checkbox" className={getNavCls}>
 					Checkbox
 				</NavLink>
+				<NavLink to="/input" className={getNavCls}>
+					Input
+				</NavLink>
 			</div>
 			<div className="content">
 				<Routes>
@@ -45,6 +49,7 @@ const App: FC = () => {
 						<Route path="switch" element={<SwitchExample />} />
 						<Route path="radio" element={<RadioExample />} />
 						<Route path="checkbox" element={<CheckboxExample />} />
+						<Route path="input" element={<InputExample />} />
 					</Route>
 				</Routes>
 			</div>

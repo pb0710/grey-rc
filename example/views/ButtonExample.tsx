@@ -1,6 +1,5 @@
 import React, { FC } from 'react'
-import { Button, Divider, Space } from '../../src'
-import Icon from '@mdi/react'
+import { Button, Divider, Space, Icon } from '../../src'
 import { mdiAccountOutline, mdiPlayOutline } from '@mdi/js'
 
 const ButtonExample: FC = () => {
