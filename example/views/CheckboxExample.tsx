@@ -68,6 +68,7 @@ const CheckboxExample: FC = () => {
 			<Divider />
 			<Checkbox.Group
 				direction="vertical"
+				defaultValue={['a']}
 				value={groupValue}
 				onChange={value => {
 					console.log('value: ', value)

@@ -1,4 +1,4 @@
-import { cls, is } from 'gray-utils'
+import { cls } from 'gray-utils'
 import React, { createContext, FC, HTMLAttributes } from 'react'
 import { Space } from '../..'
 
@@ -16,14 +16,17 @@ export const RadioGroupCtx = createContext<{
 }>({})
 
 export const RadioGroup: FC<RadioGroupProps> = props => {
-	const { children, className, value, onChange, defaultValue, direction = 'horizontal', ...rest } = props
+	const {
+		children,
+		className,
+		defaultValue,
+		value = defaultValue,
+		onChange,
+		direction = 'horizontal',
+		...rest
+	} = props
 	return (
-		<RadioGroupCtx.Provider
-			value={{
-				value: is.undefined(value) ? defaultValue : value,
-				onChange
-			}}
-		>
+		<RadioGroupCtx.Provider value={{ value, onChange }}>
 			<div className={cls(className, 'g-radio-group')} {...rest}>
 				<Space direction={direction} size="medium" block={false}>
 					{children}

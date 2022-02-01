@@ -1,4 +1,4 @@
-import { cls, is } from 'gray-utils'
+import { cls } from 'gray-utils'
 import React, { createContext, FC, HTMLAttributes } from 'react'
 import { Space } from '../..'
 
@@ -16,14 +16,17 @@ export const CheckboxGroupCtx = createContext<{
 }>({})
 
 export const CheckboxGroup: FC<CheckboxGroupProps> = props => {
-	const { children, className, value, onChange, defaultValue, direction = 'horizontal', ...rest } = props
+	const {
+		children,
+		className,
+		defaultValue = [],
+		value = defaultValue,
+		onChange,
+		direction = 'horizontal',
+		...rest
+	} = props
 	return (
-		<CheckboxGroupCtx.Provider
-			value={{
-				value: is.undefined(value) ? defaultValue : value,
-				onChange
-			}}
-		>
+		<CheckboxGroupCtx.Provider value={{ value, onChange }}>
 			<div className={cls(className, 'g-checkbox-group')} {...rest}>
 				<Space direction={direction} size="medium" block={false}>
 					{children}
