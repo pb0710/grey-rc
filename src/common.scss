@@ -1,6 +1,9 @@
+$primary-color: var(--g-primary-color, #333);
+$text-primary: var(--g-text-primary, #333);
+
 @mixin common {
 	box-sizing: border-box;
-	color: #333;
+	color: $text-primary;
 	font-size: 14px;
 }
 @mixin radius {

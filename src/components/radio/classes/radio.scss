@@ -41,8 +41,8 @@
 	&:checked {
 		& + .g-radio {
 			&::before {
-				border-color: #333;
-				background-color: #333;
+				border-color: $primary-color;
+				background-color: $primary-color;
 			}
 			&::after {
 				transform: scale(1);
@@ -76,7 +76,7 @@
 		& + .g-radio {
 			&:hover {
 				&::before {
-					border-color: #333;
+					border-color: $primary-color;
 				}
 			}
 		}

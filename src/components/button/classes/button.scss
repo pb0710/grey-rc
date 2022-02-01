@@ -20,8 +20,8 @@
 		width: 100%;
 	}
 	&.g-primary {
-		border: 1px solid #333;
-		background: #333;
+		border: 1px solid $primary-color;
+		background: $primary-color;
 		color: #fff;
 	}
 	&.g-round {

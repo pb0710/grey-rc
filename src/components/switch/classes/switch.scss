@@ -38,7 +38,7 @@
 	@include common;
 	&:checked {
 		& + .g-switch {
-			background: #333;
+			background: $primary-color;
 			&::before {
 				content: '';
 				left: 6px;
