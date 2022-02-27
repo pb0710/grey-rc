@@ -1,0 +1,139 @@
+@use '../../styles/mixins.scss' as *;
+.g-tooltip {
+	@include cmm;
+	position: relative;
+	$tip-bg-color: #333;
+	$tip-text-color: #fff;
+	&-block {
+		display: block;
+		width: 100%;
+	}
+	&:not(&-block) {
+		display: inline-block;
+	}
+	&-disabled {
+		&::before,
+		&::after {
+			display: none;
+		}
+	}
+	&::before,
+	&::after {
+		visibility: hidden;
+		opacity: 0;
+		transform: scale(0);
+		transition: all 0.2s ease-out;
+	}
+	&:hover {
+		&::before,
+		&::after {
+			visibility: visible;
+			opacity: 1;
+			transform: scale(1);
+		}
+	}
+	&::before {
+		content: '';
+		position: absolute;
+		width: 0;
+		height: 0;
+		border: 6px solid transparent;
+	}
+	&::after {
+		z-index: 10;
+		content: attr(aria-controls);
+		position: absolute;
+		background: $tip-bg-color;
+		color: $tip-text-color;
+		white-space: pre;
+		line-height: 1em;
+		padding: 8px 12px;
+		border-radius: 4px;
+		user-select: all;
+		box-shadow: 0 0 8px rgba($color: #000000, $alpha: 0.1);
+	}
+	&.g-tooltip-top,
+	&.g-tooltip-bottom {
+		&::before {
+			left: calc(50% - 6px);
+		}
+		&::after {
+			left: 50%;
+			transform: translateX(-50%) scale(0);
+		}
+	}
+	&.g-tooltip-top {
+		&::before {
+			border-top-color: $tip-bg-color;
+			transform-origin: top;
+			top: -12px;
+		}
+		&::after {
+			transform-origin: bottom;
+			bottom: calc(100% + 12px);
+		}
+		&:hover {
+			&::after {
+				transform: translateX(-50%) scale(1);
+			}
+		}
+	}
+	&.g-tooltip-bottom {
+		&::before {
+			border-bottom-color: $tip-bg-color;
+			transform-origin: bottom;
+			bottom: -12px;
+		}
+		&::after {
+			transform-origin: top;
+			top: calc(100% + 12px);
+		}
+		&:hover {
+			&::after {
+				transform: translateX(-50%) scale(1);
+			}
+		}
+	}
+	&.g-tooltip-right,
+	&.g-tooltip-left {
+		&::before {
+			top: calc(50% - 6px);
+		}
+		&::after {
+			top: 50%;
+			transform: translateY(-50%) scale(0);
+		}
+	}
+	&.g-tooltip-right {
+		&::before {
+			border-right-color: $tip-bg-color;
+			transform-origin: right;
+			right: -12px;
+		}
+		&::after {
+			transform-origin: left;
+			left: calc(100% + 12px);
+		}
+		&:hover {
+			&::after {
+				transform: translateY(-50%) scale(1);
+			}
+		}
+	}
+	&.g-tooltip-left {
+		&::before {
+			border-left-color: $tip-bg-color;
+			transform-origin: left;
+			left: -12px;
+		}
+		&::after {
+			transform-origin: right;
+			right: calc(100% + 12px);
+		}
+		&:hover {
+			&::after {
+				transform: translateY(-50%) scale(1);
+			}
+		}
+	}
+}

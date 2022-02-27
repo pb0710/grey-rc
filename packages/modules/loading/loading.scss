@@ -1,0 +1,39 @@
+@use '../../styles/mixins.scss' as *;
+.g-loading {
+	@include cmm;
+	font-size: inherit;
+	color: $primary-color;
+	display: inline-block;
+	&-tip-box {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		z-index: 10;
+		.g-loading-tip-description {
+			font-size: $text-font-size;
+			margin-top: 8px;
+		}
+	}
+	&-is-wrapper {
+		position: relative;
+		display: block;
+		.g-loading-tip-box {
+			display: inline-flex;
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			transform: translate(-50%, -50%);
+		}
+		.g-loading-content {
+			transition: filter 0.2s ease-out;
+		}
+		&.g-loading-spinning {
+			.g-loading-content {
+				filter: opacity(0.4);
+				user-select: none;
+				pointer-events: none;
+			}
+		}
+	}
+}

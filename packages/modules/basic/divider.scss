@@ -1,0 +1,21 @@
+@use '../../styles/mixins.scss' as *;
+.g-divider {
+	@include cmm;
+	&-small {
+		margin: 8px 0;
+	}
+	&-medium {
+		margin: 16px 0;
+	}
+	&-large {
+		margin: 24px 0;
+	}
+	&-horizontal {
+		width: 100%;
+		border-bottom: 1px solid #ddd;
+	}
+	&-vertical {
+		height: 100%;
+		border-right: 1px solid #ddd;
+	}
+}

@@ -1,0 +1,45 @@
+@use '../../styles/mixins.scss' as *;
+.g-switch {
+	@include cmm;
+	display: inline-block;
+	position: relative;
+	width: 34px;
+	height: 22px;
+	border-radius: 999vmax;
+	background: #ddd;
+	transition: all 0.2s;
+	&::after {
+		content: '';
+		position: absolute;
+		left: 2px;
+		top: 2px;
+		width: 18px;
+		height: 18px;
+		background: #fff;
+		border-radius: 999vmax;
+		box-shadow: 0 1px 4px rgba($color: #000000, $alpha: 0.2);
+		transition: all 0.2s;
+	}
+	&:not(&-disabled) {
+		&:active {
+			&::after {
+				width: 22px;
+			}
+			&.g-switch-checked {
+				&::after {
+					left: 10px;
+				}
+			}
+		}
+	}
+	&-disabled {
+		cursor: not-allowed;
+		opacity: 0.4;
+	}
+	&-checked {
+		background: $primary-color;
+		&::after {
+			left: 14px;
+		}
+	}
+}

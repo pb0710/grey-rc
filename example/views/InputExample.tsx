@@ -1,192 +1,115 @@
-import { mdiAccountEyeOutline, mdiCameraOutline, mdiMagnify } from '@mdi/js'
-import React, { FC, useState } from 'react'
-import { Space, Input, Divider, Icon } from '../../src'
+import React, { FC, useRef, useState } from 'react'
+import Input from '../../packages/modules/input'
+import Space from '../../packages/modules/basic/Space'
+import { mdiArrowUp, mdiMagnify } from '@mdi/js'
+import Icon from '../../packages/modules/basic/Icon'
+import Divider from '../../packages/modules/basic/Divider'
+import Button from '../../packages/modules/button'
 
 const InputExample: FC = () => {
-	const [value, setValue] = useState<string>()
+	const [inputVal, setInputVal] = useState('controlled input')
+	const [textareaVal, setTextareaVal] = useState('controlled textarea')
+	const inputRef = useRef<HTMLInputElement>(null)
+	const textareaRef = useRef<HTMLTextAreaElement>(null)
 	return (
 		<>
 			<h1>Input</h1>
 			<Space>
+				<Input defaultValue="hi" placeholder="basic" />
 				<Input
-					placeholder="basic usage"
-					value={value}
+					placeholder="controlled"
+					value={inputVal}
 					onChange={value => {
-						console.log('value: ', value)
-						setValue(value)
-					}}
-				/>
-				<Input
-					placeholder="defaults value"
-					defaultValue="defaults value"
-					value={value}
-					onChange={value => {
-						console.log('value: ', value)
-						setValue(value)
-					}}
-				/>
-				<Input
-					placeholder="placeholder"
-					value={value}
-					onChange={value => {
-						console.log('value: ', value)
-						setValue(value)
-					}}
-				/>
-			</Space>
-			<Divider />
-			<Input
-				block
-				placeholder="block"
-				value={value}
-				onChange={value => {
-					console.log('value: ', value)
-					setValue(value)
-				}}
-			/>
-			<Divider />
-			<Input
-				round
-				block
-				placeholder="round"
-				value={value}
-				onChange={value => {
-					console.log('value: ', value)
-					setValue(value)
-				}}
-			/>
-			<Divider />
-			<Space>
-				<Input
-					defaultValue="can be clear"
-					placeholder="can be clear"
-					canBeClear
-					value={value}
-					onChange={value => {
-						console.log('value: ', value)
-						setValue(value)
-					}}
-					onEnter={() => {
-						alert('enter')
-					}}
-				/>
-				<Input
-					placeholder="on keyboard enter"
-					value={value}
-					onChange={value => {
-						console.log('value: ', value)
-						setValue(value)
-					}}
-					onEnter={() => {
-						alert('enter')
-					}}
-				/>
-				<Input
-					placeholder="disabled"
-					disabled
-					value={value}
-					onChange={value => {
-						console.log('value: ', value)
-						setValue(value)
+						if (typeof value === 'string') setInputVal(value)
 					}}
 				/>
 			</Space>
 			<Divider />
 			<Space>
-				<Input
-					placeholder="prefix"
-					value={value}
-					onChange={value => {
-						console.log('value: ', value)
-						setValue(value)
-					}}
-					prefix={<Icon path={mdiMagnify} size="16px" color="#333" />}
-				/>
-				<Input
-					placeholder="suffix"
-					value={value}
-					onChange={value => {
-						console.log('value: ', value)
-						setValue(value)
-					}}
-					suffix={<Icon path={mdiCameraOutline} size="16px" color="#333" />}
-				/>
-				<Input
-					placeholder="prefix and suffix"
-					value={value}
-					onChange={value => {
-						console.log('value: ', value)
-						setValue(value)
-					}}
-					prefix={<Icon path={mdiMagnify} size="16px" color="#333" />}
-					suffix={<Icon path={mdiCameraOutline} size="16px" color="#333" />}
-				/>
+				<Input placeholder="prefix" prefix={<Icon path={mdiMagnify} canHover />} />
+				<Input placeholder="suffix" suffix={<Icon path={mdiArrowUp} canHover />} />
 			</Space>
 			<Divider />
 			<Space>
-				<Input.Password
-					placeholder="password"
-					value={value}
-					onChange={value => {
-						console.log('value: ', value)
-						setValue(value)
-					}}
+				<Input placeholder="allow clear" allowClear defaultValue="allow clear" />
+			</Space>
+			<Divider />
+			<Input placeholder="block" block />
+			<Divider />
+			<Space direction="vertical">
+				<Input placeholder="round" round />
+				<Input
+					placeholder="round with prefix and suffix"
+					round
+					prefix={<Icon path={mdiMagnify} canHover />}
+					suffix={<Icon path={mdiArrowUp} canHover />}
 				/>
-				<Input.Password
-					placeholder="can be clear"
-					canBeClear
-					value={value}
-					onChange={value => {
-						console.log('value: ', value)
-						setValue(value)
-					}}
-				/>
-				<Input.Password
-					placeholder="toggle icon hidden"
-					visibilityToggle={false}
-					value={value}
-					onChange={value => {
-						console.log('value: ', value)
-						setValue(value)
-					}}
-				/>
+				<Input placeholder="round block" round block />
 			</Space>
 			<Divider />
 			<Space>
-				<Input.Textarea
-					placeholder="textarea"
-					value={value}
-					onChange={value => {
-						console.log('value: ', value)
-						setValue(value)
-					}}
-				/>
-				<Input.Textarea
-					placeholder="on keyboard enter"
-					value={value}
-					onChange={value => {
-						console.log('value: ', value)
-						setValue(value)
-					}}
-					onEnter={() => {
-						alert('enter')
-					}}
-				/>
+				<Input placeholder="enabled" />
+				<Input placeholder="disabled" disabled />
 			</Space>
+			<Divider />
+			<Space>
+				<Input placeholder="forward ref" ref={inputRef} />
+				<Button
+					primary
+					onClick={() => {
+						inputRef.current?.focus()
+					}}
+				>
+					focus
+				</Button>
+				<Button
+					primary
+					onClick={() => {
+						inputRef.current?.blur()
+					}}
+				>
+					blur
+				</Button>
+			</Space>
+			<Divider />
+			<Input.Textarea defaultValue="hi" placeholder="basic textarea" />
 			<Divider />
 			<Input.Textarea
-				block
-				placeholder="block"
-				value={value}
+				placeholder="controlled textarea"
+				value={textareaVal}
 				onChange={value => {
-					console.log('value: ', value)
-					setValue(value)
-				}}
-				onEnter={() => {
-					alert('enter')
+					if (typeof value === 'string') setTextareaVal(value)
 				}}
 			/>
 			<Divider />
+			<Input.Textarea autosize placeholder="autosize textarea" />
+			<Divider />
+			<Input.Textarea block placeholder="block textarea" />
+			<Divider />
+			<Space>
+				<Input.Textarea disabled placeholder="disabled textarea" />
+				<Input.Textarea disabled autosize placeholder="disabled autosize textarea" />
+			</Space>
+			<Divider />
+			<Space>
+				<Input.Textarea ref={textareaRef} placeholder="ref textarea" />
+				<Button
+					primary
+					onClick={() => {
+						textareaRef.current?.focus()
+					}}
+				>
+					focus
+				</Button>
+				<Button
+					primary
+					onClick={() => {
+						textareaRef.current?.blur()
+					}}
+				>
+					blur
+				</Button>
+			</Space>
 		</>
 	)
 }

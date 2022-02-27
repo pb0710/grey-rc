@@ -1,88 +1,132 @@
-import React, { FC, useState } from 'react'
-import { Divider, Checkbox, Space } from '../../src'
+import React, { FC, ReactText, useEffect, useRef, useState } from 'react'
+import { Checkbox, Divider, Space } from '../../packages'
 
-const CheckboxExample: FC = () => {
-	const [checked, setChecked] = useState<Record<string, boolean | undefined>>({
-		a: false,
-		b: undefined,
-		c: false,
-		d: false,
-		e: true
-	})
-
-	const [groupValue, setGroupValue] = useState<string[]>([])
-
+const CheckboxExample1: FC = () => {
+	const [val, setVal] = useState(false)
+	const defaultGroupVal = [2]
+	const [groupVal, setGroupVal] = useState<ReactText[]>(defaultGroupVal)
+	const checkboxRef = useRef<HTMLInputElement>(null)
+	const defaultHorizontalVal = [0, 1]
+	const [horizontalVal, setHorizontalVal] = useState<ReactText[]>(defaultHorizontalVal)
+	const defaultVerticalVal = [1]
+	const [verticalVal, setVerticalVal] = useState<ReactText[]>(defaultVerticalVal)
+	const defaultDisabledVal = [0, 1]
+	const defaultJsxGroupVal = [2, 3]
+	const [jsxGroupVal, setJsxGroupVal] = useState<ReactText[]>(defaultJsxGroupVal)
+	useEffect(() => {
+		setTimeout(() => {
+			console.log('checkboxRef.current.checked', checkboxRef.current?.checked)
+		}, 1000)
+	}, [])
 	return (
 		<>
-			<h1>Radio</h1>
+			<h1>Checkbox</h1>
 			<Space>
+				<Checkbox defaultValue={true}>basic</Checkbox>
 				<Checkbox
-					value={checked.a}
-					onChange={checked => {
-						console.log('checked: ', checked)
-						setChecked(pre => ({ ...pre, a: checked }))
+					value={val}
+					onChange={value => {
+						if (typeof value === 'boolean') {
+							setVal(value)
+						}
 					}}
 				>
-					Apple
-				</Checkbox>
-				<Checkbox
-					defaultValue={true}
-					value={checked.b}
-					onChange={checked => {
-						console.log('checked: ', checked)
-						setChecked(pre => ({ ...pre, b: checked }))
-					}}
-				>
-					Pear
-				</Checkbox>
-				<Checkbox
-					value={checked.c}
-					onChange={checked => {
-						console.log('checked: ', checked)
-						setChecked(pre => ({ ...pre, c: checked }))
-					}}
-				>
-					Orange
-				</Checkbox>
-				<Checkbox
-					disabled
-					value={checked.d}
-					onChange={checked => {
-						console.log('checked: ', checked)
-						setChecked(pre => ({ ...pre, d: checked }))
-					}}
-				>
-					Disabled
-				</Checkbox>
-				<Checkbox
-					disabled
-					value={checked.e}
-					onChange={checked => {
-						console.log('checked: ', checked)
-						setChecked(pre => ({ ...pre, e: checked }))
-					}}
-				>
-					Disabled
+					controlled
 				</Checkbox>
 			</Space>
 			<Divider />
 			<Checkbox.Group
-				direction="vertical"
-				defaultValue={['a']}
-				value={groupValue}
+				defaultValue={defaultGroupVal}
+				options={[
+					{
+						label: 0,
+						child: 'cherry'
+					},
+					{
+						label: 1,
+						child: 'apple'
+					},
+					{
+						label: 2,
+						child: 'pear'
+					},
+					{
+						label: 3,
+						child: 'orange',
+						disabled: true
+					}
+				]}
+				value={groupVal}
 				onChange={value => {
-					console.log('value: ', value)
-					setGroupValue(value)
+					setGroupVal(value)
+				}}
+			/>
+			<Divider />
+			<Space direction="vertical">
+				<Checkbox.Group
+					direction="horizontal"
+					defaultValue={defaultHorizontalVal}
+					options={[
+						{ label: 0, child: 'horizontal a' },
+						{ label: 1, child: 'horizontal b' },
+						{ label: 2, child: 'horizontal c' }
+					]}
+					value={horizontalVal}
+					onChange={value => {
+						setHorizontalVal(value)
+					}}
+				/>
+				<Checkbox.Group
+					direction="vertical"
+					defaultValue={defaultVerticalVal}
+					options={[
+						{ label: 0, child: 'vertical a' },
+						{ label: 1, child: 'vertical b' },
+						{ label: 2, child: 'vertical c' }
+					]}
+					value={verticalVal}
+					onChange={value => {
+						setVerticalVal(value)
+					}}
+				/>
+			</Space>
+			<Divider />
+			<Checkbox ref={checkboxRef} defaultValue={true}>
+				forward ref
+			</Checkbox>
+			<Divider />
+			<Space direction="vertical">
+				<Checkbox disabled>disabled</Checkbox>
+				<Checkbox.Group
+					disabled
+					defaultValue={defaultDisabledVal}
+					options={[
+						{ label: 0, child: 'a' },
+						{ label: 1, child: 'b' },
+						{ label: 2, child: 'c' }
+					]}
+				/>
+			</Space>
+			<Divider />
+			<Checkbox.Group
+				direction="vertical"
+				defaultValue={defaultJsxGroupVal}
+				options={[
+					{ label: 0, child: 'options a' },
+					{ label: 1, child: 'options b' },
+					{ label: 2, child: 'options c' }
+				]}
+				value={jsxGroupVal}
+				onChange={value => {
+					setJsxGroupVal(value)
 				}}
 			>
-				<div>
-					<Checkbox option="a">水电费水电费Angular</Checkbox>
-				</div>
-				<Checkbox option="v">Vue</Checkbox>
-				<Checkbox option="r">React</Checkbox>
+				<Checkbox label={3}>jsx a</Checkbox>
+				<Checkbox label={4}>jsx b</Checkbox>
+				<Checkbox label={5}>jsx c</Checkbox>
 			</Checkbox.Group>
 		</>
 	)
 }
 
-export default CheckboxExample
+export default CheckboxExample1

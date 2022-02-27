@@ -1,0 +1,32 @@
+@use '../../styles/mixins.scss' as *;
+.g-collapse-panel {
+	@include cmm;
+	padding: 4px;
+	&-header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		height: 32px;
+		padding: 0 8px;
+		background: #fff;
+		border-radius: 6px;
+		&-icon {
+			> svg {
+				transition: transform 0.2s;
+			}
+		}
+	}
+	&-box {
+		transition: max-height 0.2s ease-out, opacity 0.2s ease-out;
+		overflow: hidden;
+		&-entered {
+			opacity: 1;
+		}
+		&-exited {
+			opacity: 0;
+		}
+	}
+	&:not(&-is-custom-header) {
+		border-bottom: 1px solid #ddd;
+	}
+}

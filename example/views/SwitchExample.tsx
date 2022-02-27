@@ -1,31 +1,21 @@
 import React, { FC, useState } from 'react'
-import { Switch, Space } from '../../src'
+import { Space, Switch } from '../../packages'
 
 const SwitchExample: FC = () => {
-	const [checked, setChecked] = useState<boolean>()
+	const [checked, setChecked] = useState<boolean>(false)
 	return (
 		<>
 			<h1>Switch</h1>
 			<Space>
+				<Switch defaultValue={true} />
 				<Switch
-					// disabled
-					defaultValue={true}
 					value={checked}
 					onChange={checked => {
-						console.log(checked)
-						setChecked(checked)
+						if (typeof checked === 'boolean') setChecked(checked)
 					}}
 				/>
-				<Switch
-					// disabled
-					defaultValue={true}
-					disabled
-					value={checked}
-					onChange={checked => {
-						console.log(checked)
-						setChecked(checked)
-					}}
-				/>
+				<Switch disabled defaultValue={true} />
+				<Switch disabled />
 			</Space>
 		</>
 	)

@@ -1,0 +1,46 @@
+@use '../../styles/mixins.scss' as *;
+.g-checkbox {
+	@include cmm;
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	user-select: none;
+	&-inner {
+		padding: 0;
+		outline: 0;
+		border: 0;
+	}
+	&-icon {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 16px;
+		height: 16px;
+		border: 1px solid #ddd;
+		border-bottom-color: #bbb;
+		border-radius: 2px;
+		background: #fff;
+		transition: all ease-out 0.1s;
+		&-inner {
+			color: #fff;
+			transition: all ease-out 0.1s;
+			transform: scale(0);
+		}
+	}
+	&-checked {
+		.g-checkbox-icon {
+			background: $primary-color;
+			border-color: $primary-color;
+			&-inner {
+				color: #fff;
+				transition: all ease-out 0.1s;
+				transform: scale(1);
+			}
+		}
+	}
+	&-disabled {
+		cursor: not-allowed;
+		opacity: 0.4;
+	}
+}

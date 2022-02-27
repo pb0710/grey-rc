@@ -1,0 +1,12 @@
+@use './vars.scss' as *;
+@forward './vars.scss';
+@mixin cmm {
+	box-sizing: border-box;
+	font-size: $text-font-size;
+	color: $text-primary;
+	*,
+	*::before,
+	*::after {
+		box-sizing: inherit;
+	}
+}

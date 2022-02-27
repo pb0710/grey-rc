@@ -1,0 +1,13 @@
+@use '../../styles/mixins.scss' as *;
+.g-radio-group {
+	@include cmm;
+	&-disabled {
+		cursor: not-allowed;
+	}
+	&-tab {
+		display: inline-flex;
+		background: #eee;
+		padding: 2px;
+		border-radius: 6px;
+	}
+}

@@ -1,53 +1,60 @@
 import React, { FC } from 'react'
-import { Button, Divider, Space, Icon } from '../../src'
-import { mdiAccountOutline, mdiPlayOutline } from '@mdi/js'
+import { mdiAccountOutline, mdiMagnify, mdiShieldCheckOutline } from '@mdi/js'
+import { Button, Divider, Icon, Space, Tooltip } from '../../packages'
 
 const ButtonExample: FC = () => {
 	return (
 		<>
 			<h1>Button</h1>
 			<Space>
-				<Button>按钮</Button>
-				<Button primary>主要</Button>
-				<Button round>圆角</Button>
-				<Button circle>
-					<Icon path={mdiAccountOutline} size="16px"></Icon>
-				</Button>
+				<Button>click me</Button>
+				<Button primary>primary</Button>
+				<Button round>round</Button>
+				<Tooltip content="circle button">
+					<Button circle>
+						<Icon path={mdiAccountOutline}></Icon>
+					</Button>
+				</Tooltip>
+				<Tooltip content="circle primary button">
+					<Button circle primary>
+						<Icon path={mdiMagnify}></Icon>
+					</Button>
+				</Tooltip>
 			</Space>
 			<Divider />
-			<Button block>Block</Button>
+			<Button block>block</Button>
 			<Divider />
 			<Space>
-				<Button loading>加载中</Button>
+				<Button loading>loading</Button>
 				<Button primary loading>
-					加载中
+					loading
 				</Button>
 				<Button round loading>
-					加载中
+					loading
 				</Button>
 				<Button circle loading>
-					<Icon path={mdiAccountOutline} size="16px"></Icon>
+					<Icon path={mdiAccountOutline}></Icon>
 				</Button>
 			</Space>
 			<Divider />
 			<Button block loading>
-				加载中
+				loading
 			</Button>
 			<Divider />
 			<Space>
-				<Button disable>禁用</Button>
+				<Button disabled>disabled</Button>
 				<a href="https://www.google.com">
-					<Button>超链接</Button>
+					<Button>link</Button>
 				</a>
 			</Space>
 			<Divider />
 			<Space>
-				<Button icon={<Icon path={mdiPlayOutline} size="16px"></Icon>}>图标按钮</Button>
-				<Button icon={<Icon path={mdiPlayOutline} size="16px"></Icon>} primary>
-					图标主要按钮
+				<Button icon={<Icon path={mdiShieldCheckOutline}></Icon>}>icon button</Button>
+				<Button icon={<Icon path={mdiShieldCheckOutline}></Icon>} primary>
+					icon primary button
 				</Button>
-				<Button icon={<Icon path={mdiPlayOutline} size="16px"></Icon>} loading>
-					图标按钮加载中
+				<Button icon={<Icon path={mdiShieldCheckOutline}></Icon>} loading>
+					icon loading button
 				</Button>
 			</Space>
 		</>

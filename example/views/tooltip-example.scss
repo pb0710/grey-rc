@@ -1,0 +1,22 @@
+.tooltip-box {
+	box-sizing: border-box;
+	width: 100%;
+	display: grid;
+	padding-top: 40px;
+	grid-template-columns: repeat(3, 120px);
+	grid-template-rows: repeat(3, 60px);
+	justify-content: center;
+	.ceil {
+		user-select: none;
+		text-align: center;
+		line-height: 60px;
+		border-radius: 8px;
+		background: #eee;
+		border: 1px solid #ddd;
+		&.empty {
+			background: transparent;
+			pointer-events: none;
+			border: 0;
+		}
+	}
+}

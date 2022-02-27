@@ -1,0 +1,14 @@
+@use '../../styles/mixins.scss' as *;
+.g-space-box {
+	@include cmm;
+	display: flex;
+	&.g-small {
+		gap: 4px;
+	}
+	&.g-medium {
+		gap: 12px;
+	}
+	&.g-large {
+		gap: 24px;
+	}
+}
