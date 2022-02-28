@@ -50,7 +50,7 @@ const CollapsePanel: FC<CollapsePanelProps> = props => {
 				path={mdiChevronDown}
 				canHover
 				size="16px"
-				rotate={expend ? 180 : 0}
+				rotate={expend ? 0 : -90}
 				onClick={() => {
 					onChange?.(!expend)
 				}}

@@ -1,10 +1,12 @@
 import { mdiCloseCircle } from '@mdi/js'
 import { cls, is } from 'gray-utils'
 import React, {
+	ChangeEvent,
 	ChangeEventHandler,
 	FocusEventHandler,
 	forwardRef,
 	HTMLAttributes,
+	MouseEventHandler,
 	MutableRefObject,
 	ReactNode,
 	ReactText,
@@ -48,6 +50,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props, forwardRef) => {
 	const [focus, setFocus] = useState(false)
 	const isControlled = !is.undefined(value)
 	const [clearVisible, setClearVisible] = useState(false)
+
 	const handleFocus: FocusEventHandler<HTMLInputElement> = e => {
 		onFocus?.(e)
 		setFocus(true)
@@ -57,24 +60,30 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props, forwardRef) => {
 		setFocus(false)
 	}
 	const handleChange: ChangeEventHandler<HTMLInputElement> = e => {
-		if (isControlled) onChange?.(e.target.value)
+		const { value } = e.target
+
+		if (isControlled) onChange?.(value)
 		else onChange?.(e)
 
-		setClearVisible(!!e.target.value)
+		setClearVisible(!!value)
 	}
 	const handleClear = () => {
-		inputRef.current.value = ''
+		if (isControlled) onChange?.('')
+		else {
+			inputRef.current.value = ''
+			onChange?.({ target: inputRef.current } as ChangeEvent<HTMLInputElement>)
+		}
 		setClearVisible(false)
-		// nextTick
-		setTimeout(() => {
-			inputRef.current.focus()
-		})
+	}
+
+	const handleMouseDown: MouseEventHandler<HTMLElement> = e => {
+		if (e.target instanceof Element) {
+			if (e.target.tagName !== 'INPUT') e.preventDefault()
+		}
 	}
 
 	useEffect(() => {
-		if (defaultValue) {
-			setClearVisible(true)
-		}
+		if (defaultValue) setClearVisible(true)
 	}, [defaultValue])
 
 	const valueProps = isControlled && { value }
@@ -101,7 +110,12 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props, forwardRef) => {
 				onChange={handleChange}
 			/>
 			{allowClear && focus && clearVisible && (
-				<Icon path={mdiCloseCircle} color="#999" onMouseDown={handleClear} />
+				<Icon
+					path={mdiCloseCircle}
+					color="#999"
+					onClick={handleClear}
+					onMouseDown={handleMouseDown}
+				/>
 			)}
 			{suffix}
 		</label>

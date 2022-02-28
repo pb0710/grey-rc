@@ -1,6 +1,6 @@
 import React, { FC, FormEvent } from 'react'
 import { Field, useForm } from 'gray-react-form'
-import { Button } from '../../packages'
+import { Button, Space } from '../../packages'
 
 interface CheckboxProps {
 	value?: boolean
@@ -42,38 +42,36 @@ const ExampleIndex: FC = () => {
 		<>
 			<h1>Index</h1>
 			<form onSubmit={form.onSubmit}>
-				<label>
-					<span>Nickname: </span>
-					<Field form={form} label="nickname">
-						<input />
-					</Field>
-				</label>
-				<br />
-				<label>
-					<span>Address: </span>
-					<Field form={form} label="address">
-						<input />
-					</Field>
-				</label>
-				<br />
-				<label>
-					<span>Is it myself: </span>
-					<Field form={form} label="is_it_myself">
-						<CheckBox />
-					</Field>
-				</label>
-				<br />
-				<label>
-					<span>Gender: </span>
-					<Field form={form} label="gender">
-						<select>
-							<option value="female">female</option>
-							<option value="male">male</option>
-						</select>
-					</Field>
-				</label>
-				<br />
-				<Button type="submit">submit</Button>
+				<Space direction="vertical">
+					<label>
+						<span>Nickname: </span>
+						<Field form={form} label="nickname">
+							<input />
+						</Field>
+					</label>
+					<label>
+						<span>Address: </span>
+						<Field form={form} label="address">
+							<input />
+						</Field>
+					</label>
+					<label>
+						<span>Is it myself: </span>
+						<Field form={form} label="is_it_myself">
+							<CheckBox />
+						</Field>
+					</label>
+					<label>
+						<span>Gender: </span>
+						<Field form={form} label="gender">
+							<select>
+								<option value="female">female</option>
+								<option value="male">male</option>
+							</select>
+						</Field>
+					</label>
+					<Button type="submit">submit</Button>
+				</Space>
 			</form>
 		</>
 	)
