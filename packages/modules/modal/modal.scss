@@ -1,0 +1,29 @@
+@use '../../styles/mixins.scss' as *;
+.g-modal {
+	@include cmm;
+	z-index: 1000;
+	position: fixed;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	display: flex;
+	&-mask {
+		position: fixed;
+		left: 0;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		background: rgba($color: #000000, $alpha: 0.4);
+	}
+	&-wrap {
+		position: fixed;
+		left: 0;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+}

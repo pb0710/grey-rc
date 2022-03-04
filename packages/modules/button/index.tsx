@@ -28,7 +28,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
 		...rest
 	} = props
 
-	const loadEle = <Loading style={{ color: 'inherit' }} />
+	const loadEle = <Loading size="inherit" style={{ color: 'inherit' }} />
 	return (
 		<button
 			className={cls('g-button', className, {

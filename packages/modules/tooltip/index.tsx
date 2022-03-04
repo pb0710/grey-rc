@@ -6,19 +6,7 @@ interface TooltipProps extends HTMLAttributes<HTMLElement> {
 	block?: boolean
 	disabled?: boolean
 	content?: string
-	direction?:
-		| 'top'
-		| 'left'
-		| 'right'
-		| 'bottom'
-		| 'top-left'
-		| 'top-right'
-		| 'left-top'
-		| 'left-bottom'
-		| 'bottom-left'
-		| 'bottom-right'
-		| 'right-bottom'
-		| 'right-top'
+	direction?: 'top' | 'left' | 'right' | 'bottom'
 }
 
 const Tooltip: FC<TooltipProps> = props => {

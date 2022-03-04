@@ -41,8 +41,8 @@ const InputExample: FC = () => {
 				<Input
 					placeholder="round with prefix and suffix"
 					round
-					prefix={<Icon path={mdiMagnify} canHover />}
-					suffix={<Icon path={mdiArrowUp} canHover />}
+					prefix={<Icon path={mdiMagnify} canHover round />}
+					suffix={<Icon path={mdiArrowUp} canHover round />}
 				/>
 				<Input placeholder="round block" round block />
 			</Space>

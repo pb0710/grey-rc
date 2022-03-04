@@ -1,0 +1,30 @@
+@use '../../styles/mixins.scss' as *;
+.g-card {
+	@include cmm;
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+	width: 480px;
+	border-radius: 6px;
+	background: #fff;
+	padding: 24px;
+	&-bordered {
+		border: 1px solid #ddd;
+		border-bottom-color: #ccc;
+	}
+	&-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		background: #fff;
+		&-title {
+			font-size: 20px;
+		}
+	}
+	&-content {
+	}
+	&-footer {
+		display: flex;
+		flex-direction: row-reverse;
+	}
+}

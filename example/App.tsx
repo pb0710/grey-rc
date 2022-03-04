@@ -13,6 +13,8 @@ import TooltipExample from './views/TooltipExample'
 import CollapseExample from './views/CollapseExample'
 import LoadingExample from './views/LoadingExample'
 import ListExample from './views/ListExample'
+import ModalExample from './views/ModalExample'
+import CardExample from './views/CardExample'
 
 const App: FC = () => {
 	const getNavCls = (props: { isActive: boolean }): string =>
@@ -53,6 +55,12 @@ const App: FC = () => {
 					<NavLink to="/list" className={getNavCls}>
 						<div className="wrap">List</div>
 					</NavLink>
+					<NavLink to="/modal" className={getNavCls}>
+						<div className="wrap">Modal</div>
+					</NavLink>
+					<NavLink to="/card" className={getNavCls}>
+						<div className="wrap">Card</div>
+					</NavLink>
 				</Space>
 			</div>
 			<div className="content">
@@ -68,6 +76,8 @@ const App: FC = () => {
 						<Route path="collapse" element={<CollapseExample />} />
 						<Route path="loading" element={<LoadingExample />} />
 						<Route path="list" element={<ListExample />} />
+						<Route path="modal" element={<ModalExample />} />
+						<Route path="card" element={<CardExample />} />
 					</Route>
 				</Routes>
 			</div>
