@@ -1,0 +1,21 @@
+@use '../../styles/mixins.scss' as *;
+.g-avatar-group {
+	@include cmm;
+	display: inline-flex;
+	flex-wrap: nowrap;
+	> * {
+		border: 2px solid #fff;
+	}
+	&-overlap {
+		&-left {
+			> *:not(:first-child) {
+				margin-left: -5%;
+			}
+		}
+		&-right {
+			> *:not(:first-child) {
+				margin-left: -5%;
+			}
+		}
+	}
+}

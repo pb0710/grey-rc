@@ -1,0 +1,24 @@
+@use '../../styles/mixins.scss' as *;
+.g-image {
+	@include cmm;
+}
+.g-image-detail {
+	@include cmm;
+	display: flex;
+	justify-content: center;
+	&-pic {
+		max-width: 90vw;
+		max-height: calc(100vh - 240px);
+		user-select: none;
+		transition: transform 0.2s ease-out;
+	}
+	&-toolbar {
+		position: fixed;
+		bottom: 40px;
+		padding: 8px 16px;
+		background: #fff;
+		border-radius: 999vmax;
+		color: #000;
+		box-shadow: 0 4px 8px rgba($color: #000000, $alpha: 0.1);
+	}
+}

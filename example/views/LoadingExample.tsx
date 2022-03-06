@@ -1,6 +1,6 @@
 import { mdiLoading } from '@mdi/js'
 import React, { FC, useState } from 'react'
-import { Button, Divider, Icon, Loading, Space } from '../../packages'
+import { Button, Card, Divider, Icon, Loading, Space } from '../../packages'
 
 const LoadingExample: FC = () => {
 	const [spinning, setSpinning] = useState(false)
@@ -27,31 +27,22 @@ const LoadingExample: FC = () => {
 					toggle spinning
 				</Button>
 				<Loading spinning={spinning}>
-					<div style={{ padding: 16, borderRadius: 6 }}>
-						<Space direction="vertical">
-							<strong>loading wrapper</strong>
-							<span>you can append content to loading children nodes.</span>
-						</Space>
-					</div>
+					<Card title="loading wrapper" action={null} footer={null}>
+						content
+					</Card>
 				</Loading>
 			</Space>
 			<Divider />
 			<Loading icon={<Icon path={mdiLoading} spin={1} size="24px" />} style={{ fontSize: 20 }}>
-				<div style={{ padding: 16, borderRadius: 6 }}>
-					<Space direction="vertical">
-						<strong>custom spinning icon</strong>
-						<span>you can use any custom loading icon.</span>
-					</Space>
-				</div>
+				<Card title="custom spinning icon" action={null} footer={null}>
+					content
+				</Card>
 			</Loading>
 			<Divider />
 			<Loading description="text description">
-				<div style={{ padding: 16, borderRadius: 6 }}>
-					<Space direction="vertical">
-						<strong>custom spinning icon</strong>
-						<span>you can use any custom loading icon.</span>
-					</Space>
-				</div>
+				<Card title="text description" action={null} footer={null}>
+					content
+				</Card>
 			</Loading>
 		</>
 	)

@@ -1,7 +1,9 @@
 @use '../../styles/mixins.scss' as *;
 .g-space-box {
 	@include cmm;
-	display: flex;
+	color: unset;
+	font-size: unset;
+	flex-wrap: nowrap;
 	&.g-small {
 		gap: 4px;
 	}

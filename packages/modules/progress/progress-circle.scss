@@ -1,0 +1,42 @@
+@use '../../styles/mixins.scss' as *;
+.g-progress-circle {
+	@include cmm;
+	&-detail {
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);
+	}
+	&-small {
+		.g-progress-circle-detail {
+			&-num {
+				font-size: 14px;
+			}
+			&-suffix {
+				font-size: 10px;
+			}
+		}
+	}
+	&-medium {
+		.g-progress-circle-detail {
+			&-num {
+				font-size: 18px;
+			}
+			&-suffix {
+				padding-left: 2px;
+				font-size: 12px;
+			}
+		}
+	}
+	&-large {
+		.g-progress-circle-detail {
+			&-num {
+				font-size: 22px;
+			}
+			&-suffix {
+				padding-left: 2px;
+				font-size: 14px;
+			}
+		}
+	}
+}

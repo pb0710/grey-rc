@@ -1,6 +1,7 @@
 @use '../../styles/mixins.scss' as *;
 .g-list {
 	@include cmm;
+	background: #fff;
 	&-bordered {
 		border: 1px solid #ddd;
 		border-radius: 6px;

@@ -1,0 +1,69 @@
+@use '../../styles/mixins.scss' as *;
+.g-progress {
+	@include cmm;
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	&-track {
+		background: #eee;
+		border-radius: 999vmax;
+	}
+	&-inset {
+		background: $primary-color;
+		border-radius: 999vmax;
+		transition: all 0.2s;
+	}
+	&-horizontal {
+		flex-direction: row;
+		width: 100%;
+		.g-progress-track {
+			width: 100%;
+		}
+		.g-progress-text {
+			min-width: 56px;
+		}
+	}
+	&-vertical {
+		flex-direction: column;
+		height: 100%;
+		.g-progress-track {
+			height: 100%;
+		}
+	}
+	&-small {
+		&.g-progress-horizontal {
+			.g-progress-inset {
+				height: 4px;
+			}
+		}
+		&.g-progress-vertical {
+			.g-progress-inset {
+				width: 4px;
+			}
+		}
+	}
+	&-medium {
+		&.g-progress-horizontal {
+			.g-progress-inset {
+				height: 6px;
+			}
+		}
+		&.g-progress-vertical {
+			.g-progress-inset {
+				width: 6px;
+			}
+		}
+	}
+	&-large {
+		&.g-progress-horizontal {
+			.g-progress-inset {
+				height: 8px;
+			}
+		}
+		&.g-progress-vertical {
+			.g-progress-inset {
+				width: 8px;
+			}
+		}
+	}
+}

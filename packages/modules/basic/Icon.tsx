@@ -9,12 +9,14 @@ const Icon: FC<
 		HTMLAttributes<HTMLSpanElement> & {
 			canHover?: boolean
 			round?: boolean
+			bgColor?: string
 		}
 > = props => {
 	const {
 		className,
 		canHover = false,
 		round = false,
+		bgColor = 'inherit',
 		size = '14px',
 		color = 'currentColor',
 		path,
@@ -25,6 +27,7 @@ const Icon: FC<
 		vertical,
 		description,
 		ref,
+		style,
 		...rest
 	} = props
 
@@ -46,6 +49,7 @@ const Icon: FC<
 				'g-icon-can-hover': canHover,
 				'g-icon-round': round
 			})}
+			style={{ ...style, backgroundColor: bgColor }}
 			{...rest}
 		>
 			<_Icon {...iconProps} />

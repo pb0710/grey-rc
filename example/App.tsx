@@ -15,6 +15,9 @@ import LoadingExample from './views/LoadingExample'
 import ListExample from './views/ListExample'
 import ModalExample from './views/ModalExample'
 import CardExample from './views/CardExample'
+import ProgressExample from './views/ProgressExample'
+import AvatarExample from './views/AvatarExample'
+import ImageExample from './views/ImageExample'
 
 const App: FC = () => {
 	const getNavCls = (props: { isActive: boolean }): string =>
@@ -61,6 +64,15 @@ const App: FC = () => {
 					<NavLink to="/card" className={getNavCls}>
 						<div className="wrap">Card</div>
 					</NavLink>
+					<NavLink to="/progress" className={getNavCls}>
+						<div className="wrap">Progress</div>
+					</NavLink>
+					<NavLink to="/avatar" className={getNavCls}>
+						<div className="wrap">Avatar</div>
+					</NavLink>
+					<NavLink to="/image" className={getNavCls}>
+						<div className="wrap">Image</div>
+					</NavLink>
 				</Space>
 			</div>
 			<div className="content">
@@ -78,6 +90,9 @@ const App: FC = () => {
 						<Route path="list" element={<ListExample />} />
 						<Route path="modal" element={<ModalExample />} />
 						<Route path="card" element={<CardExample />} />
+						<Route path="progress" element={<ProgressExample />} />
+						<Route path="avatar" element={<AvatarExample />} />
+						<Route path="image" element={<ImageExample />} />
 					</Route>
 				</Routes>
 			</div>

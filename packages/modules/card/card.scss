@@ -3,28 +3,35 @@
 	@include cmm;
 	display: flex;
 	flex-direction: column;
-	gap: 24px;
 	width: 480px;
 	border-radius: 6px;
 	background: #fff;
-	padding: 24px;
 	&-bordered {
 		border: 1px solid #ddd;
 		border-bottom-color: #ccc;
 	}
+	&-shadow {
+		box-shadow: 0 4px 12px rgba($color: #000000, $alpha: 0.2);
+	}
 	&-header {
 		display: flex;
 		justify-content: space-between;
-		align-items: center;
-		background: #fff;
+		align-items: baseline;
+		gap: 8px;
+		padding: 24px 24px 0 24px;
 		&-title {
 			font-size: 20px;
 		}
+		&-close-icon {
+			background: #fff;
+		}
 	}
 	&-content {
+		padding: 24px;
 	}
 	&-footer {
 		display: flex;
 		flex-direction: row-reverse;
+		padding: 0 24px 24px 24px;
 	}
 }

@@ -14,7 +14,7 @@ const Tooltip: FC<TooltipProps> = props => {
 		children,
 		className,
 		content,
-		direction = 'bottom',
+		direction = 'top',
 		block = false,
 		disabled = false,
 		...rest

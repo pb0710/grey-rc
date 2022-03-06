@@ -20,11 +20,20 @@ if (document) {
 interface ModalProps extends HTMLAttributes<HTMLElement> {
 	visible?: boolean
 	maskClassName?: string
+	maskClosable?: boolean
 	onCancel?: () => void
 }
 
 const Modal: FC<ModalProps> = props => {
-	const { children, className, maskClassName, visible = false, onCancel, ...rest } = props
+	const {
+		children,
+		className,
+		maskClassName,
+		maskClosable = true,
+		visible = false,
+		onCancel,
+		...rest
+	} = props
 
 	console.log('mousePosition', mousePosition)
 
@@ -32,7 +41,7 @@ const Modal: FC<ModalProps> = props => {
 		? createPortal(
 				<div className={cls(className, 'g-modal')} {...rest}>
 					<div className={cls(maskClassName, 'g-modal-mask')}></div>
-					<div className="g-modal-wrap" onClick={onCancel}>
+					<div className="g-modal-wrap" onClick={maskClosable ? onCancel : undefined}>
 						<div onClick={e => e.stopPropagation()}>{children}</div>
 					</div>
 				</div>,

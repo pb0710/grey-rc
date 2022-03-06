@@ -10,12 +10,11 @@ const ModalExample: FC = () => {
 			<h1>Modal</h1>
 			<Button onClick={show}>show modal</Button>
 			<Modal visible={visible} onCancel={hide}>
-				<Card bordered={false} onCancel={hide}>
-					1232
+				<Card title="modal" bordered={false} shadow onCancel={hide}>
+					content
 				</Card>
 			</Modal>
 			<Divider />
-			<Card onCancel={hide}>1232</Card>
 		</>
 	)
 }
