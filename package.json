@@ -2,7 +2,7 @@
 	"version": "0.0.1",
 	"name": "grey-rc",
 	"main": "src/index.tsx",
-	"types": "types",
+	"types": "types/packages/index.d.ts",
 	"scripts": {
 		"prepare": "husky install",
 		"dev": "vite --host",
