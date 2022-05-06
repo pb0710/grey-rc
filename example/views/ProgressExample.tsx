@@ -106,25 +106,6 @@ const ProgressExample: FC = () => {
 				<Progress.Circle size="medium" molecule={percent} />
 				<Progress.Circle size="large" molecule={percent} />
 			</Space>
-			<Divider />
-			<Space>
-				<Progress.Countdown duration={12} />
-				<Progress.Countdown size="small" duration={60} />
-				<Progress.Countdown size="medium" duration={60} />
-				<Progress.Countdown size="large" duration={60} />
-				<Progress.Countdown duration={60} suffix="秒" />
-				<Progress.Countdown duration={60} format={null} />
-				<Progress.Countdown
-					duration={60}
-					suffix={null}
-					format={({ countUpRef }) => (
-						<div style={{ fontSize: 18, color: 'purple' }}>
-							<span ref={countUpRef}></span>
-							<span>s</span>
-						</div>
-					)}
-				/>
-			</Space>
 		</>
 	)
 }

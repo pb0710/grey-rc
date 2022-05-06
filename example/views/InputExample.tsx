@@ -26,8 +26,14 @@ const InputExample: FC = () => {
 			</Space>
 			<Divider />
 			<Space>
-				<Input placeholder="prefix" prefix={<Icon path={mdiMagnify} canHover />} />
-				<Input placeholder="suffix" suffix={<Icon path={mdiArrowUp} canHover />} />
+				<Input
+					placeholder="prefix"
+					prefix={<Icon style={{ backgroundColor: '#fff' }} path={mdiMagnify} canHover />}
+				/>
+				<Input
+					placeholder="suffix"
+					suffix={<Icon style={{ backgroundColor: '#fff' }} path={mdiArrowUp} canHover />}
+				/>
 			</Space>
 			<Divider />
 			<Space>
@@ -41,8 +47,8 @@ const InputExample: FC = () => {
 				<Input
 					placeholder="round with prefix and suffix"
 					round
-					prefix={<Icon path={mdiMagnify} canHover round />}
-					suffix={<Icon path={mdiArrowUp} canHover round />}
+					prefix={<Icon style={{ backgroundColor: '#fff' }} path={mdiMagnify} canHover round />}
+					suffix={<Icon style={{ backgroundColor: '#fff' }} path={mdiArrowUp} canHover round />}
 				/>
 				<Input placeholder="round block" round block />
 			</Space>

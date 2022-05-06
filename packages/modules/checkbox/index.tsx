@@ -58,7 +58,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, forwardRef)
 				{...checkedProps}
 				hidden
 				disabled={disabled}
-				className="g-checkbox-inner"
+				className="g-checkbox-input"
 				ref={checkboxRef}
 				type="checkbox"
 				onChange={handleChange}

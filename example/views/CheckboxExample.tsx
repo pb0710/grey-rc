@@ -1,7 +1,7 @@
 import React, { FC, ReactText, useEffect, useRef, useState } from 'react'
 import { Checkbox, Divider, Space } from '../../packages'
 
-const CheckboxExample1: FC = () => {
+const CheckboxExample: FC = () => {
 	const [val, setVal] = useState(false)
 	const defaultGroupVal = [2]
 	const [groupVal, setGroupVal] = useState<ReactText[]>(defaultGroupVal)
@@ -99,7 +99,6 @@ const CheckboxExample1: FC = () => {
 				<Checkbox disabled>disabled</Checkbox>
 				<Checkbox.Group
 					disabled
-					defaultValue={defaultDisabledVal}
 					options={[
 						{ label: 0, child: 'a' },
 						{ label: 1, child: 'b' },
@@ -129,4 +128,4 @@ const CheckboxExample1: FC = () => {
 	)
 }
 
-export default CheckboxExample1
+export default CheckboxExample

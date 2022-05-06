@@ -2,10 +2,10 @@ import React, { FC } from 'react'
 import { Divider, Image, Space } from '../../packages'
 
 const ImageExample: FC = () => {
-	const picSrc1 = 'https://img.acgbox.org/2020/12/20/025e7528d9eee.jpg'
-	const picSrc2 = 'https://img.acgbox.org/2020/12/20/0992e9220aa3c.jpg'
-	const picSrc3 = 'https://img.acgbox.org/2020/12/20/01ca140c8a0a1.jpg'
-	const picSrc4 = 'https://img.acgbox.org/2020/12/20/c1a22ba2d4817.jpg'
+	const picSrc1 = 'https://iph.href.lu/879x400'
+	const picSrc2 = 'https://iph.href.lu/879x400'
+	const picSrc3 = 'https://iph.href.lu/879x400'
+	const picSrc4 = 'https://iph.href.lu/879x400'
 	return (
 		<>
 			<h1>Image</h1>

@@ -16,7 +16,6 @@ const Icon: FC<
 		className,
 		canHover = false,
 		round = false,
-		bgColor = 'inherit',
 		size = '14px',
 		color = 'currentColor',
 		path,
@@ -27,7 +26,6 @@ const Icon: FC<
 		vertical,
 		description,
 		ref,
-		style,
 		...rest
 	} = props
 
@@ -44,16 +42,15 @@ const Icon: FC<
 		ref
 	}
 	return (
-		<span
+		<div
 			className={cls('g-icon', className, {
 				'g-icon-can-hover': canHover,
 				'g-icon-round': round
 			})}
-			style={{ ...style, backgroundColor: bgColor }}
 			{...rest}
 		>
 			<_Icon {...iconProps} />
-		</span>
+		</div>
 	)
 }
 export default Icon

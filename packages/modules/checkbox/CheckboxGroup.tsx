@@ -1,5 +1,6 @@
 import { cls, is } from 'gray-utils'
 import React, {
+	ChangeEvent,
 	Children,
 	cloneElement,
 	FC,
@@ -38,12 +39,14 @@ const CheckboxGroup: FC<CheckboxGroupProps> = props => {
 		...rest
 	} = props
 
-	const getHandleSubChange = (label?: ReactText) => (subValue: boolean) => {
+	const getHandleSubChange = (label?: ReactText) => (subParam: ChangeEvent<HTMLInputElement> | boolean) => {
 		if (is.undefined(label)) return
 
 		let nextValue = value
 		const hasChecked = value.includes(label)
-		if (subValue) {
+		const subChecked = is.boolean(subParam) ? subParam : subParam.target.checked
+
+		if (subChecked) {
 			if (!hasChecked) {
 				nextValue.push(label)
 			}
@@ -55,13 +58,13 @@ const CheckboxGroup: FC<CheckboxGroupProps> = props => {
 		onChange?.(nextValue)
 	}
 
-	const isControlled = value.length > 0
 	const getValueProps = (label?: ReactText) => {
 		if (is.undefined(label)) return
 
-		return isControlled
-			? { value: value.includes(label), defaultValue: defaultValue.includes(label) }
-			: { defaultValue: defaultValue.includes(label) }
+		return {
+			value: value.includes(label),
+			defaultValue: defaultValue.includes(label)
+		}
 	}
 
 	return (
@@ -78,7 +81,7 @@ const CheckboxGroup: FC<CheckboxGroupProps> = props => {
 							key={option.label}
 							label={option.label}
 							disabled={disabled || option.disabled}
-							onChange={getHandleSubChange(option.label) as any}
+							onChange={getHandleSubChange(option.label)}
 							{...getValueProps(option.label)}
 						>
 							{option.child}
@@ -89,7 +92,7 @@ const CheckboxGroup: FC<CheckboxGroupProps> = props => {
 					isValidElement<CheckboxProps>(child)
 						? cloneElement(child, {
 								disabled: disabled || child.props.disabled,
-								onChange: getHandleSubChange(child.props.label) as any,
+								onChange: getHandleSubChange(child.props.label),
 								...getValueProps(child.props.label)
 						  })
 						: child

@@ -19,7 +19,7 @@ const Avatar: FC<AvatarProps> = props => {
 		className,
 		size = 'medium',
 		src,
-		round = true,
+		round = false,
 		color = '#ccc',
 		fallback,
 		badge,

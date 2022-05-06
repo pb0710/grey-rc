@@ -44,46 +44,46 @@ const Image = forwardRef<HTMLImageElement, ImageProps>((props, outerRef) => {
 			<Space>
 				<Tooltip content="向左旋转90°">
 					<Icon
+						className="g-image-detail-icon"
 						path={mdiRestore}
 						size="20px"
 						canHover
-						bgColor="#fff"
 						onClick={() => setRotate(pre => pre - 90)}
 					/>
 				</Tooltip>
 				<Tooltip content="向右旋转90°">
 					<Icon
+						className="g-image-detail-icon"
 						path={mdiReload}
 						size="20px"
 						canHover
-						bgColor="#fff"
 						onClick={() => setRotate(pre => pre + 90)}
 					/>
 				</Tooltip>
 				<Tooltip content="缩小">
 					<Icon
+						className="g-image-detail-icon"
 						path={mdiMagnifyMinusOutline}
 						size="20px"
 						canHover
-						bgColor="#fff"
 						onClick={() => setScale(pre => Math.max(0.4, pre - 0.4))}
 					/>
 				</Tooltip>
 				<Tooltip content="放大">
 					<Icon
+						className="g-image-detail-icon"
 						path={mdiMagnifyPlusOutline}
 						size="20px"
 						canHover
-						bgColor="#fff"
 						onClick={() => setScale(pre => Math.min(4, pre + 0.4))}
 					/>
 				</Tooltip>
 				<Tooltip content="下载">
 					<Icon
+						className="g-image-detail-icon"
 						path={mdiTrayArrowDown}
 						size="20px"
 						canHover
-						bgColor="#fff"
 						onClick={() => {
 							alert('download')
 						}}
@@ -91,10 +91,10 @@ const Image = forwardRef<HTMLImageElement, ImageProps>((props, outerRef) => {
 				</Tooltip>
 				<Tooltip content="关闭">
 					<Icon
+						className="g-image-detail-icon"
 						path={mdiClose}
 						size="20px"
 						canHover
-						bgColor="#fff"
 						onClick={() => setDetailVisible(false)}
 					/>
 				</Tooltip>
@@ -103,11 +103,7 @@ const Image = forwardRef<HTMLImageElement, ImageProps>((props, outerRef) => {
 	)
 
 	const detailEle = detailDisabled || (
-		<Modal
-			visible={detailVisible}
-			maskClosable={!toolbarVisible}
-			onCancel={() => setDetailVisible(false)}
-		>
+		<Modal visible={detailVisible} onCancel={() => setDetailVisible(false)}>
 			<div className="g-image-detail">
 				<img
 					className="g-image-detail-pic"

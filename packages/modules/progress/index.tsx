@@ -1,6 +1,5 @@
-import React, { CSSProperties, FC, HTMLAttributes, ReactNode, RefObject, useEffect, useRef } from 'react'
+import React, { CSSProperties, FC, HTMLAttributes, ReactNode, useEffect, useRef } from 'react'
 import ProgressCircle from './ProgressCircle'
-import Countdown from './Countdown'
 import { cls, is } from 'gray-utils'
 import './progress.scss'
 import CountUp from 'react-countup'
@@ -68,8 +67,6 @@ const Progress: FC<ProgressProps> = props => {
 
 const ExportProgress = Progress as typeof Progress & {
 	Circle: typeof ProgressCircle
-	Countdown: typeof Countdown
 }
 ExportProgress.Circle = ProgressCircle
-ExportProgress.Countdown = Countdown
 export default ExportProgress

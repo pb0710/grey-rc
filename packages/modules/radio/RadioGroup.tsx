@@ -1,5 +1,6 @@
 import { cls, is } from 'gray-utils'
 import React, {
+	ChangeEvent,
 	Children,
 	cloneElement,
 	FC,
@@ -40,21 +41,23 @@ const RadioGroup: FC<RadioGroup> = props => {
 		...rest
 	} = props
 
-	const getHandleSubChange = (label?: ReactText) => (subValue: boolean) => {
+	const getHandleSubChange = (label?: ReactText) => (subParam: boolean | ChangeEvent<HTMLInputElement>) => {
 		if (is.undefined(label)) return
-		if (subValue) {
+
+		const subChecked = is.boolean(subParam) ? subParam : subParam.target.checked
+		if (subChecked) {
 			onChange?.(label)
 		}
 	}
 
-	const isControlled = !is.undefined(value)
 	const isTab = type === 'tab'
 	const getValueProps = (label?: ReactText) => {
 		if (is.undefined(label)) return
 
-		return isControlled
-			? { value: value === label, defaultValue: defaultValue === label }
-			: { defaultValue: defaultValue === label }
+		return {
+			value: value === label,
+			defaultValue: defaultValue === label
+		}
 	}
 
 	return (
@@ -73,7 +76,7 @@ const RadioGroup: FC<RadioGroup> = props => {
 							label={option.label}
 							type={type}
 							disabled={disabled || option.disabled}
-							onChange={getHandleSubChange(option.label) as any}
+							onChange={getHandleSubChange(option.label)}
 							{...getValueProps(option.label)}
 						>
 							{option.child}
@@ -85,7 +88,7 @@ const RadioGroup: FC<RadioGroup> = props => {
 						? cloneElement(child, {
 								type,
 								disabled: disabled || child.props.disabled,
-								onChange: getHandleSubChange(child.props.label) as any,
+								onChange: getHandleSubChange(child.props.label),
 								...getValueProps(child.props.label)
 						  })
 						: child
