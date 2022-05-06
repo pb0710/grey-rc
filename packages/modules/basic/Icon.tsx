@@ -1,7 +1,7 @@
 import React, { FC, HTMLAttributes } from 'react'
 import _Icon from '@mdi/react'
 import { IconProps } from '@mdi/react/dist/IconProps'
-import { cls } from 'gray-utils'
+import { cls } from 'grey-utils'
 import './icon.scss'
 
 const Icon: FC<

@@ -1,4 +1,4 @@
-import { cls } from 'gray-utils'
+import { cls } from 'grey-utils'
 import React, { FC, HTMLAttributes, ReactEventHandler, ReactNode, SyntheticEvent, useState } from 'react'
 import './avatar.scss'
 import AvatarGroup from './avatarGroup'

@@ -1,5 +1,5 @@
 import React, { ButtonHTMLAttributes, forwardRef, ReactElement } from 'react'
-import { cls } from 'gray-utils'
+import { cls } from 'grey-utils'
 import './button.scss'
 import Loading from '../loading'
 

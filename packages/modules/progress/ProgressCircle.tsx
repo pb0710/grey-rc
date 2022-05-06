@@ -1,4 +1,4 @@
-import { cls, is, omit } from 'gray-utils'
+import { cls, is, omit } from 'grey-utils'
 import React, { FC, ReactNode, useEffect, useRef } from 'react'
 import CountUp from 'react-countup'
 import { RenderCounterProps } from 'react-countup/build/types'

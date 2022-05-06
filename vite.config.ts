@@ -8,8 +8,8 @@ export default defineConfig({
 	build: {
 		lib: {
 			entry: resolve(__dirname, 'packages/index.ts'), // 设置入口文件
-			name: 'gray-rc', // 起个名字，安装、引入用
-			fileName: format => `gray-rc.${format}.js` // 打包后的文件名
+			name: 'grey-rc', // 起个名字，安装、引入用
+			fileName: format => `grey-rc.${format}.js` // 打包后的文件名
 		},
 		sourcemap: true, // 输出.map文件
 		rollupOptions: {

@@ -1,4 +1,4 @@
-import { cls, is } from 'gray-utils'
+import { cls, is } from 'grey-utils'
 import React, {
 	ChangeEventHandler,
 	forwardRef,

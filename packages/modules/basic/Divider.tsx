@@ -1,4 +1,4 @@
-import { cls } from 'gray-utils'
+import { cls } from 'grey-utils'
 import React, { FC, HTMLAttributes } from 'react'
 import './divider.scss'
 

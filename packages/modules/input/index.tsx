@@ -1,5 +1,5 @@
 import { mdiCloseCircle } from '@mdi/js'
-import { cls, is } from 'gray-utils'
+import { cls, is } from 'grey-utils'
 import React, {
 	ChangeEvent,
 	ChangeEventHandler,

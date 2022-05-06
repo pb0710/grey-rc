@@ -6,7 +6,7 @@ import {
 	mdiReload,
 	mdiRestore
 } from '@mdi/js'
-import { cls } from 'gray-utils'
+import { cls } from 'grey-utils'
 import React, { forwardRef, ImgHTMLAttributes, useEffect, useRef, useState } from 'react'
 import Icon from '../basic/Icon'
 import Space from '../basic/Space'

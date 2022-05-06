@@ -1,4 +1,4 @@
-import { cls } from 'gray-utils'
+import { cls } from 'grey-utils'
 import React, { FC, HTMLAttributes, MouseEvent } from 'react'
 import { createPortal } from 'react-dom'
 import './modal.scss'

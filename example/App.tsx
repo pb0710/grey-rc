@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { Route, Routes, NavLink } from 'react-router-dom'
-import { cls } from 'gray-utils'
+import { cls } from 'grey-utils'
 import './App.scss'
 import ExampleIndex from './views/ExampleIndex'
 import ButtonExample from './views/ButtonExample'

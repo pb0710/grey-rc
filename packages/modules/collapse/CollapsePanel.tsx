@@ -1,5 +1,5 @@
 import { mdiChevronDown } from '@mdi/js'
-import { cls, is, omit } from 'gray-utils'
+import { cls, is, omit } from 'grey-utils'
 import React, { CSSProperties, FC, HTMLAttributes, ReactNode, ReactText, useRef, useState } from 'react'
 import Icon from '../basic/Icon'
 import './collapse-panel.scss'

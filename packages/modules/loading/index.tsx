@@ -1,4 +1,4 @@
-import { cls } from 'gray-utils'
+import { cls } from 'grey-utils'
 import React, { FC, HTMLAttributes, ReactNode } from 'react'
 import SpinSvg from './SpinSvg'
 import './loading.scss'

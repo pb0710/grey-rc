@@ -1,6 +1,6 @@
 import React, { CSSProperties, FC, HTMLAttributes, ReactNode, useEffect, useRef } from 'react'
 import ProgressCircle from './ProgressCircle'
-import { cls, is } from 'gray-utils'
+import { cls, is } from 'grey-utils'
 import './progress.scss'
 import CountUp from 'react-countup'
 import { RenderCounterProps } from 'react-countup/build/types'

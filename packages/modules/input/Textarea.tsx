@@ -8,7 +8,7 @@ import React, {
 	useRef,
 	useState
 } from 'react'
-import { cls, is } from 'gray-utils'
+import { cls, is } from 'grey-utils'
 import './textarea.scss'
 import TextareaAutosize from 'react-textarea-autosize'
 

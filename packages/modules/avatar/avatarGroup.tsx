@@ -1,4 +1,4 @@
-import { cls } from 'gray-utils'
+import { cls } from 'grey-utils'
 import React, { Children, cloneElement, FC, HTMLAttributes, isValidElement } from 'react'
 import { AvatarProps } from '.'
 import './avatar-group.scss'

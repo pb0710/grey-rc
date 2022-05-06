@@ -1,5 +1,5 @@
 import { mdiClose } from '@mdi/js'
-import { cls, is } from 'gray-utils'
+import { cls, is } from 'grey-utils'
 import React, { FC, HTMLAttributes, ReactNode } from 'react'
 import Icon from '../basic/Icon'
 import Space from '../basic/Space'
