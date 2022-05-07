@@ -2,7 +2,6 @@ import React, { FC } from 'react'
 import { Route, Routes, NavLink } from 'react-router-dom'
 import { cls } from 'grey-utils'
 import './App.scss'
-import ExampleIndex from './views/ExampleIndex'
 import ButtonExample from './views/ButtonExample'
 import SwitchExample from './views/SwitchExample'
 import RadioExample from './views/RadioExample'
@@ -28,9 +27,6 @@ const App: FC = () => {
 		<div className="example">
 			<div className="nav-bar">
 				<Space direction="vertical" size="small">
-					<NavLink to="/" className={getNavCls}>
-						<div className="wrap">Index</div>
-					</NavLink>
 					<NavLink to="/button" className={getNavCls}>
 						<div className="wrap">Button</div>
 					</NavLink>
@@ -78,7 +74,6 @@ const App: FC = () => {
 			<div className="content">
 				<Routes>
 					<Route path="/">
-						<Route index element={<ExampleIndex />} />
 						<Route path="button" element={<ButtonExample />} />
 						<Route path="switch" element={<SwitchExample />} />
 						<Route path="radio" element={<RadioExample />} />

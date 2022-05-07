@@ -3,17 +3,21 @@
 	"name": "grey-rc",
 	"main": "src/index.tsx",
 	"types": "types/packages/index.d.ts",
+	"repository": {
+		"url": "https://github.com/pb0710/grey-rc"
+	},
 	"scripts": {
 		"prepare": "husky install",
 		"dev": "vite --host",
-		"build": "tsc && vite build",
+		"build": "yarn run types && vite build",
+		"types": "rm -rf types && tsc",
 		"serve": "vite preview",
 		"test": "jest"
 	},
 	"dependencies": {
 		"@mdi/js": "^6.6.96",
 		"@mdi/react": "^1.6.0",
-		"grey-r-form": "link:../grey-r-form",
+		"grey-rh": "link:../grey-rh",
 		"grey-utils": "link:../grey-utils",
 		"normalize.css": "^8.0.1",
 		"react-countup": "^6.2.0",
