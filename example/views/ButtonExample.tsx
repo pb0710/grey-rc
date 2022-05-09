@@ -10,6 +10,16 @@ const ButtonExample: FC = () => {
 				<Button>click me</Button>
 				<Button primary>primary</Button>
 				<Button round>round</Button>
+				<Tooltip content="square button">
+					<Button square>
+						<Icon path={mdiStarOutline}></Icon>
+					</Button>
+				</Tooltip>
+				<Tooltip content="square primary button">
+					<Button square primary>
+						<Icon path={mdiMagnify}></Icon>
+					</Button>
+				</Tooltip>
 				<Tooltip content="circle button">
 					<Button circle>
 						<Icon path={mdiStarOutline}></Icon>

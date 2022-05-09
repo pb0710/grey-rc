@@ -9,6 +9,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 	primary?: boolean
 	round?: boolean
 	circle?: boolean
+	square?: boolean
 	loading?: boolean
 	disabled?: boolean
 	icon?: ReactElement
@@ -23,6 +24,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
 		primary = false,
 		round = false,
 		circle = false,
+		square = false,
 		loading = false,
 		disabled = false,
 		icon = null,
@@ -39,6 +41,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
 				[`${prefixCls}-block`]: block,
 				[`${prefixCls}-round`]: round,
 				[`${prefixCls}-circle`]: circle,
+				[`${prefixCls}-square`]: square,
 				[`${prefixCls}-disabled`]: disabled || loading
 			})}
 			ref={ref}
@@ -46,7 +49,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
 			{...rest}
 		>
 			{loading ? (
-				circle ? (
+				circle || square ? (
 					loadEle
 				) : (
 					<>
