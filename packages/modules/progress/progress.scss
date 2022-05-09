@@ -1,6 +1,6 @@
 @use '../../styles/mixins.scss' as *;
 .g-progress {
-	@include cmm;
+	@include basic;
 	display: flex;
 	align-items: center;
 	gap: 12px;

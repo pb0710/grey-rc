@@ -9,6 +9,7 @@ import React, {
 	useRef,
 	useState
 } from 'react'
+import { UI_PREFIX } from '../../constants'
 import './radio.scss'
 import RadioGroup from './RadioGroup'
 
@@ -55,16 +56,18 @@ const Radio = forwardRef<HTMLInputElement, RadioProps>((props, outerRef) => {
 		}
 	}
 
+	const prefixCls = `${UI_PREFIX}-radio`
+
 	const checkedProps = isControlled ? { checked } : { defaultChecked: defaultValue }
 	const isTab = type === 'tab'
 	const radioCls = isTab
-		? cls('g-radio-tab', className, {
-				'g-radio-tab-disabled': disabled,
-				'g-radio-tab-checked': checked
+		? cls(className, `${prefixCls}-tab`, {
+				[`${prefixCls}-tab-disabled`]: disabled,
+				[`${prefixCls}-tab-checked`]: checked
 		  })
-		: cls('g-radio', className, {
-				'g-radio-disabled': disabled,
-				'g-radio-checked': checked
+		: cls(className, prefixCls, {
+				[`${prefixCls}-disabled`]: disabled,
+				[`${prefixCls}-checked`]: checked
 		  })
 
 	return (
@@ -74,12 +77,12 @@ const Radio = forwardRef<HTMLInputElement, RadioProps>((props, outerRef) => {
 				{...checkedProps}
 				hidden
 				disabled={disabled}
-				className="g-radio-inner"
+				className={`${prefixCls}-inner`}
 				ref={radioRef}
 				type="radio"
 				onChange={handleChange}
 			/>
-			{!isTab && <div className="g-radio-icon"></div>}
+			{!isTab && <div className={`${prefixCls}-icon`}></div>}
 			{children}
 		</label>
 	)

@@ -1,6 +1,7 @@
 {
 	"version": "0.0.1",
 	"name": "grey-rc",
+	"license": "MIT",
 	"main": "src/index.tsx",
 	"types": "types/packages/index.d.ts",
 	"repository": {

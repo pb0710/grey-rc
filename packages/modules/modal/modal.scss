@@ -1,6 +1,6 @@
 @use '../../styles/mixins.scss' as *;
 .g-modal {
-	@include cmm;
+	@include basic;
 	z-index: 1000;
 	position: fixed;
 	left: 0;

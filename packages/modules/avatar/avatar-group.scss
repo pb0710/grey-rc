@@ -1,6 +1,6 @@
 @use '../../styles/mixins.scss' as *;
 .g-avatar-group {
-	@include cmm;
+	@include basic;
 	display: inline-flex;
 	flex-wrap: nowrap;
 	> * {

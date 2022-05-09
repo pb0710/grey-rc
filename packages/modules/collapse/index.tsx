@@ -9,6 +9,7 @@ import React, {
 	useEffect,
 	useState
 } from 'react'
+import { UI_PREFIX } from '../../constants'
 import './collapse.scss'
 import CollapsePanel, { CollapsePanelProps } from './CollapsePanel'
 
@@ -28,8 +29,10 @@ const Collapse: FC<CollapseProps> = props => {
 		if (isControlled) _setActives(actives)
 	}, [actives])
 
+	const prefixCls = `${UI_PREFIX}-collapse`
+
 	return (
-		<div className={cls(className, 'g-collapse')} {...rest}>
+		<div className={cls(className, prefixCls)} {...rest}>
 			{Children.map(children, child => {
 				if (!isValidElement<CollapsePanelProps>(child)) return child
 

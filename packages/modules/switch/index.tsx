@@ -8,6 +8,7 @@ import React, {
 	useRef,
 	useState
 } from 'react'
+import { UI_PREFIX } from '../../constants'
 import './switch.scss'
 
 interface SwitchProps
@@ -30,6 +31,7 @@ const Switch = forwardRef<HTMLInputElement, SwitchProps>((props, outerRef) => {
 		onChange,
 		...rest
 	} = props
+
 	const innerRef = useRef<HTMLInputElement>(null)
 	const switchRef = (outerRef ?? innerRef) as MutableRefObject<HTMLInputElement>
 	const [checked, setChecked] = useState(defaultValue)
@@ -45,12 +47,15 @@ const Switch = forwardRef<HTMLInputElement, SwitchProps>((props, outerRef) => {
 		else onChange?.(e)
 	}
 
+	const prefixCls = `${UI_PREFIX}-switch`
+
 	const checkedProps = isControlled ? { checked } : { defaultChecked: defaultValue }
+
 	return (
 		<label
-			className={cls('g-switch', className, {
-				'g-switch-disabled': disabled,
-				'g-switch-checked': checked
+			className={cls(className, prefixCls, {
+				[`${prefixCls}-disabled`]: disabled,
+				[`${prefixCls}-checked`]: checked
 			})}
 		>
 			<input

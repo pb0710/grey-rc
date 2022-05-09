@@ -1,6 +1,6 @@
 @use './vars.scss' as *;
 @forward './vars.scss';
-@mixin cmm {
+@mixin basic {
 	box-sizing: border-box;
 	font-size: $text-font-size;
 	color: $text-primary;

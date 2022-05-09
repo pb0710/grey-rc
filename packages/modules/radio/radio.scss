@@ -1,6 +1,6 @@
 @use '../../styles/mixins.scss' as *;
 .g-radio {
-	@include cmm;
+	@include basic;
 	display: inline-flex;
 	align-items: center;
 	gap: 8px;
@@ -53,7 +53,7 @@
 }
 
 .g-radio-tab {
-	@include cmm;
+	@include basic;
 	display: inline-flex;
 	align-items: center;
 	height: 24px;

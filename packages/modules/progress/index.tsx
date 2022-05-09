@@ -4,6 +4,7 @@ import { cls, is } from 'grey-utils'
 import './progress.scss'
 import CountUp from 'react-countup'
 import { RenderCounterProps } from 'react-countup/build/types'
+import { UI_PREFIX } from '../../constants'
 
 interface ProgressProps extends HTMLAttributes<HTMLElement> {
 	size?: 'small' | 'medium' | 'large'
@@ -31,6 +32,8 @@ const Progress: FC<ProgressProps> = props => {
 		prePercentRef.current = percent
 	}, [percent])
 
+	const prefixCls = `${UI_PREFIX}-progress`
+
 	let rectStyle: CSSProperties
 	switch (direction) {
 		case 'horizontal':
@@ -47,14 +50,14 @@ const Progress: FC<ProgressProps> = props => {
 
 	return (
 		<div
-			className={cls(className, 'g-progress', `g-progress-${size}`, `g-progress-${direction}`)}
+			className={cls(className, prefixCls, `${prefixCls}-${size}`, `${prefixCls}-${direction}`)}
 			{...rest}
 		>
-			<div className="g-progress-track">
-				<div className="g-progress-inset" style={rectStyle}></div>
+			<div className={`${prefixCls}-track`}>
+				<div className={`${prefixCls}-inset`} style={rectStyle}></div>
 			</div>
 			{is.null(format) || (
-				<span className="g-progress-text">
+				<span className={`${prefixCls}-text`}>
 					<CountUp start={prePercentRef.current} end={percent} duration={0.2}>
 						{format}
 					</CountUp>

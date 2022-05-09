@@ -10,6 +10,7 @@ import React, {
 	ReactText
 } from 'react'
 import Radio, { RadioProps } from '.'
+import { UI_PREFIX } from '../../constants'
 import Space from '../basic/Space'
 import './radio-group.scss'
 
@@ -36,7 +37,7 @@ const RadioGroup: FC<RadioGroup> = props => {
 		options = [],
 		disabled = false,
 		defaultValue,
-		value,
+		value = defaultValue,
 		onChange,
 		...rest
 	} = props
@@ -50,6 +51,8 @@ const RadioGroup: FC<RadioGroup> = props => {
 		}
 	}
 
+	const prefixCls = `${UI_PREFIX}-radio-group`
+
 	const isTab = type === 'tab'
 	const getValueProps = (label?: ReactText) => {
 		if (is.undefined(label)) return
@@ -62,9 +65,9 @@ const RadioGroup: FC<RadioGroup> = props => {
 
 	return (
 		<div
-			className={cls('g-radio-group', className, {
-				'g-radio-group-disabled': disabled,
-				'g-radio-group-tab': isTab
+			className={cls(className, prefixCls, {
+				[`${prefixCls}-disabled`]: disabled,
+				[`${prefixCls}-tab`]: isTab
 			})}
 			{...rest}
 		>

@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { mdiAccountOutline, mdiMagnify, mdiShieldCheckOutline } from '@mdi/js'
+import { mdiStarOutline, mdiMagnify, mdiShieldCheckOutline } from '@mdi/js'
 import { Button, Divider, Icon, Space, Tooltip } from '../../packages'
 
 const ButtonExample: FC = () => {
@@ -12,7 +12,7 @@ const ButtonExample: FC = () => {
 				<Button round>round</Button>
 				<Tooltip content="circle button">
 					<Button circle>
-						<Icon path={mdiAccountOutline}></Icon>
+						<Icon path={mdiStarOutline}></Icon>
 					</Button>
 				</Tooltip>
 				<Tooltip content="circle primary button">
@@ -33,7 +33,7 @@ const ButtonExample: FC = () => {
 					loading
 				</Button>
 				<Button circle loading>
-					<Icon path={mdiAccountOutline}></Icon>
+					<Icon path={mdiStarOutline}></Icon>
 				</Button>
 			</Space>
 			<Divider />

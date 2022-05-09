@@ -4,6 +4,7 @@ import React, { CSSProperties, FC, HTMLAttributes, ReactNode, ReactText, useRef,
 import Icon from '../basic/Icon'
 import './collapse-panel.scss'
 import { Transition, TransitionStatus } from 'react-transition-group'
+import { UI_PREFIX } from '../../constants'
 
 export interface CollapsePanelProps extends Omit<HTMLAttributes<HTMLElement>, 'title' | 'onChange'> {
 	itemKey?: ReactText
@@ -39,14 +40,16 @@ const CollapsePanel: FC<CollapsePanelProps> = props => {
 		}
 	}
 
+	const prefixCls = `${UI_PREFIX}-collapse-panel`
+
 	const isCustomHeader = !is.string(title)
 	const headerEle = isCustomHeader ? (
 		title
 	) : (
-		<div className={cls(className, 'g-collapse-panel-header')} {...rest}>
+		<div className={cls(className, `${prefixCls}-header`)} {...rest}>
 			<div>{title}</div>
 			<Icon
-				className="g-collapse-panel-header-icon"
+				className={`${prefixCls}-header-icon`}
 				path={mdiChevronDown}
 				canHover
 				size="16px"
@@ -59,8 +62,8 @@ const CollapsePanel: FC<CollapsePanelProps> = props => {
 	)
 	return (
 		<div
-			className={cls('g-collapse-panel', {
-				'g-collapse-panel-is-custom-header': isCustomHeader
+			className={cls(prefixCls, {
+				[`${prefixCls}-is-custom-header`]: isCustomHeader
 			})}
 		>
 			{headerEle}
@@ -68,9 +71,9 @@ const CollapsePanel: FC<CollapsePanelProps> = props => {
 				{(state: TransitionStatus) => (
 					<div
 						ref={boxRef}
-						className={cls('g-collapse-panel-box', {
-							'g-collapse-panel-box-entered': state === 'entered',
-							'g-collapse-panel-box-exited': state === 'exited'
+						className={cls(`${prefixCls}-box`, {
+							[`${prefixCls}-box-entered`]: state === 'entered',
+							[`${prefixCls}-box-exited`]: state === 'exited'
 						})}
 						style={{ maxHeight }}
 					>

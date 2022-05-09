@@ -1,6 +1,6 @@
 @use '../../styles/mixins.scss' as *;
 .g-progress-circle {
-	@include cmm;
+	@include basic;
 	&-detail {
 		position: absolute;
 		left: 50%;

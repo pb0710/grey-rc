@@ -1,6 +1,6 @@
 @use '../../styles/mixins.scss' as *;
 .g-tooltip {
-	@include cmm;
+	@include basic;
 	position: relative;
 	$tip-bg-color: #333;
 	$tip-text-color: #fff;

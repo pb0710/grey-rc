@@ -1,8 +1,9 @@
 import React, { FC, HTMLAttributes } from 'react'
-import _Icon from '@mdi/react'
+import MdiIcon from '@mdi/react'
 import { IconProps } from '@mdi/react/dist/IconProps'
 import { cls } from 'grey-utils'
 import './icon.scss'
+import { UI_PREFIX } from '../../constants'
 
 const Icon: FC<
 	IconProps &
@@ -29,7 +30,7 @@ const Icon: FC<
 		...rest
 	} = props
 
-	const iconProps = {
+	const midIconProps = {
 		size,
 		color,
 		path,
@@ -41,15 +42,17 @@ const Icon: FC<
 		description,
 		ref
 	}
+	const prefixCls = `${UI_PREFIX}-icon`
+
 	return (
 		<div
-			className={cls('g-icon', className, {
-				'g-icon-can-hover': canHover,
-				'g-icon-round': round
+			className={cls(className, prefixCls, {
+				[`${prefixCls}-can-hover`]: canHover,
+				[`${prefixCls}-round`]: round
 			})}
 			{...rest}
 		>
-			<_Icon {...iconProps} />
+			<MdiIcon {...midIconProps} />
 		</div>
 	)
 }

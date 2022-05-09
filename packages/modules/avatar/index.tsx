@@ -1,5 +1,6 @@
 import { cls } from 'grey-utils'
 import React, { FC, HTMLAttributes, ReactEventHandler, ReactNode, SyntheticEvent, useState } from 'react'
+import { UI_PREFIX } from '../../constants'
 import './avatar.scss'
 import AvatarGroup from './avatarGroup'
 
@@ -28,12 +29,14 @@ const Avatar: FC<AvatarProps> = props => {
 		...rest
 	} = props
 
+	const prefixCls = `${UI_PREFIX}-avatar`
+
 	const [error, setError] = useState<SyntheticEvent<HTMLImageElement, Event>>()
 	const imgEle = error ? (
 		fallback
 	) : (
 		<img
-			className="g-avatar-img"
+			className={`${prefixCls}-img`}
 			src={src}
 			onError={err => {
 				onError?.(err)
@@ -44,14 +47,14 @@ const Avatar: FC<AvatarProps> = props => {
 
 	return (
 		<div
-			className={cls(className, 'g-avatar', `g-avatar-${size}`, {
-				'g-avatar-round': round
+			className={cls(className, prefixCls, `${prefixCls}-${size}`, {
+				[`${prefixCls}-round`]: round
 			})}
 			style={{ ...style, backgroundColor: color }}
 			{...rest}
 		>
 			{children || imgEle}
-			{badge && <div className="g-avatar-badge">{badge}</div>}
+			{badge && <div className={`${prefixCls}-badge`}>{badge}</div>}
 		</div>
 	)
 }

@@ -2,6 +2,7 @@ import React, { ButtonHTMLAttributes, forwardRef, ReactElement } from 'react'
 import { cls } from 'grey-utils'
 import './button.scss'
 import Loading from '../loading'
+import { UI_PREFIX } from '../../constants'
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 	block?: boolean
@@ -28,15 +29,17 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
 		...rest
 	} = props
 
+	const prefixCls = `${UI_PREFIX}-button`
 	const loadEle = <Loading size="inherit" style={{ color: 'inherit' }} />
+
 	return (
 		<button
-			className={cls('g-button', className, {
-				'g-button-primary': primary,
-				'g-button-block': block,
-				'g-button-round': round,
-				'g-button-circle': circle,
-				'g-button-disabled': disabled || loading
+			className={cls(className, prefixCls, {
+				[`${prefixCls}-primary`]: primary,
+				[`${prefixCls}-block`]: block,
+				[`${prefixCls}-round`]: round,
+				[`${prefixCls}-circle`]: circle,
+				[`${prefixCls}-disabled`]: disabled || loading
 			})}
 			ref={ref}
 			type={type}

@@ -1,6 +1,6 @@
 @use '../../styles/mixins.scss' as *;
 .g-switch {
-	@include cmm;
+	@include basic;
 	display: inline-block;
 	position: relative;
 	width: 34px;

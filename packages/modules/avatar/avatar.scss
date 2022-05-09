@@ -1,6 +1,6 @@
 @use '../../styles/mixins.scss' as *;
 .g-avatar {
-	@include cmm;
+	@include basic;
 	position: relative;
 	display: inline-flex;
 	justify-content: center;

@@ -1,5 +1,6 @@
 import { cls } from 'grey-utils'
 import React, { FC, HTMLAttributes } from 'react'
+import { UI_PREFIX } from '../../constants'
 import './space.scss'
 
 interface SpaceProps extends HTMLAttributes<HTMLElement> {
@@ -35,9 +36,13 @@ const Space: FC<SpaceProps> = props => {
 		if (direction === 'vertical') return 'column'
 		return 'row'
 	}
+
+	const prefixCls = `${UI_PREFIX}-space`
+	const wrapCls = cls(className, prefixCls, `${prefixCls}-${direction}-${size}`)
+
 	return (
 		<div
-			className={cls(className, 'g-space-box', `g-${size}`)}
+			className={wrapCls}
 			style={{
 				display: toDisplay(block),
 				alignItems: toAlignItems(align),

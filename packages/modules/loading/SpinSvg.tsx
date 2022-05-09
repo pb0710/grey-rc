@@ -1,8 +1,6 @@
 import React, { FC, SVGAttributes } from 'react'
 
-type SpinSvgProps = SVGAttributes<SVGElement>
-
-const SpinSvg: FC<SpinSvgProps> = ({ style, ...rest }) => {
+const SpinSvg: FC<SVGAttributes<SVGElement>> = ({ style, ...rest }) => {
 	return (
 		<svg
 			viewBox="0 0 200 200"

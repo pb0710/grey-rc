@@ -14,6 +14,7 @@ import React, {
 	useRef,
 	useState
 } from 'react'
+import { UI_PREFIX } from '../../constants'
 import Icon from '../basic/Icon'
 import './input.scss'
 import Textarea from './Textarea'
@@ -86,14 +87,17 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props, forwardRef) => {
 		if (defaultValue) setClearVisible(true)
 	}, [defaultValue])
 
+	const prefixCls = `${UI_PREFIX}-input`
+
 	const valueProps = isControlled && { value }
+
 	return (
 		<label
-			className={cls('g-input', className, {
-				'g-input-focus': focus,
-				'g-input-block': block,
-				'g-input-round': round,
-				'g-input-disabled': disabled
+			className={cls(className, prefixCls, {
+				[`${prefixCls}-focus`]: focus,
+				[`${prefixCls}-block`]: block,
+				[`${prefixCls}-round`]: round,
+				[`${prefixCls}-disabled`]: disabled
 			})}
 		>
 			{prefix}
@@ -102,7 +106,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props, forwardRef) => {
 				{...valueProps}
 				defaultValue={defaultValue}
 				disabled={disabled}
-				className="g-input-inner"
+				className={`${prefixCls}-inner`}
 				ref={inputRef}
 				type="text"
 				onFocus={handleFocus}

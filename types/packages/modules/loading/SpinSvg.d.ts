@@ -1,4 +1,3 @@
 import { FC, SVGAttributes } from 'react'
-declare type SpinSvgProps = SVGAttributes<SVGElement>
-declare const SpinSvg: FC<SpinSvgProps>
+declare const SpinSvg: FC<SVGAttributes<SVGElement>>
 export default SpinSvg

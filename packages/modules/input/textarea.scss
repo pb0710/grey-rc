@@ -1,6 +1,6 @@
 @use '../../styles/mixins.scss' as *;
 .g-textarea {
-	@include cmm;
+	@include basic;
 	display: inline-flex;
 	width: 240px;
 	background: #fff;

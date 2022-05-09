@@ -1,6 +1,6 @@
 @use '../../styles/mixins.scss' as *;
 .g-radio-group {
-	@include cmm;
+	@include basic;
 	&-disabled {
 		cursor: not-allowed;
 	}

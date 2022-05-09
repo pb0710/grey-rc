@@ -13,6 +13,7 @@ import './checkbox.scss'
 import { mdiCheckBold } from '@mdi/js'
 import Icon from '../basic/Icon'
 import CheckboxGroup from './CheckboxGroup'
+import { UI_PREFIX } from '../../constants'
 
 export interface CheckboxProps
 	extends Omit<
@@ -45,12 +46,15 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, forwardRef)
 			onChange?.(e)
 		}
 	}
+
+	const prefixCls = `${UI_PREFIX}-checkbox`
 	const checkedProps = isControlled ? { checked } : { defaultChecked: defaultValue }
+
 	return (
 		<label
-			className={cls('g-checkbox', className, {
-				'g-checkbox-disabled': disabled,
-				'g-checkbox-checked': checked
+			className={cls(className, prefixCls, {
+				[`${prefixCls}-disabled`]: disabled,
+				[`${prefixCls}-checked`]: checked
 			})}
 		>
 			<input
@@ -58,13 +62,13 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, forwardRef)
 				{...checkedProps}
 				hidden
 				disabled={disabled}
-				className="g-checkbox-input"
+				className={`${prefixCls}-input`}
 				ref={checkboxRef}
 				type="checkbox"
 				onChange={handleChange}
 			/>
-			<div className="g-checkbox-icon">
-				<Icon className="g-checkbox-icon-inner" path={mdiCheckBold} size="13px" />
+			<div className={`${prefixCls}-icon`}>
+				<Icon className={`${prefixCls}-icon-inner`} path={mdiCheckBold} size="13px" />
 			</div>
 			{children}
 		</label>

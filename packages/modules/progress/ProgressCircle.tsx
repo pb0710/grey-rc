@@ -2,6 +2,7 @@ import { cls, is, omit } from 'grey-utils'
 import React, { FC, ReactNode, useEffect, useRef } from 'react'
 import CountUp from 'react-countup'
 import { RenderCounterProps } from 'react-countup/build/types'
+import { UI_PREFIX } from '../../constants'
 import Circle, { CircleProps } from './Circle'
 import './progress-circle.scss'
 
@@ -32,10 +33,11 @@ const Progress: FC<ProgressProps> = props => {
 	}, [molecule])
 
 	const detailVisible = size === 'small' || is.null(format)
+	const prefixCls = `${UI_PREFIX}-progress-circle`
 
 	return (
 		<Circle
-			className={cls(className, 'g-progress-circle', `g-progress-circle-${size}`)}
+			className={cls(className, prefixCls, `${prefixCls}-${size}`)}
 			defaultMolecule={defaultMolecule}
 			molecule={molecule}
 			denominator={denominator}
@@ -43,16 +45,16 @@ const Progress: FC<ProgressProps> = props => {
 			{...rest}
 		>
 			{detailVisible || (
-				<div className="g-progress-circle-detail">
+				<div className={`${prefixCls}-detail`}>
 					<CountUp
-						className="g-progress-circle-detail-num"
+						className={`${prefixCls}-detail-num`}
 						start={preMoleculeRef.current}
 						end={molecule}
 						duration={0.4}
 					>
 						{format}
 					</CountUp>
-					{suffix && <span className="g-progress-circle-detail-suffix">{suffix}</span>}
+					{suffix && <span className={`${prefixCls}-detail-suffix`}>{suffix}</span>}
 				</div>
 			)}
 		</Circle>

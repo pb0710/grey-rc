@@ -1,6 +1,6 @@
 @use '../../styles/mixins.scss' as *;
 .g-card {
-	@include cmm;
+	@include basic;
 	display: flex;
 	flex-direction: column;
 	width: 480px;

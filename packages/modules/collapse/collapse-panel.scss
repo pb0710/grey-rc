@@ -1,6 +1,6 @@
 @use '../../styles/mixins.scss' as *;
 .g-collapse-panel {
-	@include cmm;
+	@include basic;
 	padding: 4px;
 	&-header {
 		display: flex;
@@ -11,6 +11,7 @@
 		background: #fff;
 		border-radius: 6px;
 		&-icon {
+			background-color: inherit;
 			> svg {
 				transition: transform 0.2s;
 			}

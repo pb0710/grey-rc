@@ -1,9 +1,9 @@
 @use '../../styles/mixins.scss' as *;
 .g-image {
-	@include cmm;
+	@include basic;
 }
 .g-image-detail {
-	@include cmm;
+	@include basic;
 	display: flex;
 	justify-content: center;
 	&-pic {

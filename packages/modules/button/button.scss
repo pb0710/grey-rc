@@ -1,6 +1,6 @@
 @use '../../styles/mixins.scss' as *;
 .g-button {
-	@include cmm;
+	@include basic;
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;

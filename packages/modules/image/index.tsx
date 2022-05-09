@@ -8,6 +8,7 @@ import {
 } from '@mdi/js'
 import { cls } from 'grey-utils'
 import React, { forwardRef, ImgHTMLAttributes, useEffect, useRef, useState } from 'react'
+import { UI_PREFIX } from '../../constants'
 import Icon from '../basic/Icon'
 import Space from '../basic/Space'
 import Modal from '../modal'
@@ -39,12 +40,14 @@ const Image = forwardRef<HTMLImageElement, ImageProps>((props, outerRef) => {
 		}
 	}, [detailVisible])
 
+	const prefixCls = `${UI_PREFIX}-image`
+
 	const toolbarEle = toolbarVisible && (
-		<div className="g-image-detail-toolbar">
+		<div className={`${prefixCls}-detail-toolbar`}>
 			<Space>
 				<Tooltip content="向左旋转90°">
 					<Icon
-						className="g-image-detail-icon"
+						className={`${prefixCls}-detail-icon`}
 						path={mdiRestore}
 						size="20px"
 						canHover
@@ -53,7 +56,7 @@ const Image = forwardRef<HTMLImageElement, ImageProps>((props, outerRef) => {
 				</Tooltip>
 				<Tooltip content="向右旋转90°">
 					<Icon
-						className="g-image-detail-icon"
+						className={`${prefixCls}-detail-icon`}
 						path={mdiReload}
 						size="20px"
 						canHover
@@ -62,7 +65,7 @@ const Image = forwardRef<HTMLImageElement, ImageProps>((props, outerRef) => {
 				</Tooltip>
 				<Tooltip content="缩小">
 					<Icon
-						className="g-image-detail-icon"
+						className={`${prefixCls}-detail-icon`}
 						path={mdiMagnifyMinusOutline}
 						size="20px"
 						canHover
@@ -71,7 +74,7 @@ const Image = forwardRef<HTMLImageElement, ImageProps>((props, outerRef) => {
 				</Tooltip>
 				<Tooltip content="放大">
 					<Icon
-						className="g-image-detail-icon"
+						className={`${prefixCls}-detail-icon`}
 						path={mdiMagnifyPlusOutline}
 						size="20px"
 						canHover
@@ -80,7 +83,7 @@ const Image = forwardRef<HTMLImageElement, ImageProps>((props, outerRef) => {
 				</Tooltip>
 				<Tooltip content="下载">
 					<Icon
-						className="g-image-detail-icon"
+						className={`${prefixCls}-detail-icon`}
 						path={mdiTrayArrowDown}
 						size="20px"
 						canHover
@@ -91,7 +94,7 @@ const Image = forwardRef<HTMLImageElement, ImageProps>((props, outerRef) => {
 				</Tooltip>
 				<Tooltip content="关闭">
 					<Icon
-						className="g-image-detail-icon"
+						className={`${prefixCls}-detail-icon`}
 						path={mdiClose}
 						size="20px"
 						canHover
@@ -104,9 +107,9 @@ const Image = forwardRef<HTMLImageElement, ImageProps>((props, outerRef) => {
 
 	const detailEle = detailDisabled || (
 		<Modal visible={detailVisible} onCancel={() => setDetailVisible(false)}>
-			<div className="g-image-detail">
+			<div className={`${prefixCls}-detail`}>
 				<img
-					className="g-image-detail-pic"
+					className={`${prefixCls}-detail-pic`}
 					src={src}
 					draggable={false}
 					style={{
@@ -121,9 +124,9 @@ const Image = forwardRef<HTMLImageElement, ImageProps>((props, outerRef) => {
 	return (
 		<>
 			<img
-				className={cls(className, 'g-image', {
-					'g-image-bordered': src,
-					'g-image-shadow': src
+				className={cls(className, prefixCls, {
+					[`${prefixCls}-bordered`]: src,
+					[`${prefixCls}-shadow`]: src
 				})}
 				ref={imgRef}
 				src={src}

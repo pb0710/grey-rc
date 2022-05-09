@@ -1,5 +1,6 @@
 import { cls } from 'grey-utils'
 import React, { FC, HTMLAttributes } from 'react'
+import { UI_PREFIX } from '../../constants'
 import './divider.scss'
 
 interface DividerProps extends HTMLAttributes<HTMLDivElement> {
@@ -9,8 +10,16 @@ interface DividerProps extends HTMLAttributes<HTMLDivElement> {
 
 const Divider: FC<DividerProps> = props => {
 	const { children, className, size = 'medium', direction = 'horizontal' } = props
+	const prefixCls = `${UI_PREFIX}-divider`
 	return (
-		<div className={cls(className, 'g-divider', `g-divider-${size}`, `g-divider-${direction}`)}>
+		<div
+			className={cls(
+				className,
+				prefixCls,
+				`${prefixCls}-${direction}`,
+				`${prefixCls}-${direction}-${size}`
+			)}
+		>
 			{children}
 		</div>
 	)

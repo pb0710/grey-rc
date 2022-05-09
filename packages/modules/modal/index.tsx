@@ -1,6 +1,7 @@
 import { cls } from 'grey-utils'
-import React, { FC, HTMLAttributes, MouseEvent } from 'react'
+import React, { FC, HTMLAttributes } from 'react'
 import { createPortal } from 'react-dom'
+import { UI_PREFIX } from '../../constants'
 import './modal.scss'
 
 let mousePosition: { x: number; y: number } | null = null
@@ -35,13 +36,13 @@ const Modal: FC<ModalProps> = props => {
 		...rest
 	} = props
 
-	console.log('mousePosition', mousePosition)
+	const prefixCls = `${UI_PREFIX}-modal`
 
 	return visible
 		? createPortal(
-				<div className={cls(className, 'g-modal')} {...rest}>
-					<div className={cls(maskClassName, 'g-modal-mask')}></div>
-					<div className="g-modal-wrap" onClick={maskClosable ? onCancel : undefined}>
+				<div className={cls(className, prefixCls)} {...rest}>
+					<div className={cls(maskClassName, `${prefixCls}-mask`)}></div>
+					<div className={`${prefixCls}-wrap`} onClick={maskClosable ? onCancel : undefined}>
 						<div onClick={e => e.stopPropagation()}>{children}</div>
 					</div>
 				</div>,

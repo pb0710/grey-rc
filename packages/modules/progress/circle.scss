@@ -1,6 +1,6 @@
 @use '../../styles/mixins.scss' as *;
 .g-circle {
-	@include cmm;
+	@include basic;
 	position: relative;
 	user-select: none;
 	> svg {

@@ -1,6 +1,7 @@
 import { mdiClose } from '@mdi/js'
 import { cls, is } from 'grey-utils'
 import React, { FC, HTMLAttributes, ReactNode } from 'react'
+import { UI_PREFIX } from '../../constants'
 import Icon from '../basic/Icon'
 import Space from '../basic/Space'
 import Button from '../button'
@@ -40,11 +41,13 @@ const Card: FC<CardProps> = props => {
 		...rest
 	} = props
 
+	const prefixCls = `${UI_PREFIX}-card`
+
 	let actionEle = action
 	if (is.undefined(action))
 		actionEle = (
 			<Icon
-				className="g-card-header-close-icon"
+				className={`${prefixCls}-header-close-icon`}
 				path={mdiClose}
 				size="18px"
 				canHover
@@ -55,8 +58,8 @@ const Card: FC<CardProps> = props => {
 	let headerEle = header
 	if (is.undefined(header))
 		headerEle = (
-			<div className="g-card-header">
-				<strong className="g-card-header-title">{title}</strong>
+			<div className={`${prefixCls}-header`}>
+				<strong className="${prefixCls}-header-title">{title}</strong>
 				{actionEle}
 			</div>
 		)
@@ -64,7 +67,7 @@ const Card: FC<CardProps> = props => {
 	let footerEle = footer
 	if (is.undefined(footer))
 		footerEle = (
-			<div className="g-card-footer">
+			<div className={`${prefixCls}-footer`}>
 				<Space>
 					{hasCancel && <Button onClick={onCancel}>{cancelText}</Button>}
 					<Button primary loading={okLoading} onClick={onOk}>
@@ -76,14 +79,14 @@ const Card: FC<CardProps> = props => {
 
 	return (
 		<div
-			className={cls(className, 'g-card', {
-				'g-card-bordered': bordered,
-				'g-card-shadow': shadow
+			className={cls(className, prefixCls, {
+				[`${prefixCls}-bordered`]: bordered,
+				[`${prefixCls}-shadow`]: shadow
 			})}
 			{...rest}
 		>
 			{headerEle}
-			<div className="g-card-content">{children}</div>
+			<div className={`${prefixCls}-content`}>{children}</div>
 			{footerEle}
 		</div>
 	)

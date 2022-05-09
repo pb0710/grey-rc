@@ -10,6 +10,7 @@ import React, {
 	ReactText
 } from 'react'
 import Checkbox, { CheckboxProps } from '.'
+import { UI_PREFIX } from '../../constants'
 import Space from '../basic/Space'
 import './checkbox-group.scss'
 
@@ -34,7 +35,7 @@ const CheckboxGroup: FC<CheckboxGroupProps> = props => {
 		options = [],
 		disabled = false,
 		defaultValue = [],
-		value = [],
+		value = defaultValue,
 		onChange,
 		...rest
 	} = props
@@ -67,10 +68,12 @@ const CheckboxGroup: FC<CheckboxGroupProps> = props => {
 		}
 	}
 
+	const prefixCls = `${UI_PREFIX}-checkbox-group`
+
 	return (
 		<div
-			className={cls('g-checkbox-group', className, {
-				'g-checkbox-group-disabled': disabled
+			className={cls(className, prefixCls, {
+				[`${prefixCls}-disabled`]: disabled
 			})}
 			{...rest}
 		>

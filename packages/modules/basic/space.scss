@@ -1,16 +1,29 @@
 @use '../../styles/mixins.scss' as *;
-.g-space-box {
-	@include cmm;
+.g-space {
+	@include basic;
 	color: unset;
 	font-size: unset;
 	flex-wrap: nowrap;
-	&.g-small {
-		gap: 4px;
+	&-horizontal {
+		&-small {
+			gap: 0 4px;
+		}
+		&-medium {
+			gap: 0 12px;
+		}
+		&-large {
+			gap: 0 24px;
+		}
 	}
-	&.g-medium {
-		gap: 12px;
-	}
-	&.g-large {
-		gap: 24px;
+	&-vertical {
+		&-small {
+			gap: 4px 0;
+		}
+		&-medium {
+			gap: 12px 0;
+		}
+		&-large {
+			gap: 24px 0;
+		}
 	}
 }

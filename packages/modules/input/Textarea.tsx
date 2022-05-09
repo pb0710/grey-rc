@@ -11,6 +11,7 @@ import React, {
 import { cls, is } from 'grey-utils'
 import './textarea.scss'
 import TextareaAutosize from 'react-textarea-autosize'
+import { UI_PREFIX } from '../../constants'
 
 interface TextareaProps extends Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, 'style'> {
 	autosize?: boolean
@@ -57,18 +58,20 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>((props, outerRef
 	const valueProps = isControlled ? { value } : {}
 	const TextareaComp = autosize ? TextareaAutosize : 'textarea'
 
+	const prefixCls = `${UI_PREFIX}-textarea`
+
 	return (
 		<label
-			className={cls(className, 'g-textarea', {
-				'g-textarea-focus': focus,
-				'g-textarea-block': block,
-				'g-textarea-disabled': disabled
+			className={cls(className, prefixCls, {
+				[`${prefixCls}-focus`]: focus,
+				[`${prefixCls}-block`]: block,
+				[`${prefixCls}-disabled`]: disabled
 			})}
 		>
 			<TextareaComp
 				{...valueProps}
 				{...rest}
-				className="g-textarea-inner"
+				className={`${prefixCls}-inner`}
 				ref={textareaRef}
 				disabled={disabled}
 				defaultValue={defaultValue}

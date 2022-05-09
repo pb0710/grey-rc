@@ -2,6 +2,7 @@ import { cls } from 'grey-utils'
 import React, { FC, HTMLAttributes, ReactNode } from 'react'
 import SpinSvg from './SpinSvg'
 import './loading.scss'
+import { UI_PREFIX } from '../../constants'
 
 interface LoadingProps extends HTMLAttributes<HTMLElement> {
 	spinning?: boolean
@@ -20,23 +21,27 @@ const Loading: FC<LoadingProps> = props => {
 		description,
 		...rest
 	} = props
-	const isWrapper = !!children
+
+	const isWrapper = Boolean(children)
+
+	const prefixCls = `${UI_PREFIX}-loading`
+
 	return (
 		<div
-			className={cls(className, 'g-loading', {
-				'g-loading-spinning': spinning,
-				'g-loading-is-wrapper': isWrapper,
-				[`g-loading-${size}`]: size
+			className={cls(className, prefixCls, {
+				[`${prefixCls}-spinning`]: spinning,
+				[`${prefixCls}-is-wrapper`]: isWrapper,
+				[`${prefixCls}-${size}`]: size
 			})}
 			{...rest}
 		>
 			{spinning && (
-				<div className="g-loading-tip">
+				<div className={`${prefixCls}-tip`}>
 					{icon}
-					{description && <span className="g-loading-tip-description">{description}</span>}
+					{description && <span className={`${prefixCls}-tip-description`}>{description}</span>}
 				</div>
 			)}
-			<div className="g-loading-content">{children}</div>
+			<div className={`${prefixCls}-content`}>{children}</div>
 		</div>
 	)
 }

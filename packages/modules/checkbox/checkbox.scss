@@ -1,6 +1,6 @@
 @use '../../styles/mixins.scss' as *;
 .g-checkbox {
-	@include cmm;
+	@include basic;
 	position: relative;
 	display: inline-flex;
 	align-items: center;

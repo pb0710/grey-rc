@@ -1,5 +1,6 @@
 import { cls, is } from 'grey-utils'
 import React, { FC, HTMLAttributes, useEffect, useRef } from 'react'
+import { UI_PREFIX } from '../../constants'
 import './circle.scss'
 
 export interface CircleProps extends HTMLAttributes<HTMLElement> {
@@ -81,14 +82,16 @@ const Circle: FC<CircleProps> = props => {
 			)
 	}, [denominator, molecule, progressLen])
 
+	const prefixCls = `${UI_PREFIX}-circle`
+
 	return (
-		<div className={cls(className, 'g-circle', `g-circle-${size}`)} {...rest}>
+		<div className={cls(className, prefixCls, `${prefixCls}-${size}`)} {...rest}>
 			{children}
 			<svg width={sizeData.width} height={sizeData.height}>
 				<circle
 					ref={circleRef}
-					className={cls('g-circle-circle', {
-						'g-circle-circle-round': round
+					className={cls(`${prefixCls}-circle`, {
+						[`${prefixCls}-circle-round`]: round
 					})}
 					cx={sizeData.cx}
 					cy={sizeData.cy}
