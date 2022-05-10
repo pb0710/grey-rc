@@ -11,13 +11,12 @@
 	transition: all 0.2s ease-out;
 	&-inner {
 		flex: 1;
-		min-height: 24px;
 		padding: 0 4px;
 		outline: 0;
 		border: 0;
 		background: transparent;
 		font-family: inherit;
-		line-height: 1.5;
+		line-height: 1.65;
 		&::placeholder {
 			color: #999;
 		}

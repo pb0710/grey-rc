@@ -29,8 +29,8 @@ const Card: FC<CardProps> = props => {
 		bordered = true,
 		shadow = false,
 		hasCancel = true,
-		okText = '确认',
-		cancelText = '取消',
+		okText = 'Ok',
+		cancelText = 'Cancel',
 		okLoading = false,
 		title,
 		header,
@@ -59,7 +59,7 @@ const Card: FC<CardProps> = props => {
 	if (is.undefined(header))
 		headerEle = (
 			<div className={`${prefixCls}-header`}>
-				<strong className="${prefixCls}-header-title">{title}</strong>
+				<strong className={`${prefixCls}-header-title`}>{title}</strong>
 				{actionEle}
 			</div>
 		)

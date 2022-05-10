@@ -6,8 +6,7 @@ import React, {
 	FC,
 	HTMLAttributes,
 	isValidElement,
-	ReactNode,
-	ReactText
+	ReactNode
 } from 'react'
 import Radio, { RadioProps } from '.'
 import { UI_PREFIX } from '../../constants'
@@ -15,17 +14,17 @@ import Space from '../basic/Space'
 import './radio-group.scss'
 
 interface RadioGroup extends Omit<HTMLAttributes<HTMLElement>, 'onChange' | 'defaultValue'> {
-	defaultValue?: ReactText
-	value?: ReactText
+	defaultValue?: string | number
+	value?: string | number
 	options?: {
-		label: ReactText
+		label: string | number
 		child: ReactNode
 		disabled?: boolean
 	}[]
 	direction?: 'horizontal' | 'vertical'
 	disabled?: boolean
 	type?: 'default' | 'tab'
-	onChange?: (value: ReactText) => void
+	onChange?: (value: string | number) => void
 }
 
 const RadioGroup: FC<RadioGroup> = props => {
@@ -42,19 +41,20 @@ const RadioGroup: FC<RadioGroup> = props => {
 		...rest
 	} = props
 
-	const getHandleSubChange = (label?: ReactText) => (subParam: boolean | ChangeEvent<HTMLInputElement>) => {
-		if (is.undefined(label)) return
+	const getHandleSubChange =
+		(label?: string | number) => (subParam: boolean | ChangeEvent<HTMLInputElement>) => {
+			if (is.undefined(label)) return
 
-		const subChecked = is.boolean(subParam) ? subParam : subParam.target.checked
-		if (subChecked) {
-			onChange?.(label)
+			const subChecked = is.boolean(subParam) ? subParam : subParam.target.checked
+			if (subChecked) {
+				onChange?.(label)
+			}
 		}
-	}
 
 	const prefixCls = `${UI_PREFIX}-radio-group`
 
 	const isTab = type === 'tab'
-	const getValueProps = (label?: ReactText) => {
+	const getValueProps = (label?: string | number) => {
 		if (is.undefined(label)) return
 
 		return {

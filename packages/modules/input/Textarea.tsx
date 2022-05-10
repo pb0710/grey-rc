@@ -3,7 +3,6 @@ import React, {
 	FocusEventHandler,
 	forwardRef,
 	MutableRefObject,
-	ReactText,
 	TextareaHTMLAttributes,
 	useRef,
 	useState
@@ -15,10 +14,12 @@ import { UI_PREFIX } from '../../constants'
 
 interface TextareaProps extends Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, 'style'> {
 	autosize?: boolean
+	minRows?: number
+	maxRows?: number
 	block?: boolean
 	disabled?: boolean
-	value?: ReactText
-	onChange?: ChangeEventHandler<HTMLTextAreaElement> & ((value?: ReactText) => void)
+	value?: string | number
+	onChange?: ChangeEventHandler<HTMLTextAreaElement> & ((value?: string | number) => void)
 }
 
 const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>((props, outerRef) => {
@@ -27,7 +28,8 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>((props, outerRef
 		autosize = false,
 		block = false,
 		disabled = false,
-		rows = 2,
+		minRows = 1,
+		maxRows = Infinity,
 		defaultValue,
 		value,
 		onChange,
@@ -35,6 +37,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>((props, outerRef
 		onBlur,
 		...rest
 	} = props
+
 	const innerRef = useRef<HTMLTextAreaElement>(null)
 	const textareaRef = (outerRef || innerRef) as MutableRefObject<null>
 	const [focus, setFocus] = useState(false)
@@ -55,8 +58,9 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>((props, outerRef
 		setFocus(false)
 	}
 
-	const valueProps = isControlled ? { value } : {}
 	const TextareaComp = autosize ? TextareaAutosize : 'textarea'
+	const valueProps = isControlled ? { value } : {}
+	const autosizeProps = autosize ? { minRows, maxRows } : {}
 
 	const prefixCls = `${UI_PREFIX}-textarea`
 
@@ -70,6 +74,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>((props, outerRef
 		>
 			<TextareaComp
 				{...valueProps}
+				{...autosizeProps}
 				{...rest}
 				className={`${prefixCls}-inner`}
 				ref={textareaRef}
@@ -78,7 +83,6 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>((props, outerRef
 				onChange={handleChange}
 				onFocus={handleFocus}
 				onBlur={handleBlur}
-				rows={rows}
 			></TextareaComp>
 		</label>
 	)

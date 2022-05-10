@@ -1,23 +1,23 @@
-import React, { FC, ReactText, useEffect, useRef, useState } from 'react'
+import React, { FC, useEffect, useRef, useState } from 'react'
 import { Divider, Radio, Space } from '../../packages'
 
 const RadioExample: FC = () => {
 	const [val, setVal] = useState(false)
 	const defaultGroupVal = 2
-	const [groupVal, setGroupVal] = useState<ReactText>(defaultGroupVal)
+	const [groupVal, setGroupVal] = useState<string | number>(defaultGroupVal)
 	const radioRef = useRef<HTMLInputElement>(null)
 	const defaultHorizontalVal = 1
-	const [horizontalVal, setHorizontalVal] = useState<ReactText>(defaultHorizontalVal)
+	const [horizontalVal, setHorizontalVal] = useState<string | number>(defaultHorizontalVal)
 	const defaultVerticalVal = 0
-	const [verticalVal, setVerticalVal] = useState<ReactText>(defaultVerticalVal)
+	const [verticalVal, setVerticalVal] = useState<string | number>(defaultVerticalVal)
 	const defaultDisabledVal = 2
-	const [disabledGroupVal, setDisabledGroupVal] = useState<ReactText>(defaultDisabledVal)
+	const [disabledGroupVal, setDisabledGroupVal] = useState<string | number>(defaultDisabledVal)
 	const defaultJsxGroupVal = 2
-	const [jsxGroupVal, setJsxGroupVal] = useState<ReactText>(defaultJsxGroupVal)
+	const [jsxGroupVal, setJsxGroupVal] = useState<string | number>(defaultJsxGroupVal)
 	const defaultJsxTabGroupVal = 1
-	const [jsxTabGroupVal, setJsxTabGroupVal] = useState<ReactText>(defaultJsxTabGroupVal)
+	const [jsxTabGroupVal, setJsxTabGroupVal] = useState<string | number>(defaultJsxTabGroupVal)
 	const defaultOptionsTabGroupVal = 0
-	const [optionsTabGroupVal, setOptionsTabGroupVal] = useState<ReactText>(defaultOptionsTabGroupVal)
+	const [optionsTabGroupVal, setOptionsTabGroupVal] = useState<string | number>(defaultOptionsTabGroupVal)
 	useEffect(() => {
 		setTimeout(() => {
 			console.log('radioRef.current.checked', radioRef.current?.checked)

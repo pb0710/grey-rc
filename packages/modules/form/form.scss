@@ -1,4 +1,17 @@
 @use '../../styles/mixins.scss' as *;
 .g-form {
 	@include basic;
+	&-horizontal {
+		display: flex;
+		flex-direction: column;
+	}
+	&-vertical {
+		display: flex;
+		flex-direction: column;
+	}
+	&-inline {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0 32px;
+	}
 }

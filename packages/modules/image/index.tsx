@@ -1,11 +1,4 @@
-import {
-	mdiClose,
-	mdiTrayArrowDown,
-	mdiMagnifyMinusOutline,
-	mdiMagnifyPlusOutline,
-	mdiReload,
-	mdiRestore
-} from '@mdi/js'
+import { mdiClose, mdiMagnifyMinusOutline, mdiMagnifyPlusOutline, mdiReload, mdiRestore } from '@mdi/js'
 import { cls } from 'grey-utils'
 import React, { forwardRef, ImgHTMLAttributes, useEffect, useRef, useState } from 'react'
 import { UI_PREFIX } from '../../constants'
@@ -79,17 +72,6 @@ const Image = forwardRef<HTMLImageElement, ImageProps>((props, outerRef) => {
 						size="20px"
 						canHover
 						onClick={() => setScale(pre => Math.min(4, pre + 0.4))}
-					/>
-				</Tooltip>
-				<Tooltip content="下载">
-					<Icon
-						className={`${prefixCls}-detail-icon`}
-						path={mdiTrayArrowDown}
-						size="20px"
-						canHover
-						onClick={() => {
-							alert('download')
-						}}
 					/>
 				</Tooltip>
 				<Tooltip content="关闭">

@@ -1,17 +1,35 @@
 @use '../../styles/mixins.scss' as *;
 .g-field {
 	@include basic;
-	display: flex;
+	margin-bottom: 20px;
 	&-align {
+		&-top {
+			display: block;
+		}
 		&-left {
+			display: flex;
+			.g-field-label {
+				text-align: left;
+			}
 		}
 		&-right {
-		}
-		&-top {
+			display: flex;
+			.g-field-label {
+				text-align: right;
+			}
 		}
 	}
-	&-controller {
+	&-label {
+		padding-right: 16px;
+		line-height: 32px;
+	}
+	&-control {
+		flex: 1;
 		&-inner {
+			flex: 1;
+			display: flex;
+			align-items: center;
+			min-height: 32px;
 		}
 	}
 	&-message {

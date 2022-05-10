@@ -4,7 +4,6 @@ import React, {
 	forwardRef,
 	InputHTMLAttributes,
 	MutableRefObject,
-	ReactText,
 	useEffect,
 	useRef,
 	useState
@@ -20,7 +19,7 @@ export interface CheckboxProps
 		InputHTMLAttributes<HTMLInputElement>,
 		'onChange' | 'defaultValue' | 'defaultChecked' | 'checked' | 'value'
 	> {
-	label?: ReactText
+	label?: string | number
 	disabled?: boolean
 	defaultValue?: boolean
 	value?: boolean

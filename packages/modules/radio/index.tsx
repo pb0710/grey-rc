@@ -4,7 +4,6 @@ import React, {
 	forwardRef,
 	InputHTMLAttributes,
 	MutableRefObject,
-	ReactText,
 	useEffect,
 	useRef,
 	useState
@@ -21,7 +20,7 @@ export interface RadioProps
 	value?: boolean
 	disabled?: boolean
 	type?: 'default' | 'tab'
-	label?: ReactText
+	label?: string | number
 	defaultValue?: boolean
 	onChange?: ChangeEventHandler<HTMLInputElement> & ((value: boolean) => void)
 }

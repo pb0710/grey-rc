@@ -1,8 +1,8 @@
-import React, { FC, ReactText, useState } from 'react'
+import React, { FC, useState } from 'react'
 import { Button, Collapse, Divider } from '../../packages'
 
 const CollapseExample: FC = () => {
-	const [controlledActives, setControlledActives] = useState<ReactText[]>([])
+	const [controlledActives, setControlledActives] = useState<(string | number)[]>([])
 	const [customHeaderExpend, setCustomHeaderExpend] = useState<boolean>(false)
 	return (
 		<>

@@ -1,13 +1,13 @@
 import { mdiChevronDown } from '@mdi/js'
 import { cls, is, omit } from 'grey-utils'
-import React, { CSSProperties, FC, HTMLAttributes, ReactNode, ReactText, useRef, useState } from 'react'
+import React, { CSSProperties, FC, HTMLAttributes, ReactNode, useRef, useState } from 'react'
 import Icon from '../basic/Icon'
 import './collapse-panel.scss'
 import { Transition, TransitionStatus } from 'react-transition-group'
 import { UI_PREFIX } from '../../constants'
 
 export interface CollapsePanelProps extends Omit<HTMLAttributes<HTMLElement>, 'title' | 'onChange'> {
-	itemKey?: ReactText
+	itemKey?: string | number
 	title?: ReactNode
 	expend?: boolean
 	onChange?: (expend: boolean) => void

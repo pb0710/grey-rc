@@ -9,7 +9,6 @@ import React, {
 	MouseEventHandler,
 	MutableRefObject,
 	ReactNode,
-	ReactText,
 	useEffect,
 	useRef,
 	useState
@@ -20,14 +19,14 @@ import './input.scss'
 import Textarea from './Textarea'
 
 interface InputProps extends Omit<HTMLAttributes<HTMLInputElement>, 'maxLength' | 'onChange' | 'prefix'> {
-	value?: ReactText
+	value?: string | number
 	block?: boolean
 	round?: boolean
 	disabled?: boolean
 	prefix?: ReactNode
 	suffix?: ReactNode
 	allowClear?: boolean
-	onChange?: ChangeEventHandler<HTMLInputElement> & ((value: ReactText) => void)
+	onChange?: ChangeEventHandler<HTMLInputElement> & ((value: string | number) => void)
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>((props, forwardRef) => {
@@ -115,6 +114,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props, forwardRef) => {
 			/>
 			{allowClear && focus && clearVisible && (
 				<Icon
+					className={`${prefixCls}-clear-icon`}
 					path={mdiCloseCircle}
 					color="#999"
 					onClick={handleClear}

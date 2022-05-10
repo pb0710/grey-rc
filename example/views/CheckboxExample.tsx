@@ -1,18 +1,17 @@
-import React, { FC, ReactText, useEffect, useRef, useState } from 'react'
+import React, { FC, useEffect, useRef, useState } from 'react'
 import { Checkbox, Divider, Space } from '../../packages'
 
 const CheckboxExample: FC = () => {
 	const [val, setVal] = useState(false)
 	const defaultGroupVal = [2]
-	const [groupVal, setGroupVal] = useState<ReactText[]>(defaultGroupVal)
+	const [groupVal, setGroupVal] = useState<(string | number)[]>(defaultGroupVal)
 	const checkboxRef = useRef<HTMLInputElement>(null)
 	const defaultHorizontalVal = [0, 1]
-	const [horizontalVal, setHorizontalVal] = useState<ReactText[]>(defaultHorizontalVal)
+	const [horizontalVal, setHorizontalVal] = useState<(string | number)[]>(defaultHorizontalVal)
 	const defaultVerticalVal = [1]
-	const [verticalVal, setVerticalVal] = useState<ReactText[]>(defaultVerticalVal)
-	const defaultDisabledVal = [0, 1]
+	const [verticalVal, setVerticalVal] = useState<(string | number)[]>(defaultVerticalVal)
 	const defaultJsxGroupVal = [2, 3]
-	const [jsxGroupVal, setJsxGroupVal] = useState<ReactText[]>(defaultJsxGroupVal)
+	const [jsxGroupVal, setJsxGroupVal] = useState<(string | number)[]>(defaultJsxGroupVal)
 	useEffect(() => {
 		setTimeout(() => {
 			console.log('checkboxRef.current.checked', checkboxRef.current?.checked)
