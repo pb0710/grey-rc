@@ -1,0 +1,19 @@
+@use '../../styles/mixins.scss' as *;
+.g-field {
+	@include basic;
+	display: flex;
+	&-align {
+		&-left {
+		}
+		&-right {
+		}
+		&-top {
+		}
+	}
+	&-controller {
+		&-inner {
+		}
+	}
+	&-message {
+	}
+}

@@ -1,0 +1,4 @@
+@use '../../styles/mixins.scss' as *;
+.g-form {
+	@include basic;
+}

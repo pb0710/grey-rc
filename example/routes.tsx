@@ -13,6 +13,7 @@ import CardExample from './views/CardExample'
 import ProgressExample from './views/ProgressExample'
 import AvatarExample from './views/AvatarExample'
 import ImageExample from './views/ImageExample'
+import FormExample from './views/FormExample'
 
 export const componentRoutes = [
 	{
@@ -84,6 +85,11 @@ export const componentRoutes = [
 		name: 'Image',
 		path: 'image',
 		element: <ImageExample />
+	},
+	{
+		name: 'Form',
+		path: 'form',
+		element: <FormExample />
 	}
 ]
 
