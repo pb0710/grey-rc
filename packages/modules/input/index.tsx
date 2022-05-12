@@ -52,19 +52,19 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props, forwardRef) => {
 	const [clearVisible, setClearVisible] = useState(false)
 	const isControlled = !is.undefined(value)
 
-	const handleFocus: FocusEventHandler<HTMLInputElement> = e => {
-		onFocus?.(e)
+	const handleFocus: FocusEventHandler<HTMLInputElement> = event => {
+		onFocus?.(event)
 		setFocus(true)
 	}
-	const handleBlur: FocusEventHandler<HTMLInputElement> = e => {
-		onBlur?.(e)
+	const handleBlur: FocusEventHandler<HTMLInputElement> = event => {
+		onBlur?.(event)
 		setFocus(false)
 	}
-	const handleChange: ChangeEventHandler<HTMLInputElement> = e => {
-		const { value } = e.target
+	const handleChange: ChangeEventHandler<HTMLInputElement> = event => {
+		const { value } = event.target
 
 		if (isControlled) onChange?.(value)
-		else onChange?.(e)
+		else onChange?.(event)
 
 		setClearVisible(!!value)
 	}
@@ -77,9 +77,9 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props, forwardRef) => {
 		setClearVisible(false)
 	}
 
-	const handleMouseDown: MouseEventHandler<HTMLElement> = e => {
-		if (e.target instanceof Element) {
-			if (e.target.tagName !== 'INPUT') e.preventDefault()
+	const handleMouseDown: MouseEventHandler<HTMLElement> = event => {
+		if (event.target instanceof Element) {
+			if (event.target.tagName !== 'INPUT') event.preventDefault()
 		}
 	}
 

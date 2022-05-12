@@ -6,11 +6,13 @@ import {
 	mdiRestore,
 	mdiBackupRestore
 } from '@mdi/js'
+import { useLatestRef } from 'grey-rh'
 import { cls } from 'grey-utils'
 import React, {
 	forwardRef,
 	ImgHTMLAttributes,
 	MouseEventHandler,
+	useCallback,
 	useEffect,
 	useRef,
 	useState,
@@ -30,17 +32,31 @@ type Coordinate = {
 interface ImageProps extends ImgHTMLAttributes<HTMLImageElement> {
 	toolbarVisible?: boolean
 	detailDisabled?: boolean
+	scaleRange?: number[]
 }
 
 const Image = forwardRef<HTMLImageElement, ImageProps>((props, outerRef) => {
-	const { className, src, toolbarVisible = true, detailDisabled = false, onClick, ...rest } = props
+	const {
+		className,
+		src,
+		toolbarVisible = true,
+		detailDisabled = false,
+		scaleRange = [0.25, 0.5, 0.75, 1, 1.5, 2, 3, 5, 8],
+		onClick,
+		...rest
+	} = props
 
 	const innerRef = useRef<HTMLImageElement>(null)
 	const imgRef = outerRef || innerRef
 	const imgDetailRef = useRef<HTMLImageElement>(null)
 
 	const [detailVisible, setDetailVisible] = useState(false)
-	const [scale, setScale] = useState(1)
+
+	const scaleRangeRef = useLatestRef(scaleRange)
+	const originalScaleIndex = scaleRangeRef.current.indexOf(1)
+	const [scaleIndex, setScaleIndex] = useState(originalScaleIndex)
+	const scale = scaleRangeRef.current[scaleIndex]
+
 	const [rotate, setRotate] = useState(0)
 	const [offset, setOffset] = useState<Coordinate>(null)
 	const [ratioVisible, setRatioVisible] = useState(false)
@@ -70,32 +86,47 @@ const Image = forwardRef<HTMLImageElement, ImageProps>((props, outerRef) => {
 		document.addEventListener('mouseup', handleUp)
 	}
 
-	const handleReset = () => {
-		setScale(1)
+	const updateScale = useCallback(
+		(mapState: (state: number) => number) => {
+			setScaleIndex(preScaleIndex => {
+				const nextScaleIndex = mapState(preScaleIndex)
+				if (nextScaleIndex >= 0 && nextScaleIndex < scaleRangeRef.current.length) {
+					return nextScaleIndex
+				}
+				return preScaleIndex
+			})
+		},
+		[scaleRangeRef]
+	)
+
+	const handleReset = useCallback(() => {
+		updateScale(() => originalScaleIndex)
 		setRotate(0)
 		setOffset(null)
-	}
+	}, [originalScaleIndex, updateScale])
 
 	useEffect(() => {
 		if (!detailVisible) {
 			handleReset()
 		}
-	}, [detailVisible])
+	}, [detailVisible, handleReset])
 
 	const handleShowRatio = () => {
 		setRatioVisible(true)
+
+		const ONE_SECOND = 1000
 		clearTimeout(delayTimerRef.current)
 		delayTimerRef.current = window.setTimeout(() => {
 			setRatioVisible(false)
-		}, 1000)
+		}, ONE_SECOND)
 	}
 
 	const handleZoom = () => {
-		setScale(pre => Math.min(4, pre + 0.5))
+		updateScale(pre => pre + 1)
 		handleShowRatio()
 	}
 	const handleShrink = () => {
-		setScale(pre => Math.max(0.5, pre - 0.5))
+		updateScale(pre => pre - 1)
 		handleShowRatio()
 	}
 
@@ -105,6 +136,10 @@ const Image = forwardRef<HTMLImageElement, ImageProps>((props, outerRef) => {
 		} else {
 			handleZoom()
 		}
+	}
+
+	const hideDetail = () => {
+		setDetailVisible(false)
 	}
 
 	const prefixCls = `${UI_PREFIX}-image`
@@ -134,15 +169,23 @@ const Image = forwardRef<HTMLImageElement, ImageProps>((props, outerRef) => {
 					<Icon {...toolbarProps} path={mdiBackupRestore} onClick={handleReset} />
 				</Tooltip>
 				<Tooltip content="关闭">
-					<Icon {...toolbarProps} path={mdiClose} onClick={() => setDetailVisible(false)} />
+					<Icon {...toolbarProps} path={mdiClose} onClick={hideDetail} />
 				</Tooltip>
 			</Space>
 		</div>
 	)
 
 	const detailEle = detailDisabled || (
-		<Modal visible={detailVisible} onCancel={() => setDetailVisible(false)} onWheel={handleWheel}>
-			<div className={`${prefixCls}-detail`} onClick={() => setDetailVisible(false)}>
+		<Modal visible={detailVisible} onCancel={hideDetail} onWheel={handleWheel}>
+			<div
+				className={`${prefixCls}-detail`}
+				onClick={event => {
+					// scale < 1 时，外层 detail 的宽高不变，点击 detail 也需要关闭弹窗。
+					if (event.target === event.currentTarget) {
+						hideDetail()
+					}
+				}}
+			>
 				<img
 					ref={imgDetailRef}
 					className={`${prefixCls}-detail-pic`}
@@ -159,15 +202,10 @@ const Image = forwardRef<HTMLImageElement, ImageProps>((props, outerRef) => {
 							: {})
 					}}
 					onMouseDown={handleDragDetailStart}
-					onClick={event => event.stopPropagation()}
 				/>
-				{ratioVisible && (
-					<div className={`${prefixCls}-detail-ratio`} onClick={event => event.stopPropagation()}>
-						{scalePercent}
-					</div>
-				)}
-				{toolbarEle}
 			</div>
+			{ratioVisible && <div className={`${prefixCls}-detail-ratio`}>{scalePercent}</div>}
+			{toolbarEle}
 		</Modal>
 	)
 

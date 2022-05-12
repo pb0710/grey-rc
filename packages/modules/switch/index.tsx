@@ -41,10 +41,10 @@ const Switch = forwardRef<HTMLInputElement, SwitchProps>((props, outerRef) => {
 		if (isControlled) setChecked(value)
 	}, [isControlled, value])
 
-	const handleChange: ChangeEventHandler<HTMLInputElement> = e => {
-		setChecked(e.target.checked)
-		if (isControlled) onChange?.(e.target.checked)
-		else onChange?.(e)
+	const handleChange: ChangeEventHandler<HTMLInputElement> = event => {
+		setChecked(event.target.checked)
+		if (isControlled) onChange?.(event.target.checked)
+		else onChange?.(event)
 	}
 
 	const prefixCls = `${UI_PREFIX}-switch`

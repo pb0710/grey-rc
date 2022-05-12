@@ -43,18 +43,18 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>((props, outerRef
 	const [focus, setFocus] = useState(false)
 	const isControlled = !is.undefined(value)
 
-	const handleChange: ChangeEventHandler<HTMLTextAreaElement> = e => {
-		if (isControlled) onChange?.(e.target.value)
-		else onChange?.(e)
+	const handleChange: ChangeEventHandler<HTMLTextAreaElement> = event => {
+		if (isControlled) onChange?.(event.target.value)
+		else onChange?.(event)
 	}
 
-	const handleFocus: FocusEventHandler<HTMLTextAreaElement> = e => {
-		onFocus?.(e)
+	const handleFocus: FocusEventHandler<HTMLTextAreaElement> = event => {
+		onFocus?.(event)
 		setFocus(true)
 	}
 
-	const handleBlur: FocusEventHandler<HTMLTextAreaElement> = e => {
-		onBlur?.(e)
+	const handleBlur: FocusEventHandler<HTMLTextAreaElement> = event => {
+		onBlur?.(event)
 		setFocus(false)
 	}
 

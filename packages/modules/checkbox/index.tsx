@@ -37,12 +37,12 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, forwardRef)
 		if (isControlled) setChecked(value)
 	}, [isControlled, value])
 
-	const handleChange: ChangeEventHandler<HTMLInputElement> = e => {
-		setChecked(e.target.checked)
+	const handleChange: ChangeEventHandler<HTMLInputElement> = event => {
+		setChecked(event.target.checked)
 		if (isControlled) {
-			onChange?.(e.target.checked)
+			onChange?.(event.target.checked)
 		} else {
-			onChange?.(e)
+			onChange?.(event)
 		}
 	}
 

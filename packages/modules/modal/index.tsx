@@ -1,15 +1,15 @@
 import { cls } from 'grey-utils'
-import React, { FC, HTMLAttributes } from 'react'
+import React, { Children, cloneElement, FC, HTMLAttributes, isValidElement, MouseEvent } from 'react'
 import { createPortal } from 'react-dom'
 import { UI_PREFIX } from '../../constants'
 import './modal.scss'
 
 let mousePosition: { x: number; y: number } | null = null
 if (document) {
-	document.addEventListener('click', e => {
+	document.addEventListener('click', event => {
 		mousePosition = {
-			x: e.pageX,
-			y: e.pageY
+			x: event.pageX,
+			y: event.pageY
 		}
 		// 超过 100ms 则居中弹出
 		setTimeout(() => {
@@ -42,8 +42,19 @@ const Modal: FC<ModalProps> = props => {
 		? createPortal(
 				<div className={cls(className, prefixCls)} {...rest}>
 					<div className={cls(maskClassName, `${prefixCls}-mask`)}></div>
-					<div className={`${prefixCls}-wrap`} onClick={maskClosable ? onCancel : undefined}>
-						<div onClick={e => e.stopPropagation()}>{children}</div>
+					<div
+						className={`${prefixCls}-wrap`}
+						onClick={
+							maskClosable
+								? event => {
+										if (event.target === event.currentTarget) {
+											onCancel?.()
+										}
+								  }
+								: undefined
+						}
+					>
+						{children}
 					</div>
 				</div>,
 				document.body
