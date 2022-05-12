@@ -59,7 +59,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>((props, outerRef
 	}
 
 	const TextareaComp = autosize ? TextareaAutosize : 'textarea'
-	const valueProps = isControlled ? { value } : {}
+	const valueProps = isControlled ? { value } : { defaultValue }
 	const autosizeProps = autosize ? { minRows, maxRows } : {}
 
 	const prefixCls = `${UI_PREFIX}-textarea`
@@ -79,7 +79,6 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>((props, outerRef
 				className={`${prefixCls}-inner`}
 				ref={textareaRef}
 				disabled={disabled}
-				defaultValue={defaultValue}
 				onChange={handleChange}
 				onFocus={handleFocus}
 				onBlur={handleBlur}

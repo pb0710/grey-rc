@@ -42,9 +42,9 @@
 			cursor: not-allowed;
 		}
 	}
-	&-focus,
-	&:active {
-		&:not(.g-input-disabled) {
+	&:not(&-disabled) {
+		&.g-input-focus,
+		&:active {
 			box-shadow: inset 0 0 0 2px #1890ff;
 			border-color: #1890ff;
 		}

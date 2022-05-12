@@ -6,7 +6,7 @@ import { FormContext, FormCtx } from './FormCtx'
 import './field.scss'
 
 interface FieldProps extends Omit<LabelHTMLAttributes<HTMLLabelElement>, 'form'>, Partial<FormContext> {
-	label: string
+	label?: string
 	labelText?: string
 	form?: Form
 }
@@ -19,10 +19,13 @@ export const Field: FC<FieldProps> = props => {
 	const update = useUpdate()
 
 	const _form = form ?? formCtx.form
-	const controller = _form?.subscribe(label, {})
+	let controller: any
+	if (label && _form) {
+		controller = _form.subscribe(label)
+	}
 
 	const labelAttrs = {
-		width: labelWidth ?? formCtx.labelWidth ?? 240,
+		width: labelWidth ?? formCtx.labelWidth ?? 200,
 		align: labelAlign ?? formCtx.labelAlign ?? 'left',
 		suffix: labelSuffix ?? formCtx.labelSuffix ?? ''
 	}
@@ -54,7 +57,7 @@ export const Field: FC<FieldProps> = props => {
 							onChange: onFieldValueChange
 						})}
 				</div>
-				<div className={`${prefixCls}-message`}></div>
+				<div className={`${prefixCls}-message`}>is required</div>
 			</div>
 		</label>
 	)

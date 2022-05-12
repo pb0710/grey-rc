@@ -45,11 +45,12 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props, forwardRef) => {
 		allowClear = false,
 		...rest
 	} = props
+
 	const ref = useRef<HTMLInputElement>(null)
 	const inputRef = (forwardRef ?? ref) as MutableRefObject<HTMLInputElement>
 	const [focus, setFocus] = useState(false)
-	const isControlled = !is.undefined(value)
 	const [clearVisible, setClearVisible] = useState(false)
+	const isControlled = !is.undefined(value)
 
 	const handleFocus: FocusEventHandler<HTMLInputElement> = e => {
 		onFocus?.(e)
@@ -88,7 +89,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props, forwardRef) => {
 
 	const prefixCls = `${UI_PREFIX}-input`
 
-	const valueProps = isControlled && { value }
+	const valueProps = isControlled ? { value } : { defaultValue }
 
 	return (
 		<label
@@ -103,7 +104,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props, forwardRef) => {
 			<input
 				{...rest}
 				{...valueProps}
-				defaultValue={defaultValue}
 				disabled={disabled}
 				className={`${prefixCls}-inner`}
 				ref={inputRef}

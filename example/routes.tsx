@@ -1,4 +1,5 @@
 import React from 'react'
+import { Navigate } from 'react-router-dom'
 import ButtonExample from './views/ButtonExample'
 import SwitchExample from './views/SwitchExample'
 import RadioExample from './views/RadioExample'
@@ -97,6 +98,10 @@ const routes = [
 	{
 		path: 'component',
 		children: componentRoutes
+	},
+	{
+		path: '*',
+		element: <Navigate to={`component/${componentRoutes[0].path}`} replace />
 	}
 ]
 

@@ -116,7 +116,7 @@ const Image = forwardRef<HTMLImageElement, ImageProps>((props, outerRef) => {
 		canHover: true
 	}
 	const toolbarEle = toolbarVisible && (
-		<div className={`${prefixCls}-detail-toolbar`}>
+		<div className={`${prefixCls}-detail-toolbar`} onClick={event => event.stopPropagation()}>
 			<Space>
 				<Tooltip content="向左旋转90°">
 					<Icon {...toolbarProps} path={mdiRestore} onClick={() => setRotate(pre => pre - 90)} />
@@ -161,7 +161,11 @@ const Image = forwardRef<HTMLImageElement, ImageProps>((props, outerRef) => {
 					onMouseDown={handleDragDetailStart}
 					onClick={event => event.stopPropagation()}
 				/>
-				{ratioVisible && <div className={`${prefixCls}-detail-ratio`}>{scalePercent}</div>}
+				{ratioVisible && (
+					<div className={`${prefixCls}-detail-ratio`} onClick={event => event.stopPropagation()}>
+						{scalePercent}
+					</div>
+				)}
 				{toolbarEle}
 			</div>
 		</Modal>
