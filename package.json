@@ -25,7 +25,10 @@
 		"react-textarea-autosize": "^8.3.3",
 		"react-transition-group": "^4.4.2"
 	},
-	"peerDependencies": {},
+	"peerDependencies": {
+		"react": "^18.0.8",
+		"react-dom": "^18.0.3"
+	},
 	"devDependencies": {
 		"@rollup/plugin-typescript": "^8.3.2",
 		"@types/autosize": "^4.0.1",
