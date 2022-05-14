@@ -1,7 +1,7 @@
-import React, { FC, useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Divider, Radio, Space } from '../../packages'
 
-const RadioExample: FC = () => {
+const RadioExample = () => {
 	const [val, setVal] = useState(false)
 	const defaultGroupVal = 2
 	const [groupVal, setGroupVal] = useState<string | number>(defaultGroupVal)
@@ -27,7 +27,7 @@ const RadioExample: FC = () => {
 		<>
 			<h1>Radio</h1>
 			<Space>
-				<Radio defaultValue={true}>basic</Radio>
+				<Radio defaultValue={true}>Basic</Radio>
 				<Radio
 					value={val}
 					onChange={value => {
@@ -36,7 +36,7 @@ const RadioExample: FC = () => {
 						}
 					}}
 				>
-					controlled
+					Controlled
 				</Radio>
 			</Space>
 			<Divider />
@@ -45,19 +45,19 @@ const RadioExample: FC = () => {
 				options={[
 					{
 						label: 0,
-						child: 'cherry'
+						child: 'Cherry'
 					},
 					{
 						label: 1,
-						child: 'apple'
+						child: 'Apple'
 					},
 					{
 						label: 2,
-						child: 'pear'
+						child: 'Pear'
 					},
 					{
 						label: 3,
-						child: 'orange',
+						child: 'Orange',
 						disabled: true
 					}
 				]}
@@ -72,9 +72,9 @@ const RadioExample: FC = () => {
 					direction="horizontal"
 					defaultValue={defaultHorizontalVal}
 					options={[
-						{ label: 0, child: 'horizontal a' },
-						{ label: 1, child: 'horizontal b' },
-						{ label: 2, child: 'horizontal c' }
+						{ label: 0, child: 'Horizontal a' },
+						{ label: 1, child: 'Horizontal b' },
+						{ label: 2, child: 'Horizontal c' }
 					]}
 					value={horizontalVal}
 					onChange={value => {
@@ -85,9 +85,9 @@ const RadioExample: FC = () => {
 					direction="vertical"
 					defaultValue={defaultVerticalVal}
 					options={[
-						{ label: 0, child: 'vertical a' },
-						{ label: 1, child: 'vertical b' },
-						{ label: 2, child: 'vertical c' }
+						{ label: 0, child: 'Vertical a' },
+						{ label: 1, child: 'Vertical b' },
+						{ label: 2, child: 'Vertical c' }
 					]}
 					value={verticalVal}
 					onChange={value => {
@@ -97,19 +97,19 @@ const RadioExample: FC = () => {
 			</Space>
 			<Divider />
 			<Radio ref={radioRef} defaultValue={true}>
-				forward ref
+				Forward ref
 			</Radio>
 			<Divider />
 			<Space direction="vertical">
 				<Radio disabled defaultValue={true}>
-					disabled
+					Disabled
 				</Radio>
 				<Radio.Group
 					disabled
 					options={[
-						{ label: 0, child: 'a' },
-						{ label: 1, child: 'b' },
-						{ label: 2, child: 'c' }
+						{ label: 0, child: 'A' },
+						{ label: 1, child: 'B' },
+						{ label: 2, child: 'C' }
 					]}
 					defaultValue={defaultDisabledVal}
 					value={disabledGroupVal}
@@ -123,18 +123,18 @@ const RadioExample: FC = () => {
 				direction="horizontal"
 				defaultValue={defaultJsxGroupVal}
 				options={[
-					{ label: 0, child: 'options a' },
-					{ label: 1, child: 'options b' },
-					{ label: 2, child: 'options c' }
+					{ label: 0, child: 'Options a' },
+					{ label: 1, child: 'Options b' },
+					{ label: 2, child: 'Options c' }
 				]}
 				value={jsxGroupVal}
 				onChange={value => {
 					setJsxGroupVal(value)
 				}}
 			>
-				<Radio label={3}>jsx a</Radio>
-				<Radio label={4}>jsx b</Radio>
-				<Radio label={5}>jsx c</Radio>
+				<Radio label={3}>JSX a</Radio>
+				<Radio label={4}>JSX b</Radio>
+				<Radio label={5}>JSX c</Radio>
 			</Radio.Group>
 			<Divider />
 			<Radio.Group
@@ -145,17 +145,17 @@ const RadioExample: FC = () => {
 					setJsxTabGroupVal(value)
 				}}
 			>
-				<Radio label={0}>jsx tab a</Radio>
-				<Radio label={1}>jsx tab b</Radio>
-				<Radio label={2}>jsx tab c</Radio>
+				<Radio label={0}>JSX tab a</Radio>
+				<Radio label={1}>JSX tab b</Radio>
+				<Radio label={2}>JSX tab c</Radio>
 			</Radio.Group>
 			<Divider />
 			<Radio.Group
 				type="tab"
 				options={[
-					{ label: 0, child: 'options tab a' },
-					{ label: 1, child: 'options tab b' },
-					{ label: 2, child: 'options tab c' }
+					{ label: 0, child: 'Options tab a' },
+					{ label: 1, child: 'Options tab b' },
+					{ label: 2, child: 'Options tab c' }
 				]}
 				defaultValue={defaultOptionsTabGroupVal}
 				value={optionsTabGroupVal}
@@ -165,9 +165,9 @@ const RadioExample: FC = () => {
 			/>
 			<Divider />
 			<Radio.Group type="tab" disabled defaultValue={1}>
-				<Radio label={0}>disabled tab a</Radio>
-				<Radio label={1}>disabled tab b</Radio>
-				<Radio label={2}>disabled tab c</Radio>
+				<Radio label={0}>Disabled tab a</Radio>
+				<Radio label={1}>Disabled tab b</Radio>
+				<Radio label={2}>Disabled tab c</Radio>
 			</Radio.Group>
 		</>
 	)

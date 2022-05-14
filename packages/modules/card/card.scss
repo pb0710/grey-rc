@@ -11,27 +11,25 @@
 		border-bottom-color: #ccc;
 	}
 	&-shadow {
-		box-shadow: 0 4px 12px rgba($color: #000000, $alpha: 0.2);
+		box-shadow: $shadow-medium;
 	}
 	&-header {
-		display: flex;
-		justify-content: space-between;
-		align-items: baseline;
-		gap: 8px;
 		padding: 24px 24px 0 24px;
-		&-title {
-			font-size: 20px;
-		}
-		&-close-icon {
-			background: #fff;
-		}
 	}
 	&-content {
 		padding: 24px;
 	}
 	&-footer {
-		display: flex;
-		flex-direction: row-reverse;
 		padding: 0 24px 24px 24px;
+	}
+	&-cover {
+		overflow: hidden;
+		border-top-left-radius: 6px;
+		border-top-right-radius: 6px;
+		width: 100%;
+		img {
+			display: block;
+			width: 100%;
+		}
 	}
 }

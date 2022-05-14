@@ -1,5 +1,5 @@
 import { cls } from 'grey-utils'
-import React, { Children, cloneElement, FC, HTMLAttributes, isValidElement, MouseEvent } from 'react'
+import React, { FC, HTMLAttributes } from 'react'
 import { createPortal } from 'react-dom'
 import { UI_PREFIX } from '../../constants'
 import './modal.scss'
@@ -18,7 +18,7 @@ if (document) {
 	})
 }
 
-interface ModalProps extends HTMLAttributes<HTMLElement> {
+export interface ModalProps extends HTMLAttributes<HTMLElement> {
 	visible?: boolean
 	maskClassName?: string
 	maskClosable?: boolean
@@ -26,21 +26,13 @@ interface ModalProps extends HTMLAttributes<HTMLElement> {
 }
 
 const Modal: FC<ModalProps> = props => {
-	const {
-		children,
-		className,
-		maskClassName,
-		maskClosable = true,
-		visible = false,
-		onCancel,
-		...rest
-	} = props
+	const { children, className, maskClassName, maskClosable = true, visible = false, onCancel } = props
 
 	const prefixCls = `${UI_PREFIX}-modal`
 
 	return visible
 		? createPortal(
-				<div className={cls(className, prefixCls)} {...rest}>
+				<div className={cls(className, prefixCls)}>
 					<div className={cls(maskClassName, `${prefixCls}-mask`)}></div>
 					<div
 						className={`${prefixCls}-wrap`}

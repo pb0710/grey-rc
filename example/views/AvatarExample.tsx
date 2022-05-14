@@ -1,8 +1,8 @@
 import { mdiAccount, mdiFileImageRemove } from '@mdi/js'
-import React, { FC } from 'react'
+import React from 'react'
 import { Avatar, Divider, Icon, Space } from '../../packages'
 
-const AvatarExample: FC = () => {
+const AvatarExample = () => {
 	const picSrc = 'https://iph.href.lu/200x200'
 	return (
 		<>

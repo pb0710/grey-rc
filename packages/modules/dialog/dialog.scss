@@ -1,0 +1,25 @@
+@use '../../styles/mixins.scss' as *;
+.g-dialog {
+	@include basic;
+	&-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: baseline;
+		gap: 8px;
+		padding: 24px 24px 0 24px;
+		&-title {
+			font-size: 20px;
+		}
+		&-close-icon {
+			background: #fff;
+		}
+	}
+	&-content {
+		padding: 24px;
+	}
+	&-footer {
+		display: flex;
+		flex-direction: row-reverse;
+		padding: 0 24px 24px 24px;
+	}
+}

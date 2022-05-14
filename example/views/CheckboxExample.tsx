@@ -1,7 +1,7 @@
-import React, { FC, useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Checkbox, Divider, Space } from '../../packages'
 
-const CheckboxExample: FC = () => {
+const CheckboxExample = () => {
 	const [val, setVal] = useState(false)
 	const defaultGroupVal = [2]
 	const [groupVal, setGroupVal] = useState<(string | number)[]>(defaultGroupVal)
@@ -21,7 +21,7 @@ const CheckboxExample: FC = () => {
 		<>
 			<h1>Checkbox</h1>
 			<Space>
-				<Checkbox defaultValue={true}>basic</Checkbox>
+				<Checkbox defaultValue={true}>Basic</Checkbox>
 				<Checkbox
 					value={val}
 					onChange={value => {
@@ -30,7 +30,7 @@ const CheckboxExample: FC = () => {
 						}
 					}}
 				>
-					controlled
+					Controlled
 				</Checkbox>
 			</Space>
 			<Divider />
@@ -39,19 +39,19 @@ const CheckboxExample: FC = () => {
 				options={[
 					{
 						label: 0,
-						child: 'cherry'
+						child: 'Cherry'
 					},
 					{
 						label: 1,
-						child: 'apple'
+						child: 'Apple'
 					},
 					{
 						label: 2,
-						child: 'pear'
+						child: 'Pear'
 					},
 					{
 						label: 3,
-						child: 'orange',
+						child: 'Orange',
 						disabled: true
 					}
 				]}
@@ -66,9 +66,9 @@ const CheckboxExample: FC = () => {
 					direction="horizontal"
 					defaultValue={defaultHorizontalVal}
 					options={[
-						{ label: 0, child: 'horizontal a' },
-						{ label: 1, child: 'horizontal b' },
-						{ label: 2, child: 'horizontal c' }
+						{ label: 0, child: 'Horizontal a' },
+						{ label: 1, child: 'Horizontal b' },
+						{ label: 2, child: 'Horizontal c' }
 					]}
 					value={horizontalVal}
 					onChange={value => {
@@ -79,9 +79,9 @@ const CheckboxExample: FC = () => {
 					direction="vertical"
 					defaultValue={defaultVerticalVal}
 					options={[
-						{ label: 0, child: 'vertical a' },
-						{ label: 1, child: 'vertical b' },
-						{ label: 2, child: 'vertical c' }
+						{ label: 0, child: 'Vertical a' },
+						{ label: 1, child: 'Vertical b' },
+						{ label: 2, child: 'Vertical c' }
 					]}
 					value={verticalVal}
 					onChange={value => {
@@ -91,17 +91,17 @@ const CheckboxExample: FC = () => {
 			</Space>
 			<Divider />
 			<Checkbox ref={checkboxRef} defaultValue={true}>
-				forward ref
+				Forward ref
 			</Checkbox>
 			<Divider />
 			<Space direction="vertical">
-				<Checkbox disabled>disabled</Checkbox>
+				<Checkbox disabled>Disabled</Checkbox>
 				<Checkbox.Group
 					disabled
 					options={[
-						{ label: 0, child: 'a' },
-						{ label: 1, child: 'b' },
-						{ label: 2, child: 'c' }
+						{ label: 0, child: 'A' },
+						{ label: 1, child: 'B' },
+						{ label: 2, child: 'C' }
 					]}
 				/>
 			</Space>
@@ -110,18 +110,18 @@ const CheckboxExample: FC = () => {
 				direction="vertical"
 				defaultValue={defaultJsxGroupVal}
 				options={[
-					{ label: 0, child: 'options a' },
-					{ label: 1, child: 'options b' },
-					{ label: 2, child: 'options c' }
+					{ label: 0, child: 'Options a' },
+					{ label: 1, child: 'Options b' },
+					{ label: 2, child: 'Options c' }
 				]}
 				value={jsxGroupVal}
 				onChange={value => {
 					setJsxGroupVal(value)
 				}}
 			>
-				<Checkbox label={3}>jsx a</Checkbox>
-				<Checkbox label={4}>jsx b</Checkbox>
-				<Checkbox label={5}>jsx c</Checkbox>
+				<Checkbox label={3}>JSX a</Checkbox>
+				<Checkbox label={4}>JSX b</Checkbox>
+				<Checkbox label={5}>JSX c</Checkbox>
 			</Checkbox.Group>
 		</>
 	)

@@ -5,6 +5,7 @@
 	align-items: center;
 	gap: 8px;
 	user-select: none;
+	transition: filter 0.1s;
 	&-inner {
 		padding: 0;
 		outline: 0;
@@ -63,7 +64,7 @@
 		@include basic;
 		display: inline-flex;
 		align-items: center;
-		height: 24px;
+		height: 28px;
 		padding: 0 16px;
 		background: inherit;
 		border-radius: 4px;

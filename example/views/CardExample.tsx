@@ -1,31 +1,22 @@
-import React, { FC } from 'react'
+import React from 'react'
 import { Divider, Card, Loading } from '../../packages'
 
-const CardExample: FC = () => {
+const CardExample = () => {
 	return (
 		<>
 			<h1>Card</h1>
-			<Card title="basic">content</Card>
-			<Divider />
-			<Card action={null} title="no top-right action">
-				content
+			<Card header="Basic card" footer="Footer">
+				Content
 			</Card>
 			<Divider />
-			<Card header={null}>no header</Card>
-			<Divider />
-			<Card footer={null} title="no footer">
-				content
-			</Card>
-			<Divider />
-			<Card header={null} footer={null} title="only content">
-				content
+			<Card header="Header" cover={<img src="https://iph.href.lu/500x300" />}>
+				Content
 			</Card>
 			<Divider />
 			<Card
-				title="custom card"
 				header={
 					<div style={{ color: 'purple', padding: 24 }}>
-						<strong>custom header</strong>
+						<strong>Custom header</strong>
 					</div>
 				}
 				footer={
@@ -37,30 +28,23 @@ const CardExample: FC = () => {
 							borderBottomRightRadius: 6
 						}}
 					>
-						<span>custom footer</span>
+						<span>Custom footer</span>
 					</div>
 				}
 			>
-				content
+				Content
 			</Card>
 			<Divider />
-			<Card
-				bordered={false}
-				title="no border"
-				action={null}
-				footer={<div style={{ padding: '0 24px' }}>footer</div>}
-			>
-				内容
+			<Card bordered={false} header="No border" footer="Footer">
+				Content
 			</Card>
 			<Divider />
-			<Card shadow title="shadow card" footer={null}>
-				content
+			<Card shadow header="Shadow card">
+				Content
 			</Card>
 			<Divider />
 			<Loading>
-				<Card title="loading" footer={null}>
-					content
-				</Card>
+				<Card header="Loading card">Content</Card>
 			</Loading>
 		</>
 	)

@@ -6,6 +6,7 @@
 	align-items: center;
 	gap: 8px;
 	user-select: none;
+	transition: filter 0.1s;
 	&-input {
 		padding: 0;
 		outline: 0;

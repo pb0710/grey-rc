@@ -1,15 +1,15 @@
-import React, { FC } from 'react'
+import React from 'react'
 import { mdiPlus, mdiMagnify, mdiShieldCheckOutline } from '@mdi/js'
 import { Button, Divider, Icon, Space, Tooltip } from '../../packages'
 
-const ButtonExample: FC = () => {
+const ButtonExample = () => {
 	return (
 		<>
 			<h1>Button</h1>
 			<Space>
-				<Button>click me</Button>
-				<Button primary>primary</Button>
-				<Button round>round</Button>
+				<Button>Click me</Button>
+				<Button primary>Primary</Button>
+				<Button round>Round</Button>
 				<Tooltip content="square button">
 					<Button square>
 						<Icon path={mdiPlus}></Icon>
@@ -32,15 +32,15 @@ const ButtonExample: FC = () => {
 				</Tooltip>
 			</Space>
 			<Divider />
-			<Button block>block</Button>
+			<Button block>Block</Button>
 			<Divider />
 			<Space>
-				<Button loading>loading</Button>
+				<Button loading>Loading</Button>
 				<Button primary loading>
-					loading
+					Loading
 				</Button>
 				<Button round loading>
-					loading
+					Loading
 				</Button>
 				<Button circle loading>
 					<Icon path={mdiPlus}></Icon>
@@ -48,23 +48,23 @@ const ButtonExample: FC = () => {
 			</Space>
 			<Divider />
 			<Button block loading>
-				loading
+				Loading
 			</Button>
 			<Divider />
 			<Space>
-				<Button disabled>disabled</Button>
+				<Button disabled>Disabled</Button>
 				<a href="https://www.google.com">
-					<Button>link</Button>
+					<Button>Link</Button>
 				</a>
 			</Space>
 			<Divider />
 			<Space>
-				<Button icon={<Icon path={mdiShieldCheckOutline}></Icon>}>icon button</Button>
+				<Button icon={<Icon path={mdiShieldCheckOutline}></Icon>}>Icon button</Button>
 				<Button icon={<Icon path={mdiShieldCheckOutline}></Icon>} primary>
-					icon primary button
+					Icon primary button
 				</Button>
 				<Button icon={<Icon path={mdiShieldCheckOutline}></Icon>} loading>
-					icon loading button
+					Icon loading button
 				</Button>
 			</Space>
 		</>

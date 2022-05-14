@@ -1,7 +1,7 @@
-import React, { FC, useState } from 'react'
+import React, { useState } from 'react'
 import { Space, Switch } from '../../packages'
 
-const SwitchExample: FC = () => {
+const SwitchExample = () => {
 	const [checked, setChecked] = useState<boolean>(false)
 	return (
 		<>

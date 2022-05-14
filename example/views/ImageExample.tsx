@@ -1,7 +1,7 @@
-import React, { FC } from 'react'
+import React from 'react'
 import { Divider, Image, Space } from '../../packages'
 
-const ImageExample: FC = () => {
+const ImageExample = () => {
 	const picSrc1 = 'https://iph.href.lu/879x400'
 	const picSrc2 = 'https://iph.href.lu/879x400'
 	const picSrc3 = 'https://iph.href.lu/879x400'

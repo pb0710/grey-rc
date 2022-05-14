@@ -1,8 +1,8 @@
 import { mdiLoading } from '@mdi/js'
-import React, { FC, useState } from 'react'
+import React, { useState } from 'react'
 import { Button, Card, Divider, Icon, Loading, Space } from '../../packages'
 
-const LoadingExample: FC = () => {
+const LoadingExample = () => {
 	const [spinning, setSpinning] = useState(false)
 	return (
 		<>
@@ -24,25 +24,19 @@ const LoadingExample: FC = () => {
 						setSpinning(pre => !pre)
 					}}
 				>
-					toggle spinning
+					Toggle spinning
 				</Button>
 				<Loading spinning={spinning}>
-					<Card title="loading wrapper" action={null} footer={null}>
-						content
-					</Card>
+					<Card header="loading wrapper">Content</Card>
 				</Loading>
 			</Space>
 			<Divider />
 			<Loading icon={<Icon path={mdiLoading} spin={1} size="24px" />} style={{ fontSize: 20 }}>
-				<Card title="custom spinning icon" action={null} footer={null}>
-					content
-				</Card>
+				<Card header="custom spinning icon">Content</Card>
 			</Loading>
 			<Divider />
 			<Loading description="text description">
-				<Card title="text description" action={null} footer={null}>
-					content
-				</Card>
+				<Card header="text description">Content</Card>
 			</Loading>
 		</>
 	)

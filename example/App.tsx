@@ -1,11 +1,11 @@
-import React, { FC } from 'react'
+import React from 'react'
 import { NavLink, useRoutes } from 'react-router-dom'
 import { cls } from 'grey-utils'
 import './App.scss'
 import router, { componentRoutes } from './routes'
 import { Space } from '../packages'
 
-const App: FC = () => {
+const App = () => {
 	const contentEle = useRoutes(router)
 
 	const navEle = (

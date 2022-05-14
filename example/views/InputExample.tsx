@@ -1,4 +1,4 @@
-import React, { FC, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import Input from '../../packages/modules/input'
 import Space from '../../packages/modules/basic/Space'
 import { mdiArrowUp, mdiMagnify } from '@mdi/js'
@@ -6,7 +6,7 @@ import Icon from '../../packages/modules/basic/Icon'
 import Divider from '../../packages/modules/basic/Divider'
 import Button from '../../packages/modules/button'
 
-const InputExample: FC = () => {
+const InputExample = () => {
 	const [inputVal, setInputVal] = useState('controlled input')
 	const [textareaVal, setTextareaVal] = useState('controlled textarea')
 	const inputRef = useRef<HTMLInputElement>(null)
@@ -15,9 +15,9 @@ const InputExample: FC = () => {
 		<>
 			<h1>Input</h1>
 			<Space>
-				<Input defaultValue="hi" placeholder="basic" />
+				<Input defaultValue="hi" placeholder="Basic" />
 				<Input
-					placeholder="controlled"
+					placeholder="Controlled"
 					value={inputVal}
 					onChange={value => {
 						if (typeof value === 'string') setInputVal(value)
@@ -27,46 +27,46 @@ const InputExample: FC = () => {
 			<Divider />
 			<Space>
 				<Input
-					placeholder="prefix"
+					placeholder="Prefix"
 					prefix={<Icon style={{ backgroundColor: '#fff' }} path={mdiMagnify} canHover />}
 				/>
 				<Input
-					placeholder="suffix"
+					placeholder="Suffix"
 					suffix={<Icon style={{ backgroundColor: '#fff' }} path={mdiArrowUp} canHover />}
 				/>
 			</Space>
 			<Divider />
 			<Space>
-				<Input placeholder="allow clear" allowClear defaultValue="allow clear" />
+				<Input placeholder="Allow clear" allowClear defaultValue="allow clear" />
 			</Space>
 			<Divider />
-			<Input placeholder="block" block />
+			<Input placeholder="Block" block />
 			<Divider />
 			<Space direction="vertical">
-				<Input placeholder="round" round />
+				<Input placeholder="Round" round />
 				<Input
-					placeholder="round with prefix and suffix"
+					placeholder="Round with prefix and suffix"
 					round
 					prefix={<Icon style={{ backgroundColor: '#fff' }} path={mdiMagnify} canHover round />}
 					suffix={<Icon style={{ backgroundColor: '#fff' }} path={mdiArrowUp} canHover round />}
 				/>
-				<Input placeholder="round block" round block />
+				<Input placeholder="Round block" round block />
 			</Space>
 			<Divider />
 			<Space>
-				<Input placeholder="enabled" />
-				<Input placeholder="disabled" disabled />
+				<Input placeholder="Enabled" />
+				<Input placeholder="Disabled" disabled />
 			</Space>
 			<Divider />
 			<Space>
-				<Input placeholder="forward ref" ref={inputRef} />
+				<Input placeholder="Forward ref" ref={inputRef} />
 				<Button
 					primary
 					onClick={() => {
 						inputRef.current?.focus()
 					}}
 				>
-					focus
+					Focus
 				</Button>
 				<Button
 					primary
@@ -74,38 +74,38 @@ const InputExample: FC = () => {
 						inputRef.current?.blur()
 					}}
 				>
-					blur
+					Blur
 				</Button>
 			</Space>
 			<Divider />
-			<Input.Textarea defaultValue="hi" placeholder="basic textarea" />
+			<Input.Textarea defaultValue="hi" placeholder="Basic textarea" />
 			<Divider />
 			<Input.Textarea
-				placeholder="controlled textarea"
+				placeholder="Controlled textarea"
 				value={textareaVal}
 				onChange={value => {
 					if (typeof value === 'string') setTextareaVal(value)
 				}}
 			/>
 			<Divider />
-			<Input.Textarea autosize placeholder="autosize textarea" />
+			<Input.Textarea autosize placeholder="Autosize textarea" />
 			<Divider />
-			<Input.Textarea block placeholder="block textarea" />
+			<Input.Textarea block placeholder="Block textarea" />
 			<Divider />
 			<Space>
-				<Input.Textarea disabled placeholder="disabled textarea" />
-				<Input.Textarea disabled autosize placeholder="disabled autosize textarea" />
+				<Input.Textarea disabled placeholder="Disabled textarea" />
+				<Input.Textarea disabled autosize placeholder="Disabled autosize textarea" />
 			</Space>
 			<Divider />
 			<Space>
-				<Input.Textarea ref={textareaRef} placeholder="ref textarea" />
+				<Input.Textarea ref={textareaRef} placeholder="Ref textarea" />
 				<Button
 					primary
 					onClick={() => {
 						textareaRef.current?.focus()
 					}}
 				>
-					focus
+					Focus
 				</Button>
 				<Button
 					primary
@@ -113,7 +113,7 @@ const InputExample: FC = () => {
 						textareaRef.current?.blur()
 					}}
 				>
-					blur
+					Blur
 				</Button>
 			</Space>
 		</>

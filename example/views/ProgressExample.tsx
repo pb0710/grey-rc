@@ -1,8 +1,8 @@
 import { mdiPlus, mdiMinus } from '@mdi/js'
-import React, { FC, useState } from 'react'
+import React, { useState } from 'react'
 import { Space, Progress, Button, Icon, Divider } from '../../packages'
 
-const ProgressExample: FC = () => {
+const ProgressExample = () => {
 	const [percent, setPercent] = useState(70)
 
 	const operationEle = (
@@ -77,12 +77,7 @@ const ProgressExample: FC = () => {
 					{operationEle}
 				</Space>
 				<Space direction="vertical">
-					<Progress.Circle
-						defaultMolecule={70 * 5}
-						molecule={percent * 5}
-						denominator={500}
-						suffix="/500"
-					/>
+					<Progress.Circle defaultMolecule={70 * 5} molecule={percent * 5} denominator={500} suffix="/500" />
 					{operationEle}
 				</Space>
 				<Space direction="vertical">

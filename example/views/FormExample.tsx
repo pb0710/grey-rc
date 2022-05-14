@@ -1,7 +1,7 @@
-import React, { FC, useState } from 'react'
+import React, { useState } from 'react'
 import { Button, Checkbox, Divider, Form, Input, Radio, Switch } from '../../packages'
 
-const FormExample: FC = () => {
+const FormExample = () => {
 	const [layout, setLayout] = useState<'horizontal' | 'vertical' | 'inline'>('horizontal')
 
 	const form = Form.useForm({
@@ -59,9 +59,9 @@ const FormExample: FC = () => {
 					</Form.Field>
 					<Form.Field label="fruit" labelText="Fruit">
 						<Checkbox.Group>
-							<Checkbox label={0}>apple</Checkbox>
-							<Checkbox label={1}>banana</Checkbox>
-							<Checkbox label={2}>pear</Checkbox>
+							<Checkbox label={0}>Apple</Checkbox>
+							<Checkbox label={1}>Banana</Checkbox>
+							<Checkbox label={2}>Pear</Checkbox>
 						</Checkbox.Group>
 					</Form.Field>
 					<Form.Field label="switch" labelText="Switch">
