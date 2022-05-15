@@ -16,6 +16,7 @@ import AvatarExample from './views/AvatarExample'
 import ImageExample from './views/ImageExample'
 import FormExample from './views/FormExample'
 import DialogExample from './views/DialogExample'
+import PopupExample from './views/PopupExample'
 
 export const componentRoutes = [
 	{
@@ -97,6 +98,11 @@ export const componentRoutes = [
 		name: 'Dialog',
 		path: 'dialog',
 		element: <DialogExample />
+	},
+	{
+		name: 'Popup',
+		path: 'popup',
+		element: <PopupExample />
 	}
 ]
 

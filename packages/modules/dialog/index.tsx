@@ -32,15 +32,24 @@ const Dialog: FC<DialogProps> = props => {
 		cancelText = 'Cancel',
 		okLoading = false,
 		onCancel,
-		onOk
+		onOk,
+		...rest
 	} = props
 
 	const prefixCls = `${UI_PREFIX}-dialog`
 
 	return (
-		<Modal visible={visible} maskClassName={maskClassName} maskClosable={maskClosable} onCancel={onCancel}>
+		<Modal
+			visible={visible}
+			maskClassName={maskClassName}
+			maskClosable={maskClosable}
+			onCancel={onCancel}
+			{...rest}
+		>
 			<Card
 				className={cls(className, prefixCls)}
+				shadow
+				bordered={false}
 				header={
 					<div className={`${prefixCls}-header`}>
 						<strong className={`${prefixCls}-header-title`}>{title}</strong>

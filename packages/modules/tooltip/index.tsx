@@ -11,15 +11,7 @@ interface TooltipProps extends HTMLAttributes<HTMLElement> {
 }
 
 const Tooltip: FC<TooltipProps> = props => {
-	const {
-		children,
-		className,
-		content,
-		direction = 'top',
-		block = false,
-		disabled = false,
-		...rest
-	} = props
+	const { children, className, content, direction = 'top', block = false, disabled = false, ...rest } = props
 
 	const prefixCls = `${UI_PREFIX}-tooltip`
 

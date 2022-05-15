@@ -26,13 +26,13 @@ export interface ModalProps extends HTMLAttributes<HTMLElement> {
 }
 
 const Modal: FC<ModalProps> = props => {
-	const { children, className, maskClassName, maskClosable = true, visible = false, onCancel } = props
+	const { children, className, maskClassName, maskClosable = true, visible = false, onCancel, ...rest } = props
 
 	const prefixCls = `${UI_PREFIX}-modal`
 
 	return visible
 		? createPortal(
-				<div className={cls(className, prefixCls)}>
+				<div className={cls(className, prefixCls)} {...rest}>
 					<div className={cls(maskClassName, `${prefixCls}-mask`)}></div>
 					<div
 						className={`${prefixCls}-wrap`}

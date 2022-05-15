@@ -1,0 +1,16 @@
+@use '../../styles/mixins.scss' as *;
+.g-popup-wrap {
+	@include basic;
+}
+.g-popup {
+	@include basic;
+	position: absolute;
+	&-inner {
+		padding: 16px;
+		border: 1px solid #ddd;
+		border-bottom-color: #ccc;
+		background: #fff;
+		box-shadow: $shadow-medium;
+		border-radius: 4px;
+	}
+}

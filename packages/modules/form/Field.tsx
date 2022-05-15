@@ -12,8 +12,7 @@ interface FieldProps extends Omit<LabelHTMLAttributes<HTMLLabelElement>, 'form'>
 }
 
 export const Field: FC<FieldProps> = props => {
-	const { className, children, form, label, labelText, labelWidth, labelAlign, labelSuffix, ...rest } =
-		props
+	const { className, children, form, label, labelText, labelWidth, labelAlign, labelSuffix, ...rest } = props
 
 	const formCtx = useContext(FormCtx)
 	const update = useUpdate()
@@ -57,7 +56,7 @@ export const Field: FC<FieldProps> = props => {
 							onChange: onFieldValueChange
 						})}
 				</div>
-				<div className={`${prefixCls}-message`}>is required</div>
+				{/* <div className={`${prefixCls}-message`}>is required</div> */}
 			</div>
 		</label>
 	)
