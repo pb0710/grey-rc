@@ -1,31 +1,26 @@
 import { cls } from 'grey-utils'
-import React, { FC, HTMLAttributes } from 'react'
+import React, { FC } from 'react'
 import { UI_PREFIX } from '../../constants'
+import Popup, { PopupProps } from '../popup'
 import './tooltip.scss'
 
-interface TooltipProps extends HTMLAttributes<HTMLElement> {
-	block?: boolean
-	disabled?: boolean
-	content?: string
-	direction?: 'top' | 'left' | 'right' | 'bottom'
+interface TooltipProps extends PopupProps {
+	light?: boolean
 }
 
 const Tooltip: FC<TooltipProps> = props => {
-	const { children, className, content, direction = 'top', block = false, disabled = false, ...rest } = props
+	const { children, className, content, light = false, ...rest } = props
 
 	const prefixCls = `${UI_PREFIX}-tooltip`
 
+	const contentEle = (
+		<div className={cls(`${prefixCls}-content`, `${prefixCls}-content-${light ? 'light' : 'dark'}`)}>{content}</div>
+	)
+
 	return (
-		<div
-			className={cls(className, prefixCls, `${prefixCls}-${direction}`, {
-				[`${prefixCls}-block`]: block,
-				[`${prefixCls}-disabled`]: disabled
-			})}
-			aria-controls={content}
-			{...rest}
-		>
+		<Popup className={cls(className, prefixCls)} content={contentEle} {...rest}>
 			{children}
-		</div>
+		</Popup>
 	)
 }
 

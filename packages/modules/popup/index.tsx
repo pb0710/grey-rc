@@ -10,7 +10,7 @@ document.addEventListener('click', event => {
 	visibleHandlers.forEach(handler => handler(event))
 })
 
-interface PopupProps extends HTMLAttributes<HTMLElement> {
+export interface PopupProps extends HTMLAttributes<HTMLElement> {
 	visible?: boolean
 	content?: ReactNode
 	trigger?: 'hover' | 'click' | 'manual'
@@ -28,6 +28,7 @@ interface PopupProps extends HTMLAttributes<HTMLElement> {
 		| 'bottom'
 		| 'bottom-end'
 	spacing?: number
+	disabled?: boolean
 	onClickOutside?: (event: MouseEvent) => void
 	onVisibleChange?: (visible: boolean) => void
 }
@@ -38,9 +39,10 @@ const Popup: FC<PopupProps> = props => {
 		children,
 		content,
 		visible = false,
-		trigger,
+		trigger = 'hover',
 		position = 'bottom-start',
 		spacing = 8,
+		disabled = false,
 		onClickOutside,
 		onVisibleChange,
 		style,
@@ -218,7 +220,7 @@ const Popup: FC<PopupProps> = props => {
 	return (
 		<div ref={wrapRef} className={`${prefixCls}-wrap`} {...wrapProps}>
 			{children}
-			{portal}
+			{disabled || portal}
 		</div>
 	)
 }

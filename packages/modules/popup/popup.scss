@@ -6,11 +6,11 @@
 	@include basic;
 	position: absolute;
 	&-inner {
-		padding: 16px;
+		padding: 12px 24px;
 		border: 1px solid #ddd;
 		border-bottom-color: #ccc;
 		background: #fff;
 		box-shadow: $shadow-medium;
-		border-radius: 4px;
+		border-radius: 6px;
 	}
 }

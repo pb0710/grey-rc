@@ -35,7 +35,7 @@ const PopupExample = () => {
 			<div
 				style={{
 					display: 'grid',
-					gridTemplateColumns: 'repeat(3, 120px)',
+					gridTemplateColumns: 'repeat(3, 160px)',
 					gridTemplateRows: 'repeat(5, auto)',
 					gap: 12,
 					justifyContent: 'center'

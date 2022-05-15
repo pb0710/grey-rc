@@ -4,27 +4,86 @@ import { Button, Divider, Icon, Space, Switch, Tooltip } from '../../packages'
 import './tooltip-example.scss'
 
 const TooltipExample = () => {
+	const ceilStyle = {
+		display: 'flex',
+		justifyContent: 'center',
+		alignItems: 'center'
+	}
 	return (
 		<>
 			<h1>Tooltip</h1>
-			<div className="tooltip-box">
-				<div className="ceil empty"></div>
-				<Tooltip className="ceil" direction="top" content="Top">
-					Top
+			<div
+				style={{
+					display: 'grid',
+					gridTemplateColumns: 'repeat(3, 160px)',
+					gridTemplateRows: 'repeat(5, auto)',
+					gap: 12,
+					justifyContent: 'center'
+				}}
+			>
+				<Tooltip position="top-start" content="Top start">
+					<Button block style={ceilStyle}>
+						Top start
+					</Button>
 				</Tooltip>
-				<div className="ceil empty"></div>
-				<Tooltip className="ceil" direction="left" content="Left">
-					Left
+				<Tooltip position="top" content="Top">
+					<Button block style={ceilStyle}>
+						Top
+					</Button>
 				</Tooltip>
-				<div className="ceil empty"></div>
-				<Tooltip className="ceil" direction="right" content="Right">
-					Right
+				<Tooltip position="top-end" content="Top end">
+					<Button block style={ceilStyle}>
+						Top end
+					</Button>
 				</Tooltip>
-				<div className="ceil empty"></div>
-				<Tooltip className="ceil" direction="bottom" content="Bottom">
-					Bottom
+				<Tooltip position="left-start" content="Left start">
+					<Button block style={ceilStyle}>
+						Left start
+					</Button>
 				</Tooltip>
-				<div className="ceil empty"></div>
+				<div style={ceilStyle}></div>
+				<Tooltip position="right-start" content="Right start">
+					<Button block style={ceilStyle}>
+						Right start
+					</Button>
+				</Tooltip>
+				<Tooltip position="left" content="Left">
+					<Button block style={ceilStyle}>
+						Left
+					</Button>
+				</Tooltip>
+				<div style={ceilStyle}></div>
+				<Tooltip position="right" content="Right">
+					<Button block style={ceilStyle}>
+						Right
+					</Button>
+				</Tooltip>
+				<Tooltip position="left-end" content="Left end">
+					<Button block style={ceilStyle}>
+						Left end
+					</Button>
+				</Tooltip>
+				<div style={ceilStyle}></div>
+				<Tooltip position="right-end" content="Right end">
+					<Button block style={ceilStyle}>
+						Right end
+					</Button>
+				</Tooltip>
+				<Tooltip position="bottom-start" content="Bottom start">
+					<Button block style={ceilStyle}>
+						Bottom start
+					</Button>
+				</Tooltip>
+				<Tooltip position="bottom" content="Bottom">
+					<Button block style={ceilStyle}>
+						Bottom
+					</Button>
+				</Tooltip>
+				<Tooltip position="bottom-end" content="Bottom end">
+					<Button block style={ceilStyle}>
+						Bottom end
+					</Button>
+				</Tooltip>
 			</div>
 			<Divider />
 			<Space size="large">
@@ -48,7 +107,7 @@ const TooltipExample = () => {
 				<Tooltip content="Enabled">
 					<Button icon={<Icon path={mdiCheck} />}>Enabled</Button>
 				</Tooltip>
-				<Tooltip disabled content="Disabled">
+				<Tooltip content="Disabled" disabled>
 					<Button icon={<Icon path={mdiClose} />}>Disabled</Button>
 				</Tooltip>
 			</Space>
