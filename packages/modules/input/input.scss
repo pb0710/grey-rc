@@ -33,7 +33,7 @@
 		width: 100%;
 	}
 	&-round {
-		border-radius: 999vmax;
+		border-radius: $round;
 	}
 	&-disabled {
 		cursor: not-allowed;

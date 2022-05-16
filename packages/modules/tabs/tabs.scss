@@ -1,0 +1,42 @@
+@use '../../styles/mixins.scss' as *;
+.g-tabs {
+	@include basic;
+	&-header {
+		display: flex;
+	}
+	&-tab {
+		cursor: default;
+		&-line {
+			display: flex;
+			align-items: center;
+			height: 40px;
+			margin: 0 16px;
+			border-bottom: 3px solid transparent;
+			&-active {
+				border-bottom-color: $primary-color;
+			}
+		}
+		&-round {
+			display: flex;
+			align-items: center;
+			margin: 0 6px;
+			height: 40px;
+			.g-tabs-round-wrap {
+				padding: 4px 10px;
+				border-radius: $round;
+			}
+			&-active {
+				.g-tabs-round-wrap {
+					background: $primary-color;
+					color: #fff;
+				}
+			}
+		}
+	}
+	&-container {
+		padding-top: 16px;
+		&:not(&-segment-type) {
+			border-top: 1px solid #ddd;
+		}
+	}
+}

@@ -34,9 +34,9 @@ const FormExample = () => {
 					setLayout(value as any)
 				}}
 			>
-				<Radio label={'horizontal'}>Horizontal</Radio>
-				<Radio label={'vertical'}>Vertical</Radio>
-				<Radio label={'inline'}>Inline</Radio>
+				<Radio label="horizontal">Horizontal</Radio>
+				<Radio label="vertical">Vertical</Radio>
+				<Radio label="inline">Inline</Radio>
 			</Radio.Group>
 			<Divider />
 			<div style={{ width: 640 }}>

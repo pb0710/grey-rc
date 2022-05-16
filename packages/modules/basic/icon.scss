@@ -1,3 +1,4 @@
+@use '../../styles/vars.scss' as *;
 .g-icon {
 	box-sizing: border-box;
 	color: inherit;
@@ -7,7 +8,7 @@
 	user-select: none;
 	border-radius: 4px;
 	&-round {
-		border-radius: 999vmax;
+		border-radius: $round;
 	}
 	&-can-hover {
 		padding: 4px;

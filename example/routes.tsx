@@ -17,6 +17,7 @@ import ImageExample from './views/ImageExample'
 import FormExample from './views/FormExample'
 import DialogExample from './views/DialogExample'
 import PopupExample from './views/PopupExample'
+import TabsExample from './views/TabsExample'
 
 export const componentRoutes = [
 	{
@@ -103,6 +104,11 @@ export const componentRoutes = [
 		name: 'Popup',
 		path: 'popup',
 		element: <PopupExample />
+	},
+	{
+		name: 'Tabs',
+		path: 'tabs',
+		element: <TabsExample />
 	}
 ]
 

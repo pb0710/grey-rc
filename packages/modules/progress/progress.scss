@@ -6,11 +6,11 @@
 	gap: 12px;
 	&-track {
 		background: #eee;
-		border-radius: 999vmax;
+		border-radius: $round;
 	}
 	&-inset {
 		background: $primary-color;
-		border-radius: 999vmax;
+		border-radius: $round;
 		transition: all 0.2s;
 	}
 	&-horizontal {

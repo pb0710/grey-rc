@@ -12,14 +12,7 @@ interface FormProps extends FormHTMLAttributes<HTMLFormElement>, Omit<Partial<Fo
 }
 
 const Form: FC<FormProps> = props => {
-	const {
-		className,
-		children,
-		layout = 'horizontal',
-		form,
-		labelSuffix,
-		...rest
-	} = omit(props, 'labelWidth')
+	const { className, children, layout = 'horizontal', form, labelSuffix, ...rest } = omit(props, 'labelWidth')
 	let { labelWidth } = props
 
 	const prefixCls = `${UI_PREFIX}-form`

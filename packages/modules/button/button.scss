@@ -26,12 +26,12 @@
 		color: #fff;
 	}
 	&-round {
-		border-radius: 999vmax;
+		border-radius: $round;
 	}
 	&-circle {
 		padding: 0;
 		width: 32px;
-		border-radius: 999vmax;
+		border-radius: $round;
 	}
 	&-square {
 		padding: 0;

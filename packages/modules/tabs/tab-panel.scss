@@ -1,0 +1,8 @@
+@use '../../styles/mixins.scss' as *;
+.g-tab-panel {
+	@include basic;
+	display: none;
+	&-active {
+		display: block;
+	}
+}

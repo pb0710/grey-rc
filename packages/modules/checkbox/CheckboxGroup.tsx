@@ -1,13 +1,5 @@
 import { cls, is } from 'grey-utils'
-import React, {
-	ChangeEvent,
-	Children,
-	cloneElement,
-	FC,
-	HTMLAttributes,
-	isValidElement,
-	ReactNode
-} from 'react'
+import React, { ChangeEvent, Children, cloneElement, FC, HTMLAttributes, isValidElement, ReactNode } from 'react'
 import Checkbox, { CheckboxProps } from '.'
 import { UI_PREFIX } from '../../constants'
 import Space from '../basic/Space'
@@ -39,25 +31,24 @@ const CheckboxGroup: FC<CheckboxGroupProps> = props => {
 		...rest
 	} = props
 
-	const getHandleSubChange =
-		(label?: string | number) => (subParam: ChangeEvent<HTMLInputElement> | boolean) => {
-			if (is.undefined(label)) return
+	const getHandleSubChange = (label?: string | number) => (subParam: ChangeEvent<HTMLInputElement> | boolean) => {
+		if (is.undefined(label)) return
 
-			let nextValue = value
-			const hasChecked = value.includes(label)
-			const subChecked = is.boolean(subParam) ? subParam : subParam.target.checked
+		let nextValue = value
+		const hasChecked = value.includes(label)
+		const subChecked = is.boolean(subParam) ? subParam : subParam.target.checked
 
-			if (subChecked) {
-				if (!hasChecked) {
-					nextValue.push(label)
-				}
-			} else {
-				if (hasChecked) {
-					nextValue = nextValue.filter(item => item !== label)
-				}
+		if (subChecked) {
+			if (!hasChecked) {
+				nextValue.push(label)
 			}
-			onChange?.(nextValue)
+		} else {
+			if (hasChecked) {
+				nextValue = nextValue.filter(item => item !== label)
+			}
 		}
+		onChange?.(nextValue)
+	}
 
 	const getValueProps = (label?: string | number) => {
 		if (is.undefined(label)) return

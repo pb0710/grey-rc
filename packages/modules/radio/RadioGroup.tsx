@@ -1,13 +1,5 @@
 import { cls, is } from 'grey-utils'
-import React, {
-	ChangeEvent,
-	Children,
-	cloneElement,
-	FC,
-	HTMLAttributes,
-	isValidElement,
-	ReactNode
-} from 'react'
+import React, { ChangeEvent, Children, cloneElement, FC, HTMLAttributes, isValidElement, ReactNode } from 'react'
 import Radio, { RadioProps } from '.'
 import { UI_PREFIX } from '../../constants'
 import Space from '../basic/Space'
@@ -41,15 +33,14 @@ const RadioGroup: FC<RadioGroup> = props => {
 		...rest
 	} = props
 
-	const getHandleSubChange =
-		(label?: string | number) => (subParam: boolean | ChangeEvent<HTMLInputElement>) => {
-			if (is.undefined(label)) return
+	const getHandleSubChange = (label?: string | number) => (subParam: boolean | ChangeEvent<HTMLInputElement>) => {
+		if (is.undefined(label)) return
 
-			const subChecked = is.boolean(subParam) ? subParam : subParam.target.checked
-			if (subChecked) {
-				onChange?.(label)
-			}
+		const subChecked = is.boolean(subParam) ? subParam : subParam.target.checked
+		if (subChecked) {
+			onChange?.(label)
 		}
+	}
 
 	const prefixCls = `${UI_PREFIX}-radio-group`
 
