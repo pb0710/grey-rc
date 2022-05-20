@@ -1,10 +1,23 @@
-import React, { FC, HTMLAttributes, isValidElement, ReactNode, useCallback, useEffect, useRef, useState } from 'react'
+import React, {
+	Children,
+	cloneElement,
+	FC,
+	HTMLAttributes,
+	isValidElement,
+	MouseEventHandler,
+	MouseEvent,
+	ReactNode,
+	useCallback,
+	useEffect,
+	useRef,
+	useState
+} from 'react'
 import { cls, is } from 'grey-utils'
 import { UI_PREFIX } from '../../constants'
 import './popup.scss'
 import { createPortal } from 'react-dom'
 
-let visibleHandlers: ((event: MouseEvent) => void)[] = []
+let visibleHandlers: ((event: globalThis.MouseEvent) => void)[] = []
 
 document.addEventListener('click', event => {
 	visibleHandlers.forEach(handler => handler(event))
@@ -29,7 +42,7 @@ export interface PopupProps extends HTMLAttributes<HTMLElement> {
 		| 'bottom-end'
 	spacing?: number
 	disabled?: boolean
-	onClickOutside?: (event: MouseEvent) => void
+	onClickOutside?: (event: globalThis.MouseEvent) => void
 	onVisibleChange?: (visible: boolean) => void
 }
 
@@ -49,7 +62,7 @@ const Popup: FC<PopupProps> = props => {
 		...rest
 	} = props
 
-	const wrapRef = useRef<HTMLDivElement>(null)
+	const wrapRef = useRef<HTMLElement>(null)
 	const popupRef = useRef<HTMLDivElement>(null)
 
 	const isHover = trigger === 'hover'
@@ -61,17 +74,24 @@ const Popup: FC<PopupProps> = props => {
 		if (isManual) _setVisible(visible)
 	}, [isManual, visible])
 
-	const visibleHandlerRef = useRef((event: MouseEvent) => {
-		if (popupRef.current?.contains(event.target as Node)) return
-		if (wrapRef.current?.contains(event.target as Node)) {
-			_setVisible(pre => {
-				onVisibleChange?.(pre)
-				return !pre
-			})
+	const visibleHandlerRef = useRef((event: globalThis.MouseEvent) => {
+		const isInPopup = popupRef.current?.contains(event.target as Node)
+		const isInWrap = wrapRef.current?.contains(event.target as Node)
+
+		if (isInPopup) return
+		if (isInWrap) {
+			if (isClick) {
+				_setVisible(pre => {
+					onVisibleChange?.(!pre)
+					return !pre
+				})
+			}
 		} else {
+			if (isClick) {
+				onVisibleChange?.(false)
+				_setVisible(false)
+			}
 			onClickOutside?.(event)
-			onVisibleChange?.(false)
-			_setVisible(false)
 		}
 	})
 
@@ -175,31 +195,32 @@ const Popup: FC<PopupProps> = props => {
 
 	const prefixCls = `${UI_PREFIX}-popup`
 
-	let wrapProps
-	if (isHover) {
-		wrapProps = {
-			onMouseEnter() {
-				onVisibleChange?.(true)
-				_setVisible(true)
-			},
-			onMouseLeave() {
-				onVisibleChange?.(false)
-				_setVisible(false)
+	const getWrapProps = (onMouseEnter?: MouseEventHandler, onMouseLeave?: MouseEventHandler) => {
+		if (isHover)
+			return {
+				onMouseEnter(event: MouseEvent) {
+					onMouseEnter?.(event)
+					onVisibleChange?.(true)
+					_setVisible(true)
+				},
+				onMouseLeave(event: MouseEvent) {
+					onMouseLeave?.(event)
+					onVisibleChange?.(false)
+					_setVisible(false)
+				}
 			}
-		}
 	}
 
 	useEffect(() => {
 		const removeHandler = () => {
 			visibleHandlers = visibleHandlers.filter(handler => handler !== visibleHandlerRef.current)
 		}
-		if (isClick) visibleHandlers.push(visibleHandlerRef.current)
-		else removeHandler()
+		visibleHandlers.push(visibleHandlerRef.current)
 
 		return () => {
 			removeHandler()
 		}
-	}, [isClick])
+	}, [])
 
 	const portal = _visible
 		? createPortal(
@@ -217,11 +238,17 @@ const Popup: FC<PopupProps> = props => {
 		  )
 		: null
 
+	const child = Children.only(children)
+
 	return (
-		<div ref={wrapRef} className={`${prefixCls}-wrap`} {...wrapProps}>
-			{children}
+		<>
+			{isValidElement(child) &&
+				cloneElement(child, {
+					ref: wrapRef,
+					...getWrapProps(child.props.onMouseEnter, child.props.onMouseLeave)
+				})}
 			{disabled || portal}
-		</div>
+		</>
 	)
 }
 

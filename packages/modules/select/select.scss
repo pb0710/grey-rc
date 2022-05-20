@@ -1,0 +1,36 @@
+@use '../../styles/mixins.scss' as *;
+.g-select {
+	@include basic;
+	&-block {
+		display: block;
+		width: 100%;
+	}
+	&:not(&-block) {
+		display: inline-block;
+	}
+	border: 1px solid #ddd;
+	border-bottom-color: #ccc;
+	border-radius: 4px;
+	&-wrap {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		min-height: 32px;
+		padding: 0 14px;
+	}
+	&-selection {
+		padding-right: 24px;
+	}
+	&-placeholder {
+		color: #999;
+	}
+}
+.g-select-drop {
+	@include basic;
+	background: #fff;
+	padding: 6px;
+	border-radius: 8px;
+	border: 1px solid #ddd;
+	border-bottom-color: #ccc;
+	box-shadow: $shadow-medium;
+}

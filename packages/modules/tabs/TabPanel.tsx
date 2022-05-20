@@ -7,13 +7,13 @@ import { TabsCtx } from './TabsCtx'
 interface TabPanelProps extends HTMLAttributes<HTMLElement> {
 	name: string | number
 	tab?: string
-	active?: boolean
 }
 
 const TabPanel: FC<TabPanelProps> = props => {
-	const { children, className, name, tab, active, ...rest } = props
+	const { children, className, name, tab, ...rest } = props
 
-	const { subscribe, lazyLoad = false } = useContext(TabsCtx)
+	const { subscribe, lazyLoad = false, selection } = useContext(TabsCtx)
+	const isActive = selection === name
 
 	useEffect(() => {
 		const unsubscribe = subscribe?.({ name, tab })
@@ -24,14 +24,14 @@ const TabPanel: FC<TabPanelProps> = props => {
 
 	const prefixCls = `${UI_PREFIX}-tab-panel`
 
-	if (lazyLoad && !active) {
+	if (lazyLoad && !isActive) {
 		return null
 	}
 
 	return (
 		<div
 			className={cls(className, prefixCls, {
-				[`${prefixCls}-active`]: active
+				[`${prefixCls}-active`]: isActive
 			})}
 			{...rest}
 		>

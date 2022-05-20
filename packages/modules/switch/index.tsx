@@ -23,14 +23,7 @@ interface SwitchProps
 }
 
 const Switch = forwardRef<HTMLInputElement, SwitchProps>((props, outerRef) => {
-	const {
-		className,
-		disabled = false,
-		defaultValue = false,
-		value = defaultValue,
-		onChange,
-		...rest
-	} = props
+	const { className, disabled = false, defaultValue = false, value = defaultValue, onChange, ...rest } = props
 
 	const innerRef = useRef<HTMLInputElement>(null)
 	const switchRef = (outerRef ?? innerRef) as MutableRefObject<HTMLInputElement>

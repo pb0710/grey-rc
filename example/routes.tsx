@@ -18,6 +18,7 @@ import FormExample from './views/FormExample'
 import DialogExample from './views/DialogExample'
 import PopupExample from './views/PopupExample'
 import TabsExample from './views/TabsExample'
+import SelectExample from './views/SelectExample'
 
 export const componentRoutes = [
 	{
@@ -109,6 +110,11 @@ export const componentRoutes = [
 		name: 'Tabs',
 		path: 'tabs',
 		element: <TabsExample />
+	},
+	{
+		name: 'Select',
+		path: 'select',
+		element: <SelectExample />
 	}
 ]
 

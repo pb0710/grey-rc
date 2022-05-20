@@ -7,5 +7,6 @@ export interface PanelItem {
 export interface TabsContext {
 	subscribe: (panel: PanelItem) => () => void
 	lazyLoad: boolean
+	selection: string | number
 }
 export const TabsCtx = createContext<Partial<TabsContext>>({})

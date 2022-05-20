@@ -5,6 +5,7 @@
 		display: flex;
 	}
 	&-tab {
+		user-select: none;
 		cursor: default;
 		&-line {
 			display: flex;

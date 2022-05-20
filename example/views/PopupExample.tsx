@@ -11,6 +11,9 @@ const PopupExample = () => {
 	return (
 		<>
 			<h1>Popup</h1>
+			<Popup trigger="hover" content="Show by hover">
+				<Button>Hover</Button>
+			</Popup>
 			<Space>
 				<Popup trigger="hover" content="Show by hover">
 					<Button>Hover</Button>
@@ -57,7 +60,6 @@ const PopupExample = () => {
 					</Button>
 				</Popup>
 				<Popup trigger="hover" position="left-start" content="Left start">
-					{' '}
 					<Button block style={ceilStyle}>
 						Left start
 					</Button>

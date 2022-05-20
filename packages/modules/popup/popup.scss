@@ -1,7 +1,4 @@
 @use '../../styles/mixins.scss' as *;
-.g-popup-wrap {
-	@include basic;
-}
 .g-popup {
 	@include basic;
 	position: absolute;

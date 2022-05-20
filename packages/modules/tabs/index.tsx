@@ -1,13 +1,4 @@
-import React, {
-	Children,
-	cloneElement,
-	FC,
-	HTMLAttributes,
-	isValidElement,
-	useCallback,
-	useEffect,
-	useState
-} from 'react'
+import React, { FC, HTMLAttributes, useCallback, useEffect, useState } from 'react'
 import { cls } from 'grey-utils'
 import { UI_PREFIX } from '../../constants'
 import './tabs.scss'
@@ -78,7 +69,7 @@ const Tabs: FC<TabsProps> = props => {
 	))
 
 	return (
-		<TabsCtx.Provider value={{ subscribe, lazyLoad }}>
+		<TabsCtx.Provider value={{ subscribe, lazyLoad, selection }}>
 			<div className={cls(className, prefixCls)} {...rest}>
 				<div className={`${prefixCls}-header`}>{isSegment ? segmentTabsEle : tabsEle}</div>
 				<div
@@ -86,14 +77,7 @@ const Tabs: FC<TabsProps> = props => {
 						[`${prefixCls}-container-segment-type`]: isSegment
 					})}
 				>
-					{Children.map(children, child => {
-						if (isValidElement(child)) {
-							return cloneElement(child, {
-								active: selection === child.props.name
-							})
-						}
-						return child
-					})}
+					{children}
 				</div>
 			</div>
 		</TabsCtx.Provider>
