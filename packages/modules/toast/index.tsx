@@ -1,5 +1,5 @@
 import React, { FC, ReactElement, ReactNode, useCallback, useState } from 'react'
-import { cls, is, omit, uuid } from 'grey-utils'
+import { cls, is, uuid } from 'grey-utils'
 import { UI_PREFIX } from '../../constants'
 import './toast.scss'
 import ToastItem, { ToastItemProps } from './ToastItem'
@@ -24,7 +24,7 @@ export const Toast: FC & {
 	const [toastList, setToastList] = useState<ShowProps[]>([])
 
 	Toast.show = useCallback<Show>(props => {
-		const { id, position = 'top', duration = 2000, ...rest } = props
+		const { id, position = 'top', duration = 3000, ...rest } = props
 
 		setToastList(pre => [
 			...pre,
@@ -92,7 +92,7 @@ const ExportToast: {
 				document.body.appendChild(box)
 			}
 			boxRoot = boxRoot ?? createRoot(box)
-			boxRoot?.render(toastInst)
+			boxRoot.render(toastInst)
 
 			// render 之后立马执行 show
 			Promise.resolve().then(() => {

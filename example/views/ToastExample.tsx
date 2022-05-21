@@ -16,7 +16,7 @@ const ToastExample = () => {
 			<Divider />
 			<Button
 				onClick={() => {
-					Toast.show({ title: 'With icon', icon: <Icon path={mdiInformationOutline} />, duration: 100000 })
+					Toast.show({ title: 'With icon', icon: <Icon path={mdiInformationOutline} /> })
 				}}
 			>
 				With icon toast

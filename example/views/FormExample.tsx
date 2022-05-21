@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Button, Checkbox, Divider, Form, Input, Radio, Switch } from '../../packages'
+import { Button, Checkbox, Divider, Form, Input, Radio, Select, Switch } from '../../packages'
 
 const FormExample = () => {
 	const [layout, setLayout] = useState<'horizontal' | 'vertical' | 'inline'>('horizontal')
@@ -9,6 +9,7 @@ const FormExample = () => {
 			username: 'initial username',
 			pwd: '',
 			retypePwd: '',
+			system: 'macos',
 			gender: 0,
 			fruit: [1]
 		},
@@ -49,6 +50,15 @@ const FormExample = () => {
 					</Form.Field>
 					<Form.Field label="retypePwd" labelText="Retype password">
 						<Input block />
+					</Form.Field>
+					<Form.Field label="system" labelText="System">
+						<Select>
+							<Select.Option value="windows">Windows</Select.Option>
+							<Select.Option value="macos">MacOS</Select.Option>
+							<Select.Option value="android">Android</Select.Option>
+							<Select.Option value="linux">Linux</Select.Option>
+							<Select.Option value="ios">IOS</Select.Option>
+						</Select>
 					</Form.Field>
 					<Form.Field label="gender" labelText="Gender">
 						<Radio.Group>

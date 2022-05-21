@@ -20,6 +20,7 @@ import PopupExample from './views/PopupExample'
 import TabsExample from './views/TabsExample'
 import SelectExample from './views/SelectExample'
 import ToastExample from './views/ToastExample'
+import TagExample from './views/TagExample'
 
 export const componentRoutes = [
 	{
@@ -121,6 +122,11 @@ export const componentRoutes = [
 		name: 'Toast',
 		path: 'toast',
 		element: <ToastExample />
+	},
+	{
+		name: 'Tag',
+		path: 'tag',
+		element: <TagExample />
 	}
 ]
 

@@ -4,7 +4,6 @@ import { UI_PREFIX } from '../../constants'
 import './toast-item.scss'
 import Icon from '../basic/Icon'
 import { mdiClose } from '@mdi/js'
-// import Button from '../button'
 
 export interface ToastItemProps extends Omit<HTMLAttributes<HTMLElement>, 'title'> {
 	title?: ReactNode
@@ -20,15 +19,13 @@ const ToastItem: FC<ToastItemProps> = props => {
 
 	return (
 		<div className={cls(className, prefixCls)} {...rest}>
-			<div className={`${prefixCls}-icon`}>{icon}</div>
+			{icon && <div className={`${prefixCls}-icon`}>{icon}</div>}
 			<div className={`${prefixCls}-title-wrap`}>{title}</div>
-			<div className={`${prefixCls}-close-icon`}>
-				{closable && (
+			{closable && (
+				<div className={`${prefixCls}-close-icon`}>
 					<Icon path={mdiClose} onClick={() => onClose?.()} />
-					// <Button square>
-					// </Button>
-				)}
-			</div>
+				</div>
+			)}
 		</div>
 	)
 }
