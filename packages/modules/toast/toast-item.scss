@@ -1,0 +1,22 @@
+@use '../../styles/mixins.scss' as *;
+.g-toast-item {
+	@include basic;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 8px;
+	background: #fff;
+	border: 1px solid #ddd;
+	border-bottom-color: #ccc;
+	border-radius: 6px;
+	box-shadow: $shadow-medium;
+	& + .g-toast-item {
+		margin-top: 8px;
+	}
+	&-icon {
+		margin-right: 24px;
+	}
+	&-close-icon {
+		margin-left: 24px;
+	}
+}

@@ -11,9 +11,6 @@ const PopupExample = () => {
 	return (
 		<>
 			<h1>Popup</h1>
-			<Popup trigger="hover" content="Show by hover">
-				<Button>Hover</Button>
-			</Popup>
 			<Space>
 				<Popup trigger="hover" content="Show by hover">
 					<Button>Hover</Button>

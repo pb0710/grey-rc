@@ -19,6 +19,7 @@ import DialogExample from './views/DialogExample'
 import PopupExample from './views/PopupExample'
 import TabsExample from './views/TabsExample'
 import SelectExample from './views/SelectExample'
+import ToastExample from './views/ToastExample'
 
 export const componentRoutes = [
 	{
@@ -115,6 +116,11 @@ export const componentRoutes = [
 		name: 'Select',
 		path: 'select',
 		element: <SelectExample />
+	},
+	{
+		name: 'Toast',
+		path: 'toast',
+		element: <ToastExample />
 	}
 ]
 
