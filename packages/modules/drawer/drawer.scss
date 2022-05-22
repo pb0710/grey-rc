@@ -1,0 +1,43 @@
+@use '../../styles/mixins.scss' as *;
+.g-drawer {
+	@include basic;
+	z-index: 1000;
+	position: fixed;
+	inset: 0;
+	&-mask {
+		position: fixed;
+		inset: 0;
+		background: rgba($color: #000000, $alpha: 0.4);
+	}
+	&-wrap {
+		position: fixed;
+		background: #fff;
+		padding: 16px;
+		&-left {
+			top: 0;
+			left: 0;
+			height: 100%;
+		}
+		&-top {
+			top: 0;
+			left: 0;
+			width: 100%;
+		}
+		&-right {
+			top: 0;
+			right: 0;
+			height: 100%;
+		}
+		&-bottom {
+			left: 0;
+			bottom: 0;
+			width: 100%;
+		}
+		&-close {
+			position: absolute;
+			top: 16px;
+			right: 16px;
+			background: #fff;
+		}
+	}
+}

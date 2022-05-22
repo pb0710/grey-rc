@@ -21,65 +21,65 @@ const TooltipExample = () => {
 					justifyContent: 'center'
 				}}
 			>
-				<Tooltip position="top-start" content="Top start">
+				<Tooltip placement="top-start" content="Top start">
 					<Button block style={ceilStyle}>
 						Top start
 					</Button>
 				</Tooltip>
-				<Tooltip position="top" content="Top">
+				<Tooltip placement="top" content="Top">
 					<Button block style={ceilStyle}>
 						Top
 					</Button>
 				</Tooltip>
-				<Tooltip position="top-end" content="Top end">
+				<Tooltip placement="top-end" content="Top end">
 					<Button block style={ceilStyle}>
 						Top end
 					</Button>
 				</Tooltip>
-				<Tooltip position="left-start" content="Left start">
+				<Tooltip placement="left-start" content="Left start">
 					<Button block style={ceilStyle}>
 						Left start
 					</Button>
 				</Tooltip>
 				<div style={ceilStyle}></div>
-				<Tooltip position="right-start" content="Right start">
+				<Tooltip placement="right-start" content="Right start">
 					<Button block style={ceilStyle}>
 						Right start
 					</Button>
 				</Tooltip>
-				<Tooltip position="left" content="Left">
+				<Tooltip placement="left" content="Left">
 					<Button block style={ceilStyle}>
 						Left
 					</Button>
 				</Tooltip>
 				<div style={ceilStyle}></div>
-				<Tooltip position="right" content="Right">
+				<Tooltip placement="right" content="Right">
 					<Button block style={ceilStyle}>
 						Right
 					</Button>
 				</Tooltip>
-				<Tooltip position="left-end" content="Left end">
+				<Tooltip placement="left-end" content="Left end">
 					<Button block style={ceilStyle}>
 						Left end
 					</Button>
 				</Tooltip>
 				<div style={ceilStyle}></div>
-				<Tooltip position="right-end" content="Right end">
+				<Tooltip placement="right-end" content="Right end">
 					<Button block style={ceilStyle}>
 						Right end
 					</Button>
 				</Tooltip>
-				<Tooltip position="bottom-start" content="Bottom start">
+				<Tooltip placement="bottom-start" content="Bottom start">
 					<Button block style={ceilStyle}>
 						Bottom start
 					</Button>
 				</Tooltip>
-				<Tooltip position="bottom" content="Bottom">
+				<Tooltip placement="bottom" content="Bottom">
 					<Button block style={ceilStyle}>
 						Bottom
 					</Button>
 				</Tooltip>
-				<Tooltip position="bottom-end" content="Bottom end">
+				<Tooltip placement="bottom-end" content="Bottom end">
 					<Button block style={ceilStyle}>
 						Bottom end
 					</Button>

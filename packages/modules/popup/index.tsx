@@ -27,7 +27,7 @@ export interface PopupProps extends HTMLAttributes<HTMLElement> {
 	visible?: boolean
 	content?: ReactNode
 	trigger?: 'hover' | 'click' | 'manual'
-	position?:
+	placement?:
 		| 'top-start'
 		| 'top'
 		| 'top-end'
@@ -53,7 +53,7 @@ const Popup: FC<PopupProps> = props => {
 		content,
 		visible = false,
 		trigger = 'hover',
-		position = 'bottom-start',
+		placement = 'bottom-start',
 		spacing = 8,
 		disabled = false,
 		onClickOutside,
@@ -98,13 +98,13 @@ const Popup: FC<PopupProps> = props => {
 	const [popupPos, setPopupPos] = useState<null | Record<'x' | 'y', number>>(null)
 
 	let spacingName = ''
-	if (position.includes('top')) {
+	if (placement.includes('top')) {
 		spacingName = 'marginBottom'
-	} else if (position.includes('left')) {
+	} else if (placement.includes('left')) {
 		spacingName = 'marginRight'
-	} else if (position.includes('bottom')) {
+	} else if (placement.includes('bottom')) {
 		spacingName = 'marginTop'
-	} else if (position.includes('right')) {
+	} else if (placement.includes('right')) {
 		spacingName = 'marginLeft'
 	}
 
@@ -116,7 +116,7 @@ const Popup: FC<PopupProps> = props => {
 			const { width: ww, height: wh, left: wl, top: wt } = wrapRef.current.getBoundingClientRect()
 			const { width: pw, height: ph } = popupRef.current.getBoundingClientRect()
 
-			switch (position) {
+			switch (placement) {
 				case 'top-start':
 					x = wl
 					y = wt - ph
@@ -174,7 +174,7 @@ const Popup: FC<PopupProps> = props => {
 				setPopupPos({ x, y })
 			}
 		}
-	}, [position])
+	}, [placement])
 
 	useEffect(() => {
 		if (!_visible) {
@@ -182,7 +182,7 @@ const Popup: FC<PopupProps> = props => {
 		} else {
 			updatePopupPos()
 		}
-	}, [position, _visible, updatePopupPos])
+	}, [placement, _visible, updatePopupPos])
 
 	let popupStyle
 	if (popupPos) {

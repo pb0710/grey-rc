@@ -1,6 +1,6 @@
 import React from 'react'
 import { Divider, Space } from '../../packages'
-import Tag from '../../packages/modules/tag'
+import { Tag } from '../../packages'
 
 const TagExample = () => {
 	return (

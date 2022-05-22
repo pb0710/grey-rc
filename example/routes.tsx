@@ -21,6 +21,7 @@ import TabsExample from './views/TabsExample'
 import SelectExample from './views/SelectExample'
 import ToastExample from './views/ToastExample'
 import TagExample from './views/TagExample'
+import DrawerExample from './views/DrawerExample'
 
 export const componentRoutes = [
 	{
@@ -127,6 +128,11 @@ export const componentRoutes = [
 		name: 'Tag',
 		path: 'tag',
 		element: <TagExample />
+	},
+	{
+		name: 'Drawer',
+		path: 'drawer',
+		element: <DrawerExample />
 	}
 ]
 
