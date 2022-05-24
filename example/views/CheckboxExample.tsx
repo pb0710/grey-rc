@@ -34,8 +34,19 @@ const CheckboxExample = () => {
 				</Checkbox>
 			</Space>
 			<Divider />
+			<Space>
+				<Checkbox size="small" defaultValue={true}>
+					Small
+				</Checkbox>
+				<Checkbox size="medium" defaultValue={true}>
+					Medium
+				</Checkbox>
+				<Checkbox size="large" defaultValue={true}>
+					Large
+				</Checkbox>
+			</Space>
+			<Divider />
 			<Checkbox.Group
-				defaultValue={defaultGroupVal}
 				options={[
 					{
 						label: 0,
@@ -64,7 +75,6 @@ const CheckboxExample = () => {
 			<Space direction="vertical">
 				<Checkbox.Group
 					direction="horizontal"
-					defaultValue={defaultHorizontalVal}
 					options={[
 						{ label: 0, child: 'Horizontal a' },
 						{ label: 1, child: 'Horizontal b' },
@@ -77,7 +87,6 @@ const CheckboxExample = () => {
 				/>
 				<Checkbox.Group
 					direction="vertical"
-					defaultValue={defaultVerticalVal}
 					options={[
 						{ label: 0, child: 'Vertical a' },
 						{ label: 1, child: 'Vertical b' },
@@ -108,7 +117,6 @@ const CheckboxExample = () => {
 			<Divider />
 			<Checkbox.Group
 				direction="vertical"
-				defaultValue={defaultJsxGroupVal}
 				options={[
 					{ label: 0, child: 'Options a' },
 					{ label: 1, child: 'Options b' },

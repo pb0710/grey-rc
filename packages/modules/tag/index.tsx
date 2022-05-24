@@ -6,6 +6,7 @@ import Icon from '../basic/Icon'
 import { mdiClose, mdiLoading } from '@mdi/js'
 
 interface TagProps extends HTMLAttributes<HTMLElement> {
+	size?: 'small' | 'medium' | 'large'
 	round?: boolean
 	bordered?: boolean
 	bgColor?: string
@@ -19,6 +20,7 @@ const Tag: FC<TagProps> = props => {
 	const {
 		children,
 		className,
+		size = 'medium',
 		round = false,
 		bgColor,
 		color,
@@ -36,7 +38,7 @@ const Tag: FC<TagProps> = props => {
 
 	return (
 		<div
-			className={cls(className, prefixCls, {
+			className={cls(className, prefixCls, `${prefixCls}-${size}`, {
 				[`${prefixCls}-round`]: round,
 				[`${prefixCls}-bordered`]: bordered
 			})}

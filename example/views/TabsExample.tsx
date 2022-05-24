@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { Divider, Radio, Tabs } from '../../packages'
+import { Divider, Radio, Space, Tabs } from '../../packages'
 
 const TabsExample = () => {
 	const [tabsType, setTabsType] = useState<'line' | 'round' | 'segment'>('line')
-
+	const [tabsSize, setTabsSize] = useState<'small' | 'medium' | 'large'>('medium')
 	const [tabsValue, setTabsValue] = useState<'a' | 'b' | 'c'>('a')
 	useEffect(() => {
 		setTimeout(() => {
@@ -14,20 +14,32 @@ const TabsExample = () => {
 	return (
 		<>
 			<h1>Tabs</h1>
-			<Radio.Group
-				type="tab"
-				defaultValue={'line'}
-				value={tabsType}
-				onChange={value => {
-					setTabsType(value as any)
-				}}
-			>
-				<Radio label="line">Line</Radio>
-				<Radio label="round">Round</Radio>
-				<Radio label="segment">Button</Radio>
-			</Radio.Group>
+			<Space>
+				<Radio.Group
+					type="tab"
+					value={tabsType}
+					onChange={value => {
+						setTabsType(value as any)
+					}}
+				>
+					<Radio label="line">Line</Radio>
+					<Radio label="round">Round</Radio>
+					<Radio label="segment">Button</Radio>
+				</Radio.Group>
+				<Radio.Group
+					type="tab"
+					value={tabsSize}
+					onChange={value => {
+						setTabsSize(value as any)
+					}}
+				>
+					<Radio label="small">Small</Radio>
+					<Radio label="medium">Medium</Radio>
+					<Radio label="large">Large</Radio>
+				</Radio.Group>
+			</Space>
 			<Divider />
-			<Tabs type={tabsType}>
+			<Tabs type={tabsType} size={tabsSize}>
 				<Tabs.Panel name="a" tab="Tab A">
 					aaa
 				</Tabs.Panel>

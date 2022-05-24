@@ -32,6 +32,12 @@ const ButtonExample = () => {
 				</Tooltip>
 			</Space>
 			<Divider />
+			<Space>
+				<Button size="small">Small</Button>
+				<Button size="medium">medium</Button>
+				<Button size="large">Large</Button>
+			</Space>
+			<Divider />
 			<Button block>Block</Button>
 			<Divider />
 			<Space>

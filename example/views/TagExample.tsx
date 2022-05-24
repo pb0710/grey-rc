@@ -16,6 +16,12 @@ const TagExample = () => {
 			</Space>
 			<Divider />
 			<Space>
+				<Tag size="small">Small</Tag>
+				<Tag size="medium">Medium</Tag>
+				<Tag size="large">Large</Tag>
+			</Space>
+			<Divider />
+			<Space>
 				<Tag closable>Closable</Tag>
 				<Tag
 					closable

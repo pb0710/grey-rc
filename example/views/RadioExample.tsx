@@ -40,8 +40,19 @@ const RadioExample = () => {
 				</Radio>
 			</Space>
 			<Divider />
+			<Space>
+				<Radio size="small" defaultValue={true}>
+					Small
+				</Radio>
+				<Radio size="medium" defaultValue={true}>
+					Medium
+				</Radio>
+				<Radio size="large" defaultValue={true}>
+					Large
+				</Radio>
+			</Space>
+			<Divider />
 			<Radio.Group
-				defaultValue={defaultGroupVal}
 				options={[
 					{
 						label: 0,
@@ -70,7 +81,6 @@ const RadioExample = () => {
 			<Space direction="vertical">
 				<Radio.Group
 					direction="horizontal"
-					defaultValue={defaultHorizontalVal}
 					options={[
 						{ label: 0, child: 'Horizontal a' },
 						{ label: 1, child: 'Horizontal b' },
@@ -83,7 +93,6 @@ const RadioExample = () => {
 				/>
 				<Radio.Group
 					direction="vertical"
-					defaultValue={defaultVerticalVal}
 					options={[
 						{ label: 0, child: 'Vertical a' },
 						{ label: 1, child: 'Vertical b' },
@@ -111,7 +120,6 @@ const RadioExample = () => {
 						{ label: 1, child: 'B' },
 						{ label: 2, child: 'C' }
 					]}
-					defaultValue={defaultDisabledVal}
 					value={disabledGroupVal}
 					onChange={value => {
 						setDisabledGroupVal(value)
@@ -121,7 +129,6 @@ const RadioExample = () => {
 			<Divider />
 			<Radio.Group
 				direction="horizontal"
-				defaultValue={defaultJsxGroupVal}
 				options={[
 					{ label: 0, child: 'Options a' },
 					{ label: 1, child: 'Options b' },
@@ -139,7 +146,6 @@ const RadioExample = () => {
 			<Divider />
 			<Radio.Group
 				type="tab"
-				defaultValue={defaultJsxTabGroupVal}
 				value={jsxTabGroupVal}
 				onChange={value => {
 					setJsxTabGroupVal(value)
@@ -157,7 +163,6 @@ const RadioExample = () => {
 					{ label: 1, child: 'Options tab b' },
 					{ label: 2, child: 'Options tab c' }
 				]}
-				defaultValue={defaultOptionsTabGroupVal}
 				value={optionsTabGroupVal}
 				onChange={value => {
 					setOptionsTabGroupVal(value)

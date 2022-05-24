@@ -14,8 +14,9 @@ import './switch.scss'
 interface SwitchProps
 	extends Omit<
 		InputHTMLAttributes<HTMLElement>,
-		'defaultValue' | 'value' | 'onChange' | 'checked' | 'defaultChecked'
+		'defaultValue' | 'value' | 'onChange' | 'checked' | 'defaultChecked' | 'size'
 	> {
+	size?: 'small' | 'medium' | 'large'
 	disabled?: boolean
 	defaultValue?: boolean
 	value?: boolean
@@ -23,7 +24,15 @@ interface SwitchProps
 }
 
 const Switch = forwardRef<HTMLInputElement, SwitchProps>((props, outerRef) => {
-	const { className, disabled = false, defaultValue = false, value = defaultValue, onChange, ...rest } = props
+	const {
+		className,
+		size = 'medium',
+		disabled = false,
+		defaultValue = false,
+		value = defaultValue,
+		onChange,
+		...rest
+	} = props
 
 	const innerRef = useRef<HTMLInputElement>(null)
 	const switchRef = (outerRef ?? innerRef) as MutableRefObject<HTMLInputElement>
@@ -46,7 +55,7 @@ const Switch = forwardRef<HTMLInputElement, SwitchProps>((props, outerRef) => {
 
 	return (
 		<label
-			className={cls(className, prefixCls, {
+			className={cls(className, prefixCls, `${prefixCls}-${size}`, {
 				[`${prefixCls}-disabled`]: disabled,
 				[`${prefixCls}-checked`]: checked
 			})}

@@ -15,8 +15,9 @@ import RadioGroup from './RadioGroup'
 export interface RadioProps
 	extends Omit<
 		InputHTMLAttributes<HTMLInputElement>,
-		'onChange' | 'defaultValue' | 'defaultChecked' | 'checked' | 'value'
+		'onChange' | 'defaultValue' | 'defaultChecked' | 'checked' | 'value' | 'size'
 	> {
+	size?: 'small' | 'medium' | 'large'
 	value?: boolean
 	disabled?: boolean
 	type?: 'default' | 'tab'
@@ -29,6 +30,7 @@ const Radio = forwardRef<HTMLInputElement, RadioProps>((props, outerRef) => {
 	const {
 		className,
 		children,
+		size = 'medium',
 		value,
 		onChange,
 		disabled = false,
@@ -37,10 +39,11 @@ const Radio = forwardRef<HTMLInputElement, RadioProps>((props, outerRef) => {
 		...rest
 	} = props
 
+	const isControlled = !is.undefined(value)
+
 	const innerRef = useRef<HTMLInputElement>(null)
 	const radioRef = (outerRef ?? innerRef) as MutableRefObject<HTMLInputElement>
-	const [checked, setChecked] = useState(defaultValue)
-	const isControlled = !is.undefined(value)
+	const [checked, setChecked] = useState(isControlled ? value : defaultValue)
 
 	useEffect(() => {
 		if (isControlled) setChecked(value)
@@ -60,11 +63,11 @@ const Radio = forwardRef<HTMLInputElement, RadioProps>((props, outerRef) => {
 	const checkedProps = isControlled ? { checked } : { defaultChecked: defaultValue }
 	const isTab = type === 'tab'
 	const radioCls = isTab
-		? cls(className, `${prefixCls}-tab`, {
+		? cls(className, `${prefixCls}-tab`, `${prefixCls}-tab-${size}`, {
 				[`${prefixCls}-tab-disabled`]: disabled,
 				[`${prefixCls}-tab-checked`]: checked
 		  })
-		: cls(className, prefixCls, {
+		: cls(className, prefixCls, `${prefixCls}-${size}`, {
 				[`${prefixCls}-disabled`]: disabled,
 				[`${prefixCls}-checked`]: checked
 		  })
