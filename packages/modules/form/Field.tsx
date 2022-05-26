@@ -1,4 +1,4 @@
-import React, { cloneElement, FC, isValidElement, LabelHTMLAttributes, useContext } from 'react'
+import React, { cloneElement, FC, forwardRef, isValidElement, LabelHTMLAttributes, useContext } from 'react'
 import { useUpdate, Form } from 'grey-rh'
 import { cls } from 'grey-utils'
 import { UI_PREFIX } from '../../constants'
@@ -11,7 +11,7 @@ interface FieldProps extends Omit<LabelHTMLAttributes<HTMLLabelElement>, 'form'>
 	form?: Form
 }
 
-export const Field: FC<FieldProps> = props => {
+const Field = forwardRef<HTMLLabelElement, FieldProps>((props, outerRef) => {
 	const { className, children, form, label, labelText, labelWidth, labelAlign, labelSuffix, ...rest } = props
 
 	const formCtx = useContext(FormCtx)
@@ -38,7 +38,7 @@ export const Field: FC<FieldProps> = props => {
 	const wrapCls = cls(className, prefixCls, `${prefixCls}-align-${labelAttrs.align}`)
 
 	return (
-		<label className={wrapCls} {...rest}>
+		<label ref={outerRef} className={wrapCls} {...rest}>
 			<div
 				className={`${prefixCls}-label`}
 				style={{
@@ -60,4 +60,6 @@ export const Field: FC<FieldProps> = props => {
 			</div>
 		</label>
 	)
-}
+})
+
+export default Field

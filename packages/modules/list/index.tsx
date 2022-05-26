@@ -1,5 +1,5 @@
 import { cls } from 'grey-utils'
-import React, { Children, cloneElement, FC, HTMLAttributes, isValidElement } from 'react'
+import React, { Children, cloneElement, FC, forwardRef, HTMLAttributes, isValidElement } from 'react'
 import { UI_PREFIX } from '../../constants'
 import './list.scss'
 import ListItem, { ListItemProps } from './ListItem'
@@ -9,13 +9,14 @@ interface ListProps extends HTMLAttributes<HTMLDivElement> {
 	bordered?: boolean
 }
 
-const List: FC<ListProps> = props => {
+const List = forwardRef<HTMLDivElement, ListProps>((props, outerRef) => {
 	const { className, children, size = 'medium', bordered = true, ...rest } = props
 
 	const prefixCls = `${UI_PREFIX}-list`
 
 	return (
 		<div
+			ref={outerRef}
 			className={cls(className, prefixCls, {
 				[`${prefixCls}-bordered`]: bordered
 			})}
@@ -28,7 +29,7 @@ const List: FC<ListProps> = props => {
 			})}
 		</div>
 	)
-}
+})
 
 const ExportList = List as typeof List & {
 	Item: typeof ListItem

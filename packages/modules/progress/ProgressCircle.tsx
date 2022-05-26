@@ -1,5 +1,5 @@
 import { cls, is, omit } from 'grey-utils'
-import React, { FC, ReactNode, useEffect, useRef } from 'react'
+import React, { forwardRef, ReactNode, useEffect, useRef } from 'react'
 import CountUp from 'react-countup'
 import { RenderCounterProps } from 'react-countup/build/types'
 import { UI_PREFIX } from '../../constants'
@@ -15,7 +15,7 @@ interface ProgressProps extends CircleProps {
 	format?: ((props: RenderCounterProps) => ReactNode) | null
 }
 
-const Progress: FC<ProgressProps> = props => {
+const Progress = forwardRef<HTMLDivElement, ProgressProps>((props, outerRef) => {
 	const {
 		className,
 		size = 'medium',
@@ -37,6 +37,7 @@ const Progress: FC<ProgressProps> = props => {
 
 	return (
 		<Circle
+			ref={outerRef}
 			className={cls(className, prefixCls, `${prefixCls}-${size}`)}
 			defaultMolecule={defaultMolecule}
 			molecule={molecule}
@@ -59,6 +60,6 @@ const Progress: FC<ProgressProps> = props => {
 			)}
 		</Circle>
 	)
-}
+})
 
 export default Progress

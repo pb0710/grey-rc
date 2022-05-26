@@ -30,7 +30,7 @@ interface InputProps extends Omit<HTMLAttributes<HTMLInputElement>, 'maxLength' 
 	onChange?: ChangeEventHandler<HTMLInputElement> & ((value: string | number) => void)
 }
 
-const Input = forwardRef<HTMLInputElement, InputProps>((props, forwardRef) => {
+const Input = forwardRef<HTMLInputElement, InputProps>((props, outerRef) => {
 	const {
 		className,
 		defaultValue,
@@ -49,7 +49,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props, forwardRef) => {
 	} = props
 
 	const ref = useRef<HTMLInputElement>(null)
-	const inputRef = (forwardRef ?? ref) as MutableRefObject<HTMLInputElement>
+	const inputRef = (outerRef ?? ref) as MutableRefObject<HTMLInputElement>
 	const [focus, setFocus] = useState(false)
 	const [clearVisible, setClearVisible] = useState(false)
 	const isControlled = !is.undefined(value)

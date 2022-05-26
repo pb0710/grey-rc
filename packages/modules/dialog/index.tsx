@@ -8,6 +8,7 @@ import { mdiClose } from '@mdi/js'
 import Space from '../basic/Space'
 import Button from '../button'
 import Card from '../card'
+import { Zoom } from '@mui/material'
 
 interface DialogProps extends ModalProps {
 	hasCancel?: boolean
@@ -46,35 +47,37 @@ const Dialog: FC<DialogProps> = props => {
 			onCancel={onCancel}
 			{...rest}
 		>
-			<Card
-				className={cls(className, prefixCls)}
-				shadow
-				bordered={false}
-				header={
-					<div className={`${prefixCls}-header`}>
-						<strong className={`${prefixCls}-header-title`}>{title}</strong>
-						<Icon
-							className={`${prefixCls}-header-close-icon`}
-							path={mdiClose}
-							size="16px"
-							canHover
-							onClick={onCancel}
-						/>
-					</div>
-				}
-				footer={
-					<div className={`${prefixCls}-footer`}>
-						<Space>
-							{hasCancel && <Button onClick={onCancel}>{cancelText}</Button>}
-							<Button primary loading={okLoading} onClick={onOk}>
-								{okText}
-							</Button>
-						</Space>
-					</div>
-				}
-			>
-				<div className={`${prefixCls}-content`}>{children}</div>
-			</Card>
+			<Zoom in={visible}>
+				<Card
+					className={cls(className, prefixCls)}
+					shadow
+					bordered={false}
+					header={
+						<div className={`${prefixCls}-header`}>
+							<strong className={`${prefixCls}-header-title`}>{title}</strong>
+							<Icon
+								className={`${prefixCls}-header-close-icon`}
+								path={mdiClose}
+								size="16px"
+								canHover
+								onClick={onCancel}
+							/>
+						</div>
+					}
+					footer={
+						<div className={`${prefixCls}-footer`}>
+							<Space>
+								{hasCancel && <Button onClick={onCancel}>{cancelText}</Button>}
+								<Button primary loading={okLoading} onClick={onOk}>
+									{okText}
+								</Button>
+							</Space>
+						</div>
+					}
+				>
+					<div className={`${prefixCls}-content`}>{children}</div>
+				</Card>
+			</Zoom>
 		</Modal>
 	)
 }

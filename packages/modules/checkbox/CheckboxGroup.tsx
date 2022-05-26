@@ -1,5 +1,13 @@
 import { cls, is } from 'grey-utils'
-import React, { ChangeEvent, Children, cloneElement, FC, HTMLAttributes, isValidElement, ReactNode } from 'react'
+import React, {
+	ChangeEvent,
+	Children,
+	cloneElement,
+	forwardRef,
+	HTMLAttributes,
+	isValidElement,
+	ReactNode
+} from 'react'
 import Checkbox, { CheckboxProps } from '.'
 import { UI_PREFIX } from '../../constants'
 import Space from '../basic/Space'
@@ -19,7 +27,7 @@ interface CheckboxGroupProps extends Omit<HTMLAttributes<HTMLElement>, 'onChange
 	onChange?: (value: (string | number)[]) => void
 }
 
-const CheckboxGroup: FC<CheckboxGroupProps> = props => {
+const CheckboxGroup = forwardRef<HTMLDivElement, CheckboxGroupProps>((props, outerRef) => {
 	const {
 		children,
 		className,
@@ -66,6 +74,7 @@ const CheckboxGroup: FC<CheckboxGroupProps> = props => {
 
 	return (
 		<div
+			ref={outerRef}
 			className={cls(className, prefixCls, {
 				[`${prefixCls}-disabled`]: disabled
 			})}
@@ -99,6 +108,6 @@ const CheckboxGroup: FC<CheckboxGroupProps> = props => {
 			</Space>
 		</div>
 	)
-}
+})
 
 export default CheckboxGroup

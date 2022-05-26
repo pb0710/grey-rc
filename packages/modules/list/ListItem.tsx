@@ -1,5 +1,5 @@
 import { cls } from 'grey-utils'
-import React, { FC, HTMLAttributes, ReactNode } from 'react'
+import React, { forwardRef, HTMLAttributes, ReactNode } from 'react'
 import { UI_PREFIX } from '../../constants'
 import './list-item.scss'
 
@@ -10,13 +10,14 @@ export interface ListItemProps extends Omit<HTMLAttributes<HTMLDivElement>, 'pre
 	bordered?: boolean
 }
 
-const ListItem: FC<ListItemProps> = props => {
+const ListItem = forwardRef<HTMLDivElement, ListItemProps>((props, outerRef) => {
 	const { className, children, size = 'medium', bordered = true, prefix, suffix, ...rest } = props
 
 	const prefixCls = `${UI_PREFIX}-list-item`
 
 	return (
 		<div
+			ref={outerRef}
 			className={cls(className, prefixCls, `${prefixCls}-${size}`, {
 				[`${prefixCls}-bordered`]: bordered
 			})}
@@ -27,6 +28,6 @@ const ListItem: FC<ListItemProps> = props => {
 			{suffix && <div>{suffix}</div>}
 		</div>
 	)
-}
+})
 
 export default ListItem

@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, useContext, useEffect } from 'react'
+import React, { forwardRef, HTMLAttributes, useContext, useEffect } from 'react'
 import { cls } from 'grey-utils'
 import { UI_PREFIX } from '../../constants'
 import './tab-panel.scss'
@@ -9,7 +9,7 @@ interface TabPanelProps extends HTMLAttributes<HTMLElement> {
 	tab?: string
 }
 
-const TabPanel: FC<TabPanelProps> = props => {
+const TabPanel = forwardRef<HTMLDivElement, TabPanelProps>((props, outerRef) => {
 	const { children, className, name, tab, ...rest } = props
 
 	const { subscribe, lazyLoad = false, selection } = useContext(TabsCtx)
@@ -30,6 +30,7 @@ const TabPanel: FC<TabPanelProps> = props => {
 
 	return (
 		<div
+			ref={outerRef}
 			className={cls(className, prefixCls, {
 				[`${prefixCls}-active`]: isActive
 			})}
@@ -38,6 +39,6 @@ const TabPanel: FC<TabPanelProps> = props => {
 			{children}
 		</div>
 	)
-}
+})
 
 export default TabPanel

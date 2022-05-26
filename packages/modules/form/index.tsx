@@ -1,17 +1,17 @@
-import React, { FC, FormHTMLAttributes } from 'react'
+import React, { FormHTMLAttributes, forwardRef } from 'react'
 import { cls, omit } from 'grey-utils'
 import { UI_PREFIX } from '../../constants'
 import './form.scss'
 import { FormContext, FormCtx } from './FormCtx'
 import { useForm, Form as FormType } from 'grey-rh'
-import { Field } from './Field'
+import Field from './Field'
 
 interface FormProps extends FormHTMLAttributes<HTMLFormElement>, Omit<Partial<FormContext>, 'labelAlign'> {
 	form: FormType
 	layout?: 'horizontal' | 'vertical' | 'inline'
 }
 
-const Form: FC<FormProps> = props => {
+const Form = forwardRef<HTMLFormElement, FormProps>((props, outerRef) => {
 	const { className, children, layout = 'horizontal', form, labelSuffix, ...rest } = omit(props, 'labelWidth')
 	let { labelWidth } = props
 
@@ -36,12 +36,12 @@ const Form: FC<FormProps> = props => {
 				labelAlign
 			}}
 		>
-			<form className={cls(className, prefixCls, `${prefixCls}-${layout}`)} {...rest}>
+			<form ref={outerRef} className={cls(className, prefixCls, `${prefixCls}-${layout}`)} {...rest}>
 				{children}
 			</form>
 		</FormCtx.Provider>
 	)
-}
+})
 
 const ExportForm = Form as typeof Form & {
 	Field: typeof Field

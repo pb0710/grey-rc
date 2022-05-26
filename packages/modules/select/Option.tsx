@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, MouseEvent, useContext, useEffect } from 'react'
+import React, { forwardRef, HTMLAttributes, MouseEvent, useContext } from 'react'
 import { cls } from 'grey-utils'
 import { UI_PREFIX } from '../../constants'
 import './option.scss'
@@ -8,10 +8,10 @@ export interface OptionProps extends HTMLAttributes<HTMLElement> {
 	value: string | number
 }
 
-const Option: FC<OptionProps> = props => {
+const Option = forwardRef<HTMLDivElement, OptionProps>((props, outerRef) => {
 	const { className, children, value, onClick, ...rest } = props
 
-	const { selection = [], updateSelection, subscribe } = useContext(SelectCtx)
+	const { selection = [], updateSelection } = useContext(SelectCtx)
 
 	const handleSelect = (event: MouseEvent<HTMLElement>) => {
 		onClick?.(event)
@@ -22,6 +22,7 @@ const Option: FC<OptionProps> = props => {
 
 	return (
 		<div
+			ref={outerRef}
 			className={cls(className, prefixCls, {
 				[`${prefixCls}-active`]: selection.includes(value)
 			})}
@@ -31,6 +32,6 @@ const Option: FC<OptionProps> = props => {
 			{children}
 		</div>
 	)
-}
+})
 
 export default Option

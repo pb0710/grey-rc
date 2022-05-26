@@ -1,17 +1,17 @@
 import { cls, is } from 'grey-utils'
-import React, { Children, cloneElement, FC, HTMLAttributes, isValidElement, useEffect, useState } from 'react'
+import React, { Children, cloneElement, forwardRef, HTMLAttributes, isValidElement, useEffect, useState } from 'react'
 import { UI_PREFIX } from '../../constants'
 import './collapse.scss'
 import CollapsePanel, { CollapsePanelProps } from './CollapsePanel'
 
-interface CollapseProps extends Omit<HTMLAttributes<HTMLElement>, 'onChange'> {
+interface CollapseProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {
 	accordion?: boolean
 	defaultActives?: (string | number)[]
 	actives?: (string | number)[]
 	onChange?: (actives: (string | number)[]) => void
 }
 
-const Collapse: FC<CollapseProps> = props => {
+const Collapse = forwardRef<HTMLDivElement, CollapseProps>((props, outerRef) => {
 	const { className, children, accordion = false, defaultActives = [], actives, onChange, ...rest } = props
 	const [_actives, _setActives] = useState<(string | number)[]>(defaultActives)
 
@@ -23,7 +23,7 @@ const Collapse: FC<CollapseProps> = props => {
 	const prefixCls = `${UI_PREFIX}-collapse`
 
 	return (
-		<div className={cls(className, prefixCls)} {...rest}>
+		<div ref={outerRef} className={cls(className, prefixCls)} {...rest}>
 			{Children.map(children, child => {
 				if (!isValidElement<CollapsePanelProps>(child)) return child
 
@@ -46,7 +46,7 @@ const Collapse: FC<CollapseProps> = props => {
 			})}
 		</div>
 	)
-}
+})
 
 const ExportCollapse = Collapse as typeof Collapse & {
 	Panel: typeof CollapsePanel

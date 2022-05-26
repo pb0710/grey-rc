@@ -1,4 +1,13 @@
-import React, { Children, FC, HTMLAttributes, isValidElement, ReactNode, useEffect, useRef, useState } from 'react'
+import React, {
+	Children,
+	forwardRef,
+	HTMLAttributes,
+	isValidElement,
+	ReactNode,
+	useEffect,
+	useRef,
+	useState
+} from 'react'
 import { cls, is } from 'grey-utils'
 import { UI_PREFIX } from '../../constants'
 import './select.scss'
@@ -16,7 +25,7 @@ interface SelectProps extends Omit<HTMLAttributes<HTMLElement>, 'onChange'> {
 	onChange?: (value?: (number | string) | (number | string)[]) => void
 }
 
-const Select: FC<SelectProps> = props => {
+const Select = forwardRef<HTMLDivElement, SelectProps>((props, outerRef) => {
 	const { className, children, placeholder = '', value, onChange, block = false, multiple = false, ...rest } = props
 
 	const [visible, setVisible] = useState(false)
@@ -112,6 +121,7 @@ const Select: FC<SelectProps> = props => {
 				}
 			>
 				<div
+					ref={outerRef}
 					className={cls(className, prefixCls, {
 						[`${prefixCls}-block`]: block
 					})}
@@ -128,7 +138,7 @@ const Select: FC<SelectProps> = props => {
 			</Popup>
 		</SelectCtx.Provider>
 	)
-}
+})
 
 const ExportSelect = Select as typeof Select & {
 	Option: typeof Option

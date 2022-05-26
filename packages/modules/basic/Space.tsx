@@ -1,5 +1,5 @@
 import { cls } from 'grey-utils'
-import React, { FC, HTMLAttributes } from 'react'
+import React, { forwardRef, HTMLAttributes } from 'react'
 import { UI_PREFIX } from '../../constants'
 import './space.scss'
 
@@ -10,7 +10,7 @@ interface SpaceProps extends HTMLAttributes<HTMLElement> {
 	block?: boolean
 }
 
-const Space: FC<SpaceProps> = props => {
+const Space = forwardRef<HTMLDivElement, SpaceProps>((props, outerRef) => {
 	const {
 		children,
 		className,
@@ -42,6 +42,7 @@ const Space: FC<SpaceProps> = props => {
 
 	return (
 		<div
+			ref={outerRef}
 			className={wrapCls}
 			style={{
 				display: toDisplay(block),
@@ -54,6 +55,6 @@ const Space: FC<SpaceProps> = props => {
 			{children}
 		</div>
 	)
-}
+})
 
 export default Space

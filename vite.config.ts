@@ -8,6 +8,7 @@ export default defineConfig({
 	plugins: [
 		react(),
 		visualizer({
+			title: 'Grey RC Rollup',
 			open: true
 		})
 	],

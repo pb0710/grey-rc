@@ -1,5 +1,5 @@
 import { cls, is } from 'grey-utils'
-import React, { FC, HTMLAttributes, useEffect, useRef } from 'react'
+import React, { forwardRef, HTMLAttributes, useEffect, useRef } from 'react'
 import { UI_PREFIX } from '../../constants'
 import './circle.scss'
 
@@ -21,7 +21,7 @@ interface SizeData {
 	strokeWidth: number
 }
 
-const Circle: FC<CircleProps> = props => {
+const Circle = forwardRef<HTMLDivElement, CircleProps>((props, outerRef) => {
 	const {
 		children,
 		className,
@@ -85,7 +85,7 @@ const Circle: FC<CircleProps> = props => {
 	const prefixCls = `${UI_PREFIX}-circle`
 
 	return (
-		<div className={cls(className, prefixCls, `${prefixCls}-${size}`)} {...rest}>
+		<div ref={outerRef} className={cls(className, prefixCls, `${prefixCls}-${size}`)} {...rest}>
 			{children}
 			<svg width={sizeData.width} height={sizeData.height}>
 				<circle
@@ -104,6 +104,6 @@ const Circle: FC<CircleProps> = props => {
 			</svg>
 		</div>
 	)
-}
+})
 
 export default Circle

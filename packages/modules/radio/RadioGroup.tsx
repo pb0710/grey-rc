@@ -1,11 +1,19 @@
 import { cls, is } from 'grey-utils'
-import React, { ChangeEvent, Children, cloneElement, FC, HTMLAttributes, isValidElement, ReactNode } from 'react'
+import React, {
+	ChangeEvent,
+	Children,
+	cloneElement,
+	forwardRef,
+	HTMLAttributes,
+	isValidElement,
+	ReactNode
+} from 'react'
 import Radio, { RadioProps } from '.'
 import { UI_PREFIX } from '../../constants'
 import Space from '../basic/Space'
 import './radio-group.scss'
 
-interface RadioGroup extends Omit<HTMLAttributes<HTMLElement>, 'onChange' | 'defaultValue'> {
+interface RadioGroupProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange' | 'defaultValue'> {
 	size?: 'small' | 'medium' | 'large'
 	defaultValue?: string | number
 	value?: string | number
@@ -20,7 +28,7 @@ interface RadioGroup extends Omit<HTMLAttributes<HTMLElement>, 'onChange' | 'def
 	onChange?: (value: string | number) => void
 }
 
-const RadioGroup: FC<RadioGroup> = props => {
+const RadioGroup = forwardRef<HTMLDivElement, RadioGroupProps>((props, outerRef) => {
 	const {
 		children,
 		className,
@@ -59,6 +67,7 @@ const RadioGroup: FC<RadioGroup> = props => {
 
 	return (
 		<div
+			ref={outerRef}
 			className={cls(className, prefixCls, {
 				[`${prefixCls}-disabled`]: disabled,
 				[`${prefixCls}-tab`]: isTab
@@ -95,6 +104,6 @@ const RadioGroup: FC<RadioGroup> = props => {
 			</Space>
 		</div>
 	)
-}
+})
 
 export default RadioGroup

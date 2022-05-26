@@ -1,3 +1,4 @@
+import { Fade } from '@mui/material'
 import { cls } from 'grey-utils'
 import React, { FC, HTMLAttributes } from 'react'
 import { createPortal } from 'react-dom'
@@ -30,28 +31,28 @@ const Modal: FC<ModalProps> = props => {
 
 	const prefixCls = `${UI_PREFIX}-modal`
 
-	return visible
-		? createPortal(
-				<div className={cls(className, prefixCls)} {...rest}>
-					<div className={cls(maskClassName, `${prefixCls}-mask`)}></div>
-					<div
-						className={`${prefixCls}-wrap`}
-						onClick={
-							maskClosable
-								? event => {
-										if (event.target === event.currentTarget) {
-											onCancel?.()
-										}
-								  }
-								: undefined
-						}
-					>
-						{children}
-					</div>
-				</div>,
-				document.body
-		  )
-		: null
+	return createPortal(
+		<Fade in={visible}>
+			<div className={cls(className, prefixCls)} {...rest}>
+				<div className={cls(maskClassName, `${prefixCls}-mask`)}></div>
+				<div
+					className={`${prefixCls}-wrap`}
+					onClick={
+						maskClosable
+							? event => {
+									if (event.target === event.currentTarget) {
+										onCancel?.()
+									}
+							  }
+							: undefined
+					}
+				>
+					{children}
+				</div>
+			</div>
+		</Fade>,
+		document.body
+	)
 }
 
 export default Modal

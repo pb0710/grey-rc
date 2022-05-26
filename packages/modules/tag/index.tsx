@@ -1,11 +1,11 @@
-import React, { FC, HTMLAttributes, useState } from 'react'
+import React, { FC, forwardRef, HTMLAttributes, useState } from 'react'
 import { cls } from 'grey-utils'
 import { UI_PREFIX } from '../../constants'
 import './tag.scss'
 import Icon from '../basic/Icon'
 import { mdiClose, mdiLoading } from '@mdi/js'
 
-interface TagProps extends HTMLAttributes<HTMLElement> {
+interface TagProps extends HTMLAttributes<HTMLDivElement> {
 	size?: 'small' | 'medium' | 'large'
 	round?: boolean
 	bordered?: boolean
@@ -16,7 +16,7 @@ interface TagProps extends HTMLAttributes<HTMLElement> {
 	onClose?: () => void | Promise<void>
 }
 
-const Tag: FC<TagProps> = props => {
+const Tag = forwardRef<HTMLDivElement, TagProps>((props, outerRef) => {
 	const {
 		children,
 		className,
@@ -38,6 +38,7 @@ const Tag: FC<TagProps> = props => {
 
 	return (
 		<div
+			ref={outerRef}
 			className={cls(className, prefixCls, `${prefixCls}-${size}`, {
 				[`${prefixCls}-round`]: round,
 				[`${prefixCls}-bordered`]: bordered
@@ -73,6 +74,6 @@ const Tag: FC<TagProps> = props => {
 			)}
 		</div>
 	)
-}
+})
 
 export default Tag

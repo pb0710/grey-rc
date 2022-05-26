@@ -1,18 +1,17 @@
-import React, { FC, HTMLAttributes } from 'react'
+import React, { forwardRef, HTMLAttributes } from 'react'
 import MdiIcon from '@mdi/react'
-import { IconProps } from '@mdi/react/dist/IconProps'
+import { IconProps as MdiIconProps } from '@mdi/react/dist/IconProps'
 import { cls } from 'grey-utils'
 import './icon.scss'
 import { UI_PREFIX } from '../../constants'
 
-const Icon: FC<
-	IconProps &
-		HTMLAttributes<HTMLSpanElement> & {
-			canHover?: boolean
-			round?: boolean
-			bgColor?: string
-		}
-> = props => {
+interface IconProps extends MdiIconProps, Omit<HTMLAttributes<HTMLDivElement>, 'color' | 'title'> {
+	canHover?: boolean
+	round?: boolean
+	bgColor?: string
+}
+
+const Icon = forwardRef<HTMLDivElement, IconProps>((props, outerRef) => {
 	const {
 		className,
 		canHover = false,
@@ -46,6 +45,7 @@ const Icon: FC<
 
 	return (
 		<div
+			ref={outerRef}
 			className={cls(className, prefixCls, {
 				[`${prefixCls}-can-hover`]: canHover,
 				[`${prefixCls}-round`]: round
@@ -55,5 +55,6 @@ const Icon: FC<
 			<MdiIcon {...midIconProps} />
 		</div>
 	)
-}
+})
+
 export default Icon

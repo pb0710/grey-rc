@@ -27,7 +27,7 @@ export interface CheckboxProps
 	onChange?: ChangeEventHandler<HTMLInputElement> & ((value: boolean) => void)
 }
 
-const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, forwardRef) => {
+const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, outerRef) => {
 	const {
 		className,
 		children,
@@ -42,7 +42,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, forwardRef)
 	const isControlled = !is.undefined(value)
 
 	const ref = useRef<HTMLInputElement>(null)
-	const checkboxRef = (forwardRef ?? ref) as MutableRefObject<HTMLInputElement>
+	const checkboxRef = (outerRef ?? ref) as MutableRefObject<HTMLInputElement>
 	const [checked, setChecked] = useState(isControlled ? value : defaultValue)
 
 	useEffect(() => {

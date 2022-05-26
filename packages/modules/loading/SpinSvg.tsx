@@ -1,8 +1,10 @@
-import React, { FC, SVGAttributes } from 'react'
+import React, { forwardRef, SVGAttributes } from 'react'
 
-const SpinSvg: FC<SVGAttributes<SVGElement>> = ({ style, ...rest }) => {
+const SpinSvg = forwardRef<SVGSVGElement, SVGAttributes<SVGSVGElement>>((props, outerRef) => {
+	const { style, ...rest } = props
 	return (
 		<svg
+			ref={outerRef}
 			viewBox="0 0 200 200"
 			xmlns="http://www.w3.org/2000/svg"
 			style={{
@@ -54,6 +56,6 @@ const SpinSvg: FC<SVGAttributes<SVGElement>> = ({ style, ...rest }) => {
 			</g>
 		</svg>
 	)
-}
+})
 
 export default SpinSvg

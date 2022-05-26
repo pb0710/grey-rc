@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, useCallback, useEffect, useState } from 'react'
+import React, { FC, forwardRef, HTMLAttributes, useCallback, useEffect, useState } from 'react'
 import { cls } from 'grey-utils'
 import { UI_PREFIX } from '../../constants'
 import './tabs.scss'
@@ -15,7 +15,7 @@ interface TabsProps extends Omit<HTMLAttributes<HTMLElement>, 'onChange'> {
 	onChange?: (name: PanelItem['name']) => void
 }
 
-const Tabs: FC<TabsProps> = props => {
+const Tabs = forwardRef<HTMLDivElement, TabsProps>((props, outerRef) => {
 	const { children, className, type = 'line', size = 'large', lazyLoad = false, value, onChange, ...rest } = props
 
 	const [selection, setSelection] = useState<PanelItem['name']>()
@@ -71,7 +71,7 @@ const Tabs: FC<TabsProps> = props => {
 
 	return (
 		<TabsCtx.Provider value={{ subscribe, lazyLoad, selection }}>
-			<div className={cls(className, prefixCls)} {...rest}>
+			<div ref={outerRef} className={cls(className, prefixCls)} {...rest}>
 				<div className={`${prefixCls}-header`}>{isSegment ? segmentTabsEle : tabsEle}</div>
 				<div
 					className={cls(`${prefixCls}-container`, {
@@ -83,7 +83,7 @@ const Tabs: FC<TabsProps> = props => {
 			</div>
 		</TabsCtx.Provider>
 	)
-}
+})
 
 const ExportTabs = Tabs as typeof Tabs & {
 	Panel: typeof TabPanel

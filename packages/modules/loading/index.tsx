@@ -1,5 +1,5 @@
 import { cls } from 'grey-utils'
-import React, { FC, HTMLAttributes, ReactNode } from 'react'
+import React, { FC, forwardRef, HTMLAttributes, ReactNode } from 'react'
 import SpinSvg from './SpinSvg'
 import './loading.scss'
 import { UI_PREFIX } from '../../constants'
@@ -11,16 +11,8 @@ interface LoadingProps extends HTMLAttributes<HTMLElement> {
 	description?: ReactNode
 }
 
-const Loading: FC<LoadingProps> = props => {
-	const {
-		className,
-		children,
-		spinning = true,
-		size = 'medium',
-		icon = <SpinSvg />,
-		description,
-		...rest
-	} = props
+const Loading = forwardRef<HTMLDivElement, LoadingProps>((props, outerRef) => {
+	const { className, children, spinning = true, size = 'medium', icon = <SpinSvg />, description, ...rest } = props
 
 	const isWrapper = Boolean(children)
 
@@ -28,6 +20,7 @@ const Loading: FC<LoadingProps> = props => {
 
 	return (
 		<div
+			ref={outerRef}
 			className={cls(className, prefixCls, {
 				[`${prefixCls}-spinning`]: spinning,
 				[`${prefixCls}-is-wrapper`]: isWrapper,
@@ -44,6 +37,6 @@ const Loading: FC<LoadingProps> = props => {
 			<div className={`${prefixCls}-content`}>{children}</div>
 		</div>
 	)
-}
+})
 
 export default Loading
