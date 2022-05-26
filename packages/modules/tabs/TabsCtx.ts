@@ -8,5 +8,6 @@ export interface TabsContext {
 	subscribe: (panel: PanelItem) => () => void
 	lazyLoad: boolean
 	selection: string | number
+	container: HTMLElement
 }
 export const TabsCtx = createContext<Partial<TabsContext>>({})

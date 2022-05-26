@@ -1,24 +1,24 @@
-import React, { FC, HTMLAttributes, ReactNode } from 'react'
+import React, { forwardRef, HTMLAttributes, ReactNode } from 'react'
 import { cls } from 'grey-utils'
 import { UI_PREFIX } from '../../constants'
 import './toast-item.scss'
 import Icon from '../basic/Icon'
 import { mdiClose } from '@mdi/js'
 
-export interface ToastItemProps extends Omit<HTMLAttributes<HTMLElement>, 'title'> {
+export interface ToastItemProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {
 	title?: ReactNode
 	icon?: ReactNode
 	closable?: boolean
 	onClose?: () => void
 }
 
-const ToastItem: FC<ToastItemProps> = props => {
+const ToastItem = forwardRef<HTMLDivElement, ToastItemProps>((props, outerRef) => {
 	const { className, title, icon, closable = false, onClose, ...rest } = props
 
 	const prefixCls = `${UI_PREFIX}-toast-item`
 
 	return (
-		<div className={cls(className, prefixCls)} {...rest}>
+		<div ref={outerRef} className={cls(className, prefixCls)} {...rest}>
 			{icon && <div className={`${prefixCls}-icon`}>{icon}</div>}
 			<div className={`${prefixCls}-title-wrap`}>{title}</div>
 			{closable && (
@@ -28,6 +28,6 @@ const ToastItem: FC<ToastItemProps> = props => {
 			)}
 		</div>
 	)
-}
+})
 
 export default ToastItem

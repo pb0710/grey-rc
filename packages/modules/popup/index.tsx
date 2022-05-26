@@ -16,6 +16,7 @@ import { cls, is } from 'grey-utils'
 import { UI_PREFIX } from '../../constants'
 import './popup.scss'
 import { createPortal } from 'react-dom'
+import { Fade } from '@mui/material'
 
 let visibleHandlers: ((event: globalThis.MouseEvent) => void)[] = []
 
@@ -222,21 +223,21 @@ const Popup: FC<PopupProps> = props => {
 		}
 	}, [])
 
-	const portal = _visible
-		? createPortal(
-				<div ref={popupRef} className={cls(className, prefixCls)} style={popupStyle} {...rest}>
-					<div
-						className={`${prefixCls}-content`}
-						style={{
-							[spacingName]: spacing
-						}}
-					>
-						{isValidElement(content) ? content : <div className={`${prefixCls}-inner`}>{content}</div>}
-					</div>
-				</div>,
-				document.body
-		  )
-		: null
+	const portal = createPortal(
+		<Fade in={_visible}>
+			<div ref={popupRef} className={cls(className, prefixCls)} style={popupStyle} {...rest}>
+				<div
+					className={`${prefixCls}-content`}
+					style={{
+						[spacingName]: spacing
+					}}
+				>
+					{isValidElement(content) ? content : <div className={`${prefixCls}-inner`}>{content}</div>}
+				</div>
+			</div>
+		</Fade>,
+		document.body
+	)
 
 	const child = Children.only(children)
 

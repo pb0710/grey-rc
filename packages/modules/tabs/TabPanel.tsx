@@ -3,6 +3,7 @@ import { cls } from 'grey-utils'
 import { UI_PREFIX } from '../../constants'
 import './tab-panel.scss'
 import { TabsCtx } from './TabsCtx'
+import { Slide } from '@mui/material'
 
 interface TabPanelProps extends HTMLAttributes<HTMLElement> {
 	name: string | number
@@ -12,7 +13,7 @@ interface TabPanelProps extends HTMLAttributes<HTMLElement> {
 const TabPanel = forwardRef<HTMLDivElement, TabPanelProps>((props, outerRef) => {
 	const { children, className, name, tab, ...rest } = props
 
-	const { subscribe, lazyLoad = false, selection } = useContext(TabsCtx)
+	const { subscribe, lazyLoad = false, selection, container } = useContext(TabsCtx)
 	const isActive = selection === name
 
 	useEffect(() => {
@@ -27,17 +28,19 @@ const TabPanel = forwardRef<HTMLDivElement, TabPanelProps>((props, outerRef) => 
 	if (lazyLoad && !isActive) {
 		return null
 	}
-
+	// TODO:
 	return (
-		<div
-			ref={outerRef}
-			className={cls(className, prefixCls, {
-				[`${prefixCls}-active`]: isActive
-			})}
-			{...rest}
-		>
-			{children}
-		</div>
+		<Slide in={isActive} container={container} direction="left" mountOnEnter unmountOnExit exit={false}>
+			<div
+				ref={outerRef}
+				className={cls(className, prefixCls, {
+					[`${prefixCls}-active`]: true
+				})}
+				{...rest}
+			>
+				{children}
+			</div>
+		</Slide>
 	)
 })
 

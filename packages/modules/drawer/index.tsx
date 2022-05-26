@@ -5,6 +5,7 @@ import './drawer.scss'
 import { createPortal } from 'react-dom'
 import Icon from '../basic/Icon'
 import { mdiClose } from '@mdi/js'
+import { Fade, Slide } from '@mui/material'
 
 interface DrawerProps extends HTMLAttributes<HTMLElement> {
 	visible?: boolean
@@ -37,16 +38,25 @@ const Drawer: FC<DrawerProps> = props => {
 
 	const prefixCls = `${UI_PREFIX}-drawer`
 
-	return visible
-		? createPortal(
-				<div className={prefixCls}>
-					<div
-						className={cls(maskClassName, `${prefixCls}-mask`)}
-						onClick={() => {
-							if (maskClosable) onCancel?.()
-						}}
-						style={maskStyle}
-					></div>
+	const directionMap: Record<string, 'left' | 'right' | 'down' | 'up'> = {
+		top: 'down',
+		bottom: 'up',
+		left: 'right',
+		right: 'left'
+	}
+	const direction = directionMap[placement]
+
+	return createPortal(
+		<Fade in={visible} mountOnEnter unmountOnExit>
+			<div className={prefixCls}>
+				<div
+					className={cls(maskClassName, `${prefixCls}-mask`)}
+					onClick={() => {
+						if (maskClosable) onCancel?.()
+					}}
+					style={maskStyle}
+				></div>
+				<Slide in={visible} direction={direction}>
 					<div
 						className={cls(className, `${prefixCls}-wrap`, `${prefixCls}-wrap-${placement}`)}
 						style={{ ...style, width, height }}
@@ -62,10 +72,11 @@ const Drawer: FC<DrawerProps> = props => {
 						)}
 						{children}
 					</div>
-				</div>,
-				document.body
-		  )
-		: null
+				</Slide>
+			</div>
+		</Fade>,
+		document.body
+	)
 }
 
 export default Drawer

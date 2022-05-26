@@ -1,10 +1,11 @@
-import React, { FC, forwardRef, HTMLAttributes, useCallback, useEffect, useState } from 'react'
-import { cls } from 'grey-utils'
+import React, { forwardRef, HTMLAttributes, useCallback, useEffect, useRef, useState } from 'react'
+import { cls, is } from 'grey-utils'
 import { UI_PREFIX } from '../../constants'
 import './tabs.scss'
 import TabPanel from './TabPanel'
 import { PanelItem, TabsCtx } from './TabsCtx'
 import Radio from '../radio'
+import { TransitionGroup } from 'react-transition-group'
 
 interface TabsProps extends Omit<HTMLAttributes<HTMLElement>, 'onChange'> {
 	trigger?: 'click' | 'hover'
@@ -17,6 +18,8 @@ interface TabsProps extends Omit<HTMLAttributes<HTMLElement>, 'onChange'> {
 
 const Tabs = forwardRef<HTMLDivElement, TabsProps>((props, outerRef) => {
 	const { children, className, type = 'line', size = 'large', lazyLoad = false, value, onChange, ...rest } = props
+
+	const containerRef = useRef<HTMLDivElement>(null)
 
 	const [selection, setSelection] = useState<PanelItem['name']>()
 	const [tabs, setTabs] = useState<PanelItem[]>([])
@@ -69,16 +72,19 @@ const Tabs = forwardRef<HTMLDivElement, TabsProps>((props, outerRef) => {
 		</div>
 	))
 
+	const container = containerRef.current ?? undefined
+
 	return (
-		<TabsCtx.Provider value={{ subscribe, lazyLoad, selection }}>
+		<TabsCtx.Provider value={{ subscribe, lazyLoad, selection, container }}>
 			<div ref={outerRef} className={cls(className, prefixCls)} {...rest}>
 				<div className={`${prefixCls}-header`}>{isSegment ? segmentTabsEle : tabsEle}</div>
 				<div
+					ref={containerRef}
 					className={cls(`${prefixCls}-container`, {
 						[`${prefixCls}-container-segment-type`]: isSegment
 					})}
 				>
-					{children}
+					<TransitionGroup component={null}>{children}</TransitionGroup>
 				</div>
 			</div>
 		</TabsCtx.Provider>
