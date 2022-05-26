@@ -6,6 +6,7 @@ import Space from '../basic/Space'
 import './radio-group.scss'
 
 interface RadioGroup extends Omit<HTMLAttributes<HTMLElement>, 'onChange' | 'defaultValue'> {
+	size?: 'small' | 'medium' | 'large'
 	defaultValue?: string | number
 	value?: string | number
 	options?: {
@@ -24,11 +25,12 @@ const RadioGroup: FC<RadioGroup> = props => {
 		children,
 		className,
 		direction = 'horizontal',
+		size = 'medium',
 		type = 'default',
 		options = [],
 		disabled = false,
 		defaultValue,
-		value = defaultValue,
+		value,
 		onChange,
 		...rest
 	} = props
@@ -44,14 +46,15 @@ const RadioGroup: FC<RadioGroup> = props => {
 
 	const prefixCls = `${UI_PREFIX}-radio-group`
 
+	const isControlled = !is.undefined(value)
 	const isTab = type === 'tab'
+
 	const getValueProps = (label?: string | number) => {
 		if (is.undefined(label)) return
 
-		return {
-			value: value === label,
-			defaultValue: defaultValue === label
-		}
+		if (isControlled) return { value: value === label }
+
+		return { defaultValue: defaultValue !== label }
 	}
 
 	return (
@@ -68,6 +71,7 @@ const RadioGroup: FC<RadioGroup> = props => {
 						<Radio
 							key={option.label}
 							label={option.label}
+							size={size}
 							type={type}
 							disabled={disabled || option.disabled}
 							onChange={getHandleSubChange(option.label)}
@@ -80,6 +84,7 @@ const RadioGroup: FC<RadioGroup> = props => {
 				{Children.map(children, child =>
 					isValidElement<RadioProps>(child)
 						? cloneElement(child, {
+								size,
 								type,
 								disabled: disabled || child.props.disabled,
 								onChange: getHandleSubChange(child.props.label),

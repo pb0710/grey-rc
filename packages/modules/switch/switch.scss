@@ -3,8 +3,6 @@
 	@include basic;
 	display: inline-block;
 	position: relative;
-	width: 34px;
-	height: 22px;
 	border-radius: $round;
 	background: #ddd;
 	transition: all 0.2s;
@@ -13,33 +11,91 @@
 		position: absolute;
 		left: 2px;
 		top: 2px;
-		width: 18px;
-		height: 18px;
 		background: #fff;
 		border-radius: $round;
 		box-shadow: 0 1px 4px rgba($color: #000000, $alpha: 0.2);
 		transition: all 0.2s;
 	}
-	&:not(&-disabled) {
-		&:active {
-			&::after {
-				width: 22px;
-			}
-			&.g-switch-checked {
-				&::after {
-					left: 10px;
-				}
-			}
-		}
-	}
 	&-disabled {
 		cursor: not-allowed;
 		opacity: 0.4;
 	}
-	&-checked {
-		background: $primary-color;
+	&-small {
+		width: 24px;
+		height: 16px;
 		&::after {
-			left: 14px;
+			width: 12px;
+			height: 12px;
+		}
+		&.g-switch-checked {
+			background: $primary-color;
+			&::after {
+				left: 10px;
+			}
+		}
+		&:not(.g-switch-disabled) {
+			&:active {
+				&::after {
+					width: 14px;
+				}
+				&.g-switch-checked {
+					&::after {
+						left: 8px;
+					}
+				}
+			}
+		}
+	}
+	&-medium {
+		width: 34px;
+		height: 22px;
+		&::after {
+			width: 18px;
+			height: 18px;
+		}
+		&.g-switch-checked {
+			background: $primary-color;
+			&::after {
+				left: 14px;
+			}
+		}
+		&:not(.g-switch-disabled) {
+			&:active {
+				&::after {
+					width: 22px;
+				}
+				&.g-switch-checked {
+					&::after {
+						left: 10px;
+					}
+				}
+			}
+		}
+	}
+	&-large {
+		width: 44px;
+		height: 28px;
+		&::after {
+			width: 24px;
+			height: 24px;
+		}
+		&.g-switch-checked {
+			background: $primary-color;
+			&::after {
+				left: 18px;
+			}
+		}
+		&:not(.g-switch-disabled) {
+			&:active {
+				&::after {
+					width: 30px;
+				}
+				&.g-switch-checked {
+					&::after {
+						left: 12px;
+					}
+				}
+			}
 		}
 	}
 }

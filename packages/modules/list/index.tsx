@@ -5,11 +5,12 @@ import './list.scss'
 import ListItem, { ListItemProps } from './ListItem'
 
 interface ListProps extends HTMLAttributes<HTMLDivElement> {
+	size?: 'small' | 'medium' | 'large'
 	bordered?: boolean
 }
 
 const List: FC<ListProps> = props => {
-	const { className, children, bordered = true, ...rest } = props
+	const { className, children, size = 'medium', bordered = true, ...rest } = props
 
 	const prefixCls = `${UI_PREFIX}-list`
 
@@ -23,7 +24,7 @@ const List: FC<ListProps> = props => {
 			{Children.map(children, child => {
 				if (!isValidElement<ListItemProps>(child)) return child
 
-				return cloneElement(child, { bordered })
+				return cloneElement(child, { size, bordered })
 			})}
 		</div>
 	)

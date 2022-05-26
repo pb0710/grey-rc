@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Space, Switch } from '../../packages'
+import { Divider, Space, Switch } from '../../packages'
 
 const SwitchExample = () => {
 	const [checked, setChecked] = useState<boolean>(false)
@@ -16,6 +16,12 @@ const SwitchExample = () => {
 				/>
 				<Switch disabled defaultValue={true} />
 				<Switch disabled />
+			</Space>
+			<Divider />
+			<Space>
+				<Switch size="small" />
+				<Switch size="medium" />
+				<Switch size="large" />
 			</Space>
 		</>
 	)

@@ -1,12 +1,31 @@
 import { mdiApple, mdiGoogle, mdiTwitter } from '@mdi/js'
-import React from 'react'
-import { Divider, Icon, List } from '../../packages'
+import React, { useState } from 'react'
+import { Divider, Icon, List, Radio } from '../../packages'
 
 const ListExample = () => {
+	const [size, setSize] = useState<'small' | 'medium' | 'large'>('small')
 	return (
 		<>
 			<h1>List</h1>
 			<List>
+				<List.Item>List item 1</List.Item>
+				<List.Item>List item 2</List.Item>
+				<List.Item>List item 2</List.Item>
+			</List>
+			<Divider />
+			<Radio.Group
+				style={{ marginBottom: 8 }}
+				type="tab"
+				value={size}
+				onChange={value => {
+					setSize(value as any)
+				}}
+			>
+				<Radio label="small">Small</Radio>
+				<Radio label="medium">Medium</Radio>
+				<Radio label="large">Large</Radio>
+			</Radio.Group>
+			<List size={size}>
 				<List.Item>List item 1</List.Item>
 				<List.Item>List item 2</List.Item>
 				<List.Item>List item 2</List.Item>

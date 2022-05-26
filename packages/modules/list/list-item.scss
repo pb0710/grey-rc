@@ -4,7 +4,6 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	min-height: 40px;
 	padding: 0 16px;
 	gap: 12px;
 	&-bordered {
@@ -14,5 +13,20 @@
 	}
 	&-content {
 		width: 100%;
+	}
+	&-small {
+		&.g-list-item {
+			min-height: 32px;
+		}
+	}
+	&-medium {
+		&.g-list-item {
+			min-height: 40px;
+		}
+	}
+	&-large {
+		&.g-list-item {
+			min-height: 48px;
+		}
 	}
 }

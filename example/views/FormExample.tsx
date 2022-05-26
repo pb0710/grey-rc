@@ -29,7 +29,6 @@ const FormExample = () => {
 			<h1>Form</h1>
 			<Radio.Group
 				type="tab"
-				defaultValue={'horizontal'}
 				value={layout}
 				onChange={value => {
 					setLayout(value as any)

@@ -6,17 +6,18 @@ import './list-item.scss'
 export interface ListItemProps extends Omit<HTMLAttributes<HTMLDivElement>, 'prefix'> {
 	prefix?: ReactNode
 	suffix?: ReactNode
+	size?: 'small' | 'medium' | 'large'
 	bordered?: boolean
 }
 
 const ListItem: FC<ListItemProps> = props => {
-	const { className, children, bordered = true, prefix, suffix, ...rest } = props
+	const { className, children, size = 'medium', bordered = true, prefix, suffix, ...rest } = props
 
 	const prefixCls = `${UI_PREFIX}-list-item`
 
 	return (
 		<div
-			className={cls(className, prefixCls, {
+			className={cls(className, prefixCls, `${prefixCls}-${size}`, {
 				[`${prefixCls}-bordered`]: bordered
 			})}
 			{...rest}

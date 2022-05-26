@@ -26,6 +26,12 @@ const InputExample = () => {
 			</Space>
 			<Divider />
 			<Space>
+				<Input size="small" placeholder="Small" />
+				<Input size="medium" placeholder="Medium" />
+				<Input size="large" placeholder="Large" />
+			</Space>
+			<Divider />
+			<Space>
 				<Input
 					placeholder="Prefix"
 					prefix={<Icon style={{ backgroundColor: '#fff' }} path={mdiMagnify} canHover />}

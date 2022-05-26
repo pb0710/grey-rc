@@ -17,8 +17,9 @@ import { UI_PREFIX } from '../../constants'
 export interface CheckboxProps
 	extends Omit<
 		InputHTMLAttributes<HTMLInputElement>,
-		'onChange' | 'defaultValue' | 'defaultChecked' | 'checked' | 'value'
+		'onChange' | 'defaultValue' | 'defaultChecked' | 'checked' | 'value' | 'size'
 	> {
+	size?: 'small' | 'medium' | 'large'
 	label?: string | number
 	disabled?: boolean
 	defaultValue?: boolean
@@ -27,11 +28,22 @@ export interface CheckboxProps
 }
 
 const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, forwardRef) => {
-	const { className, children, value, onChange, disabled = false, defaultValue = false, ...rest } = props
+	const {
+		className,
+		children,
+		size = 'medium',
+		value,
+		onChange,
+		disabled = false,
+		defaultValue = false,
+		...rest
+	} = props
+
+	const isControlled = !is.undefined(value)
+
 	const ref = useRef<HTMLInputElement>(null)
 	const checkboxRef = (forwardRef ?? ref) as MutableRefObject<HTMLInputElement>
-	const [checked, setChecked] = useState(defaultValue)
-	const isControlled = !is.undefined(value)
+	const [checked, setChecked] = useState(isControlled ? value : defaultValue)
 
 	useEffect(() => {
 		if (isControlled) setChecked(value)
@@ -49,9 +61,14 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, forwardRef)
 	const prefixCls = `${UI_PREFIX}-checkbox`
 	const checkedProps = isControlled ? { checked } : { defaultChecked: defaultValue }
 
+	let iconSize = 13
+	if (size === 'small') iconSize = 10
+	else if (size === 'medium') iconSize = 13
+	else if (size === 'large') iconSize = 16
+
 	return (
 		<label
-			className={cls(className, prefixCls, {
+			className={cls(className, prefixCls, `${prefixCls}-${size}`, {
 				[`${prefixCls}-disabled`]: disabled,
 				[`${prefixCls}-checked`]: checked
 			})}
@@ -67,7 +84,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, forwardRef)
 				onChange={handleChange}
 			/>
 			<div className={`${prefixCls}-icon`}>
-				<Icon className={`${prefixCls}-icon-inner`} path={mdiCheckBold} size="13px" />
+				<Icon className={`${prefixCls}-icon-inner`} path={mdiCheckBold} size={`${iconSize}px`} />
 			</div>
 			{children}
 		</label>

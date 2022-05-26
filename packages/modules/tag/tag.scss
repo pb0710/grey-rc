@@ -3,18 +3,34 @@
 	@include basic;
 	display: inline-flex;
 	align-items: center;
-	padding: 4px 12px;
 	border-radius: 4px;
 	background: #eee;
 	&-close {
 		display: flex;
 		align-items: center;
-		margin-left: 8px;
 	}
 	&-round {
 		border-radius: $round;
 	}
 	&-bordered {
 		border: 1px solid #ddd;
+	}
+	&-small {
+		padding: 2px 8px;
+		.g-tag-close {
+			margin-left: 6px;
+		}
+	}
+	&-medium {
+		padding: 4px 10px;
+		.g-tag-close {
+			margin-left: 8px;
+		}
+	}
+	&-large {
+		padding: 6px 12px;
+		.g-tag-close {
+			margin-left: 10px;
+		}
 	}
 }

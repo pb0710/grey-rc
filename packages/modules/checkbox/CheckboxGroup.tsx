@@ -13,6 +13,7 @@ interface CheckboxGroupProps extends Omit<HTMLAttributes<HTMLElement>, 'onChange
 		child: ReactNode
 		disabled?: boolean
 	}[]
+	size?: 'small' | 'medium' | 'large'
 	direction?: 'horizontal' | 'vertical'
 	disabled?: boolean
 	onChange?: (value: (string | number)[]) => void
@@ -23,13 +24,16 @@ const CheckboxGroup: FC<CheckboxGroupProps> = props => {
 		children,
 		className,
 		direction = 'horizontal',
+		size = 'medium',
 		options = [],
 		disabled = false,
-		defaultValue = [],
-		value = defaultValue,
+		defaultValue,
+		value = [],
 		onChange,
 		...rest
 	} = props
+
+	const isControlled = is.undefined(defaultValue)
 
 	const getHandleSubChange = (label?: string | number) => (subParam: ChangeEvent<HTMLInputElement> | boolean) => {
 		if (is.undefined(label)) return
@@ -53,10 +57,9 @@ const CheckboxGroup: FC<CheckboxGroupProps> = props => {
 	const getValueProps = (label?: string | number) => {
 		if (is.undefined(label)) return
 
-		return {
-			value: value.includes(label),
-			defaultValue: defaultValue.includes(label)
-		}
+		if (isControlled) return { value: value.includes(label) }
+
+		return { defaultValue: defaultValue.includes(label) }
 	}
 
 	const prefixCls = `${UI_PREFIX}-checkbox-group`
@@ -74,6 +77,7 @@ const CheckboxGroup: FC<CheckboxGroupProps> = props => {
 						<Checkbox
 							key={option.label}
 							label={option.label}
+							size={size}
 							disabled={disabled || option.disabled}
 							onChange={getHandleSubChange(option.label)}
 							{...getValueProps(option.label)}
@@ -85,6 +89,7 @@ const CheckboxGroup: FC<CheckboxGroupProps> = props => {
 				{Children.map(children, child =>
 					isValidElement<CheckboxProps>(child)
 						? cloneElement(child, {
+								size,
 								disabled: disabled || child.props.disabled,
 								onChange: getHandleSubChange(child.props.label),
 								...getValueProps(child.props.label)
