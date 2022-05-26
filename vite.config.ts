@@ -5,16 +5,22 @@ import { resolve } from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-	plugins: [react(), visualizer()],
+	plugins: [
+		react(),
+		visualizer({
+			open: true
+		})
+	],
 	build: {
 		lib: {
+			formats: ['umd', 'es'],
 			entry: resolve(__dirname, 'packages/index.ts'),
 			name: 'chunk',
 			fileName: format => `chunk.${format}.js`
 		},
-		sourcemap: true,
+		sourcemap: false,
 		rollupOptions: {
-			// plugins: [visualizer()],
+			plugins: [],
 			external: ['react', 'react-dom'],
 			output: {
 				globals: {
