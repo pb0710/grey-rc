@@ -4,7 +4,7 @@ import React, { FC, HTMLAttributes, ReactNode } from 'react'
 import Icon from '../basic/Icon'
 import './collapse-panel.scss'
 import { UI_PREFIX } from '../../constants'
-import { Collapse as MuiCollapse } from '@mui/material'
+import { Collapse as MuiCollapse } from '../motion'
 
 export interface CollapsePanelProps extends Omit<HTMLAttributes<HTMLElement>, 'title' | 'onChange'> {
 	itemKey?: string | number

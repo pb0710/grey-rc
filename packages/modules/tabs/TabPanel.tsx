@@ -3,7 +3,7 @@ import { cls } from 'grey-utils'
 import { UI_PREFIX } from '../../constants'
 import './tab-panel.scss'
 import { TabsCtx } from './TabsCtx'
-import { Slide } from '@mui/material'
+import { Slide } from '../motion'
 
 interface TabPanelProps extends HTMLAttributes<HTMLElement> {
 	name: string | number

@@ -16,7 +16,7 @@ import { cls, is } from 'grey-utils'
 import { UI_PREFIX } from '../../constants'
 import './popup.scss'
 import { createPortal } from 'react-dom'
-import { Fade } from '@mui/material'
+import { Fade } from '../motion'
 
 let visibleHandlers: ((event: globalThis.MouseEvent) => void)[] = []
 
@@ -177,14 +177,6 @@ const Popup: FC<PopupProps> = props => {
 		}
 	}, [placement])
 
-	useEffect(() => {
-		if (!_visible) {
-			setPopupPos(null)
-		} else {
-			updatePopupPos()
-		}
-	}, [placement, _visible, updatePopupPos])
-
 	let popupStyle
 	if (popupPos) {
 		popupStyle = {
@@ -223,21 +215,31 @@ const Popup: FC<PopupProps> = props => {
 		}
 	}, [])
 
-	const portal = createPortal(
-		<Fade in={_visible}>
-			<div ref={popupRef} className={cls(className, prefixCls)} style={popupStyle} {...rest}>
-				<div
-					className={`${prefixCls}-content`}
-					style={{
-						[spacingName]: spacing
+	const portal = disabled
+		? null
+		: createPortal(
+				<Fade
+					in={_visible}
+					mountOnEnter
+					unmountOnExit
+					onEnter={updatePopupPos}
+					onExited={() => {
+						setPopupPos(null)
 					}}
 				>
-					{isValidElement(content) ? content : <div className={`${prefixCls}-inner`}>{content}</div>}
-				</div>
-			</div>
-		</Fade>,
-		document.body
-	)
+					<div ref={popupRef} className={cls(className, prefixCls)} style={popupStyle} {...rest}>
+						<div
+							className={`${prefixCls}-content`}
+							style={{
+								[spacingName]: spacing
+							}}
+						>
+							{isValidElement(content) ? content : <div className={`${prefixCls}-inner`}>{content}</div>}
+						</div>
+					</div>
+				</Fade>,
+				document.body
+		  )
 
 	const child = Children.only(children)
 
@@ -248,7 +250,7 @@ const Popup: FC<PopupProps> = props => {
 					ref: wrapRef,
 					...getWrapProps(child.props.onMouseEnter, child.props.onMouseLeave)
 				})}
-			{disabled || portal}
+			{portal}
 		</>
 	)
 }

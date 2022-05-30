@@ -8,7 +8,7 @@ import { mdiClose } from '@mdi/js'
 import Space from '../basic/Space'
 import Button from '../button'
 import Card from '../card'
-import { Zoom } from '@mui/material'
+import { Zoom } from '../motion'
 
 interface DialogProps extends ModalProps {
 	hasCancel?: boolean

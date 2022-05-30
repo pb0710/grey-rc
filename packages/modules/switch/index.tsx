@@ -23,7 +23,7 @@ interface SwitchProps
 	onChange?: ChangeEventHandler<HTMLInputElement> & ((value?: boolean) => void)
 }
 
-const Switch = forwardRef<HTMLInputElement, SwitchProps>((props, outerRef) => {
+const Switch = forwardRef<HTMLLabelElement, SwitchProps>((props, outerRef) => {
 	const {
 		className,
 		size = 'medium',
@@ -55,10 +55,12 @@ const Switch = forwardRef<HTMLInputElement, SwitchProps>((props, outerRef) => {
 
 	return (
 		<label
+			ref={outerRef}
 			className={cls(className, prefixCls, `${prefixCls}-${size}`, {
 				[`${prefixCls}-disabled`]: disabled,
 				[`${prefixCls}-checked`]: checked
 			})}
+			{...rest}
 		>
 			<input
 				className="g-inner"
@@ -68,7 +70,6 @@ const Switch = forwardRef<HTMLInputElement, SwitchProps>((props, outerRef) => {
 				disabled={disabled}
 				onChange={handleChange}
 				{...checkedProps}
-				{...rest}
 			/>
 		</label>
 	)

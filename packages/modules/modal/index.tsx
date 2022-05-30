@@ -1,4 +1,4 @@
-import { Fade } from '@mui/material'
+import { Fade } from '../motion'
 import { cls } from 'grey-utils'
 import React, { FC, HTMLAttributes } from 'react'
 import { createPortal } from 'react-dom'

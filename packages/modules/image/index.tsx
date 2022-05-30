@@ -6,6 +6,7 @@ import {
 	mdiRestore,
 	mdiBackupRestore
 } from '@mdi/js'
+import { Zoom } from '../motion'
 import { useLatestRef } from 'grey-rh'
 import { cls } from 'grey-utils'
 import React, {
@@ -153,22 +154,22 @@ const Image = forwardRef<HTMLImageElement, ImageProps>((props, outerRef) => {
 	const toolbarEle = toolbarVisible && (
 		<div className={`${prefixCls}-detail-toolbar`}>
 			<Space>
-				<Tooltip content="向左旋转90°">
+				<Tooltip spacing={12} placement="top" content="向左旋转90°">
 					<Icon {...toolbarProps} path={mdiRestore} onClick={() => setRotate(pre => pre - 90)} />
 				</Tooltip>
-				<Tooltip content="向右旋转90°">
+				<Tooltip spacing={12} placement="top" content="向右旋转90°">
 					<Icon {...toolbarProps} path={mdiReload} onClick={() => setRotate(pre => pre + 90)} />
 				</Tooltip>
-				<Tooltip content="缩小">
+				<Tooltip spacing={12} placement="top" content="缩小">
 					<Icon {...toolbarProps} path={mdiMagnifyMinusOutline} onClick={handleShrink} />
 				</Tooltip>
-				<Tooltip content="放大">
+				<Tooltip spacing={12} placement="top" content="放大">
 					<Icon {...toolbarProps} path={mdiMagnifyPlusOutline} onClick={handleZoom} />
 				</Tooltip>
-				<Tooltip content="重置">
+				<Tooltip spacing={12} placement="top" content="重置">
 					<Icon {...toolbarProps} path={mdiBackupRestore} onClick={handleReset} />
 				</Tooltip>
-				<Tooltip content="关闭">
+				<Tooltip spacing={12} placement="top" content="关闭">
 					<Icon {...toolbarProps} path={mdiClose} onClick={hideDetail} />
 				</Tooltip>
 			</Space>
@@ -177,33 +178,35 @@ const Image = forwardRef<HTMLImageElement, ImageProps>((props, outerRef) => {
 
 	const detailEle = detailDisabled || (
 		<Modal visible={detailVisible} onCancel={hideDetail} onWheel={handleWheel}>
-			<div
-				className={`${prefixCls}-detail`}
-				onClick={event => {
-					// scale < 1 时，外层 detail 的宽高不变，点击 detail 也需要关闭弹窗。
-					if (event.target === event.currentTarget) {
-						hideDetail()
-					}
-				}}
-			>
-				<img
-					ref={imgDetailRef}
-					className={`${prefixCls}-detail-pic`}
-					src={src}
-					draggable={false}
-					style={{
-						transform: `scale(${scale}) rotate(${rotate}deg)`,
-						...(offset
-							? {
-									position: 'fixed',
-									left: offset.x,
-									top: offset.y
-							  }
-							: {})
+			<Zoom in={detailVisible}>
+				<div
+					className={`${prefixCls}-detail`}
+					onClick={event => {
+						// scale < 1 时，外层 detail 的宽高不变，点击 detail 也需要关闭弹窗。
+						if (event.target === event.currentTarget) {
+							hideDetail()
+						}
 					}}
-					onMouseDown={handleDragDetailStart}
-				/>
-			</div>
+				>
+					<img
+						ref={imgDetailRef}
+						className={`${prefixCls}-detail-pic`}
+						src={src}
+						draggable={false}
+						style={{
+							transform: `scale(${scale}) rotate(${rotate}deg)`,
+							...(offset
+								? {
+										position: 'fixed',
+										left: offset.x,
+										top: offset.y
+								  }
+								: {})
+						}}
+						onMouseDown={handleDragDetailStart}
+					/>
+				</div>
+			</Zoom>
 			{ratioVisible && <div className={`${prefixCls}-detail-ratio`}>{scalePercent}</div>}
 			{toolbarEle}
 		</Modal>

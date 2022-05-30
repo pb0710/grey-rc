@@ -5,7 +5,7 @@ import './drawer.scss'
 import { createPortal } from 'react-dom'
 import Icon from '../basic/Icon'
 import { mdiClose } from '@mdi/js'
-import { Fade, Slide } from '@mui/material'
+import { Fade, Slide } from '../motion'
 
 interface DrawerProps extends HTMLAttributes<HTMLElement> {
 	visible?: boolean
