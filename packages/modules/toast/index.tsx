@@ -5,7 +5,7 @@ import './toast.scss'
 import ToastItem, { ToastItemProps } from './ToastItem'
 import { createRoot, Root } from 'react-dom/client'
 import { TransitionGroup } from 'react-transition-group'
-import { Grow } from '../motion'
+import { Slip } from '../motion'
 
 const prefixCls = `${UI_PREFIX}-toast`
 
@@ -52,25 +52,50 @@ export const Toast: FC & {
 		}
 	}, [])
 
-	const renderToastList = (position: Position) => (
-		<div key={position} className={cls(prefixCls, `${prefixCls}-${position}`)}>
-			<TransitionGroup component={null} exit={false}>
-				{toastList
-					.filter(toast => toast.position === position)
-					.map(({ id, title, ...rest }) => (
-						<Grow key={id}>
-							<ToastItem
-								title={title}
-								onClose={() => {
-									Toast.hide?.(id)
-								}}
-								{...rest}
-							/>
-						</Grow>
-					))}
-			</TransitionGroup>
-		</div>
-	)
+	const renderToastList = (position: Position) => {
+		let direction: 'top' | 'bottom' | 'left' | 'right' = 'top'
+
+		switch (position) {
+			case 'top-left':
+				direction = 'left'
+				break
+			case 'top':
+				direction = 'top'
+				break
+			case 'top-right':
+				direction = 'right'
+				break
+			case 'bottom-left':
+				direction = 'left'
+				break
+			case 'bottom':
+				direction = 'bottom'
+				break
+			case 'bottom-right':
+				direction = 'right'
+				break
+		}
+
+		return (
+			<div key={position} className={cls(prefixCls, `${prefixCls}-${position}`)}>
+				<TransitionGroup component={null}>
+					{toastList
+						.filter(toast => toast.position === position)
+						.map(({ id, title, ...rest }) => (
+							<Slip key={id} direction={direction}>
+								<ToastItem
+									title={title}
+									onClose={() => {
+										Toast.hide?.(id)
+									}}
+									{...rest}
+								/>
+							</Slip>
+						))}
+				</TransitionGroup>
+			</div>
+		)
+	}
 
 	const positionList: Position[] = ['top-left', 'top', 'top-right', 'bottom-left', 'bottom', 'bottom-right']
 	return <>{positionList.map(renderToastList)}</>

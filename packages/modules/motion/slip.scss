@@ -1,4 +1,4 @@
-.stretch {
+.slip {
   // enter
 	&-top-enter,
 	&-left-enter,
@@ -8,16 +8,16 @@
 	}
 
 	&-top-enter {
-		transform: scaleY(0.8);
+		transform: translateY(-100%);
 	}
 	&-bottom-enter {
-		transform: scaleY(0.8);
+		transform: translateY(100%);
 	}
 	&-left-enter {
-		transform: scaleX(0.8);
+		transform: translateX(-100%);
 	}
 	&-right-enter {
-		transform: scaleX(0.8);
+		transform: translateX(100%);
 	}
   // enter-active
 	&-top-enter-active,
@@ -30,19 +30,19 @@
 
 	&-top-enter-active {
 		transform-origin: bottom;
-		transform: scaleY(1);
+		transform: translateY(0);
 	}
 	&-bottom-enter-active {
 		transform-origin: top;
-		transform: scaleY(1);
+		transform: translateY(0);
 	}
 	&-left-enter-active {
 		transform-origin: right;
-		transform: scaleX(1);
+		transform: translateX(0);
 	}
 	&-right-enter-active {
 		transform-origin: left;
-		transform: scaleX(1);
+		transform: translateX(0);
 	}
   // exit
 	&-top-exit,
@@ -53,16 +53,16 @@
 	}
 
 	&-top-exit {
-		transform: scaleY(1);
+		transform: translateY(0);
 	}
 	&-bottom-exit {
-		transform: scaleY(1);
+		transform: translateY(0);
 	}
 	&-left-exit {
-		transform: scaleX(1);
+		transform: translateX(0);
 	}
 	&-right-exit {
-		transform: scaleX(1);
+		transform: translateX(0);
 	}
   // exit-active
 	&-top-exit-active,
@@ -75,18 +75,18 @@
 
 	&-top-exit-active {
 		transform-origin: bottom;
-		transform: scaleY(0.8);
+		transform: translateY(-100%);
 	}
 	&-bottom-exit-active {
 		transform-origin: top;
-		transform: scaleY(0.8);
+		transform: translateY(100%);
 	}
 	&-left-exit-active {
 		transform-origin: right;
-		transform: scaleX(0.8);
+		transform: translateX(-100%);
 	}
 	&-right-exit-active {
 		transform-origin: left;
-		transform: scaleX(0.8);
+		transform: translateX(100%);
 	}
 }
