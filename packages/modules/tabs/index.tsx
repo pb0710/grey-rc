@@ -1,11 +1,10 @@
 import React, { forwardRef, HTMLAttributes, useCallback, useEffect, useRef, useState } from 'react'
-import { cls, is } from 'grey-utils'
+import { cls } from 'grey-utils'
 import { UI_PREFIX } from '../../constants'
 import './tabs.scss'
 import TabPanel from './TabPanel'
 import { PanelItem, TabsCtx } from './TabsCtx'
 import Radio from '../radio'
-import { TransitionGroup } from 'react-transition-group'
 
 interface TabsProps extends Omit<HTMLAttributes<HTMLElement>, 'onChange'> {
 	trigger?: 'click' | 'hover'
@@ -84,7 +83,7 @@ const Tabs = forwardRef<HTMLDivElement, TabsProps>((props, outerRef) => {
 						[`${prefixCls}-container-segment-type`]: isSegment
 					})}
 				>
-					<TransitionGroup component={null}>{children}</TransitionGroup>
+					{children}
 				</div>
 			</div>
 		</TabsCtx.Provider>

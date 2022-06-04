@@ -16,7 +16,7 @@ import { cls, is } from 'grey-utils'
 import { UI_PREFIX } from '../../constants'
 import './popup.scss'
 import { createPortal } from 'react-dom'
-import { Fade } from '../motion'
+import { Stretch } from '../motion'
 
 let visibleHandlers: ((event: globalThis.MouseEvent) => void)[] = []
 
@@ -60,6 +60,8 @@ const Popup: FC<PopupProps> = props => {
 		onClickOutside,
 		onVisibleChange,
 		style,
+		onMouseEnter,
+		onMouseLeave,
 		...rest
 	} = props
 
@@ -70,7 +72,7 @@ const Popup: FC<PopupProps> = props => {
 	const isClick = trigger === 'click'
 	const isManual = trigger === 'manual'
 
-	const [_visible, _setVisible] = useState(visible)
+	const [_visible, _setVisible] = useState(false)
 	useEffect(() => {
 		if (isManual) _setVisible(visible)
 	}, [isManual, visible])
@@ -96,108 +98,122 @@ const Popup: FC<PopupProps> = props => {
 		}
 	})
 
-	const [popupPos, setPopupPos] = useState<null | Record<'x' | 'y', number>>(null)
+	const [top, setTop] = useState<number | null>(null)
+	const [bottom, setBottom] = useState<number | null>(null)
+	const [right, setRight] = useState<number | null>(null)
+	const [left, setLeft] = useState<number | null>(null)
 
+	let stretchDirection: 'left' | 'top' | 'right' | 'bottom' = 'bottom'
 	let spacingName = ''
 	if (placement.includes('top')) {
+		stretchDirection = 'top'
 		spacingName = 'marginBottom'
 	} else if (placement.includes('left')) {
+		stretchDirection = 'left'
 		spacingName = 'marginRight'
 	} else if (placement.includes('bottom')) {
+		stretchDirection = 'bottom'
 		spacingName = 'marginTop'
 	} else if (placement.includes('right')) {
+		stretchDirection = 'right'
 		spacingName = 'marginLeft'
 	}
 
 	const updatePopupPos = useCallback(() => {
 		if (wrapRef.current && popupRef.current) {
-			let x: number | undefined
-			let y: number | undefined
+			let left: number | undefined
+			let top: number | undefined
+			let right: number | undefined
+			let bottom: number | undefined
 
-			const { width: ww, height: wh, left: wl, top: wt } = wrapRef.current.getBoundingClientRect()
+			const wRect = wrapRef.current.getBoundingClientRect()
+			const { width: ww, height: wh, left: wl, top: wt } = wRect
+			const wb = window.innerHeight - wRect.bottom
+			const wr = window.innerWidth - wRect.right
+
 			const { width: pw, height: ph } = popupRef.current.getBoundingClientRect()
 
 			switch (placement) {
 				case 'top-start':
-					x = wl
-					y = wt - ph
+					left = wl
+					bottom = wb + wh
 					break
 				case 'top':
-					x = wl - (pw - ww) / 2
-					y = wt - ph
+					left = wl - (pw - ww) / 2
+					bottom = wb + wh
 					break
 				case 'top-end':
-					x = wl + ww - pw
-					y = wt - ph
+					left = wl + ww - pw
+					bottom = wb + wh
 					break
 				case 'left-start':
-					x = wl - pw
-					y = wt
+					right = wr + ww
+					top = wt
 					break
 				case 'right-start':
-					x = wl + ww
-					y = wt
+					left = wl + ww
+					top = wt
 					break
 				case 'left':
-					x = wl - pw
-					y = wt - (ph - wh) / 2
+					right = wr + ww
+					top = wt - (ph - wh) / 2
 					break
 				case 'right':
-					x = wl + ww
-					y = wt - (ph - wh) / 2
+					left = wl + ww
+					top = wt - (ph - wh) / 2
 					break
 				case 'left-end':
-					x = wl - pw
-					y = wt + wh - ph
+					right = wr + ww
+					top = wt + wh - ph
 					break
 				case 'right-end':
-					x = wl + ww
-					y = wt + wh - ph
+					left = wl + ww
+					top = wt + wh - ph
 					break
 				case 'bottom-start':
-					x = wl
-					y = wt + wh
+					left = wl
+					top = wt + wh
 					break
 				case 'bottom':
-					x = wl - (pw - ww) / 2
-					y = wt + wh
+					left = wl - (pw - ww) / 2
+					top = wt + wh
 					break
 				case 'bottom-end':
-					x = wl + ww - pw
-					y = wt + wh
+					left = wl + ww - pw
+					top = wt + wh
 					break
 
 				default:
 					break
 			}
 
-			if (!is.undefined(x) && !is.undefined(y)) {
-				setPopupPos({ x, y })
-			}
+			if (!is.undefined(left)) setLeft(left)
+			if (!is.undefined(top)) setTop(top)
+			if (!is.undefined(right)) setRight(right)
+			if (!is.undefined(bottom)) setBottom(bottom)
 		}
 	}, [placement])
 
-	let popupStyle
-	if (popupPos) {
-		popupStyle = {
-			...style,
-			left: popupPos.x,
-			top: popupPos.y
-		}
+	const popupStyle = {
+		...style,
+		...(is.number(left) ? { left } : {}),
+		...(is.number(right) ? { right } : {}),
+		...(is.number(top) ? { top } : {}),
+		...(is.number(bottom) ? { bottom } : {})
 	}
 
 	const prefixCls = `${UI_PREFIX}-popup`
 
-	const getWrapProps = (onMouseEnter?: MouseEventHandler, onMouseLeave?: MouseEventHandler) => {
+	const getWrapProps = (onEnter?: MouseEventHandler, onLeave?: MouseEventHandler) => {
 		if (isHover)
 			return {
 				onMouseEnter(event: MouseEvent) {
-					onMouseEnter?.(event)
+					onEnter?.(event)
 					onVisibleChange?.(true)
 					_setVisible(true)
 				},
 				onMouseLeave(event: MouseEvent) {
-					onMouseLeave?.(event)
+					onLeave?.(event)
 					onVisibleChange?.(false)
 					_setVisible(false)
 				}
@@ -218,16 +234,26 @@ const Popup: FC<PopupProps> = props => {
 	const portal = disabled
 		? null
 		: createPortal(
-				<Fade
+				<Stretch
+					direction={stretchDirection}
 					in={_visible}
 					mountOnEnter
 					unmountOnExit
 					onEnter={updatePopupPos}
 					onExited={() => {
-						setPopupPos(null)
+						setTop(null)
+						setBottom(null)
+						setLeft(null)
+						setRight(null)
 					}}
 				>
-					<div ref={popupRef} className={cls(className, prefixCls)} style={popupStyle} {...rest}>
+					<div
+						ref={popupRef}
+						className={cls(className, prefixCls)}
+						style={popupStyle}
+						{...getWrapProps(onMouseEnter, onMouseLeave)}
+						{...rest}
+					>
 						<div
 							className={`${prefixCls}-content`}
 							style={{
@@ -237,7 +263,7 @@ const Popup: FC<PopupProps> = props => {
 							{isValidElement(content) ? content : <div className={`${prefixCls}-inner`}>{content}</div>}
 						</div>
 					</div>
-				</Fade>,
+				</Stretch>,
 				document.body
 		  )
 
