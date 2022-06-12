@@ -4,7 +4,9 @@ import { CSSTransitionProps } from 'react-transition-group/CSSTransition'
 import './stretch.scss'
 import './slip.scss'
 
-export { Fade, Grow, Slide, Zoom, Collapse } from '@mui/material'
+export { Fade, Grow, Slide, Zoom } from '@mui/material'
+import { Collapse } from '@mui/material'
+export const CollapseMotion = Collapse
 
 type StretchProps = Omit<CSSTransitionProps, 'addEventListener'> & {
 	direction?: 'top' | 'bottom' | 'left' | 'right'

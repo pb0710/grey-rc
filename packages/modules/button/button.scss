@@ -14,12 +14,24 @@
 	user-select: none;
 	&-small {
 		height: 24px;
+		&.g-button-circle,
+		&.g-button-square {
+			width: 24px;
+		}
 	}
 	&-medium {
 		height: 32px;
+		&.g-button-circle,
+		&.g-button-square {
+			width: 32px;
+		}
 	}
 	&-large {
 		height: 40px;
+		&.g-button-circle,
+		&.g-button-square {
+			width: 40px;
+		}
 	}
 	&:active {
 		filter: brightness(0.9);
