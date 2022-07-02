@@ -1,4 +1,4 @@
-export * from './modules/motion'
+export { default as Motion } from './modules/motion'
 export { default as Divider } from './modules/basic/Divider'
 export { default as Space } from './modules/basic/Space'
 export { default as Icon } from './modules/basic/Icon'

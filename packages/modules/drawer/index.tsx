@@ -1,11 +1,11 @@
-import React, { CSSProperties, FC, HTMLAttributes } from 'react'
+import React, { CSSProperties, FC, HTMLAttributes, useRef } from 'react'
 import { cls } from 'grey-utils'
 import { UI_PREFIX } from '../../constants'
 import './drawer.scss'
 import { createPortal } from 'react-dom'
 import Icon from '../basic/Icon'
 import { mdiClose } from '@mdi/js'
-import { Fade, Slide } from '../motion'
+import Motion from '../motion'
 
 interface DrawerProps extends HTMLAttributes<HTMLElement> {
 	visible?: boolean
@@ -45,18 +45,34 @@ const Drawer: FC<DrawerProps> = props => {
 		right: 'left'
 	}
 	const direction = directionMap[placement]
+	const preBodyOverflowRef = useRef('')
+
+	const setBodyOverflowHidden = () => {
+		preBodyOverflowRef.current = document.body.style.getPropertyValue('overflow')
+		document.body.style.setProperty('overflow', 'hidden')
+	}
+
+	const resetBodyOverflowHidden = () => {
+		document.body.style.setProperty('overflow', preBodyOverflowRef.current)
+	}
 
 	return createPortal(
-		<Fade in={visible} mountOnEnter unmountOnExit>
+		<Motion.Fade
+			in={visible}
+			mountOnEnter
+			unmountOnExit
+			onEnter={setBodyOverflowHidden}
+			onExited={resetBodyOverflowHidden}
+		>
 			<div className={prefixCls}>
 				<div
-					className={cls(maskClassName, `${prefixCls}-mask`)}
+					className={cls(maskClassName, `${prefixCls}-mask`, { blur: visible })}
 					onClick={() => {
 						if (maskClosable) onCancel?.()
 					}}
 					style={maskStyle}
 				></div>
-				<Slide in={visible} direction={direction}>
+				<Motion.Slide in={visible} direction={direction}>
 					<div
 						className={cls(className, `${prefixCls}-wrap`, `${prefixCls}-wrap-${placement}`)}
 						style={{ ...style, width, height }}
@@ -72,9 +88,9 @@ const Drawer: FC<DrawerProps> = props => {
 						)}
 						{children}
 					</div>
-				</Slide>
+				</Motion.Slide>
 			</div>
-		</Fade>,
+		</Motion.Fade>,
 		document.body
 	)
 }

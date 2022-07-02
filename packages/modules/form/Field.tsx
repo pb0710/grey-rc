@@ -1,24 +1,26 @@
-import React, { cloneElement, FC, forwardRef, isValidElement, LabelHTMLAttributes, useContext } from 'react'
-import { useUpdate, Form } from 'grey-rh'
+import React, { cloneElement, forwardRef, HTMLAttributes, isValidElement, LabelHTMLAttributes, useContext } from 'react'
+import { useUpdate, Form, FieldController } from 'grey-rh'
 import { cls } from 'grey-utils'
 import { UI_PREFIX } from '../../constants'
 import { FormContext, FormCtx } from './FormCtx'
 import './field.scss'
 
-interface FieldProps extends Omit<LabelHTMLAttributes<HTMLLabelElement>, 'form'>, Partial<FormContext> {
+interface FieldProps
+	extends Omit<LabelHTMLAttributes<HTMLLabelElement> & HTMLAttributes<HTMLDivElement>, 'form'>,
+		Partial<FormContext> {
 	label?: string
 	labelText?: string
 	form?: Form
 }
 
-const Field = forwardRef<HTMLLabelElement, FieldProps>((props, outerRef) => {
+const Field = forwardRef<HTMLLabelElement & HTMLDivElement, FieldProps>((props, outerRef) => {
 	const { className, children, form, label, labelText, labelWidth, labelAlign, labelSuffix, ...rest } = props
 
 	const formCtx = useContext(FormCtx)
 	const update = useUpdate()
 
 	const _form = form ?? formCtx.form
-	let controller: any
+	let controller: FieldController | null = null
 	if (label && _form) {
 		controller = _form.subscribe(label)
 	}
@@ -29,8 +31,8 @@ const Field = forwardRef<HTMLLabelElement, FieldProps>((props, outerRef) => {
 		suffix: labelSuffix ?? formCtx.labelSuffix ?? ''
 	}
 
-	const onFieldValueChange = (...args: any[]) => {
-		controller?.onChange(...args)
+	const onFieldValueChange = (arg: unknown) => {
+		controller?.onChange(arg)
 		update()
 	}
 
@@ -38,8 +40,8 @@ const Field = forwardRef<HTMLLabelElement, FieldProps>((props, outerRef) => {
 	const wrapCls = cls(className, prefixCls, `${prefixCls}-align-${labelAttrs.align}`)
 
 	return (
-		<label ref={outerRef} className={wrapCls} {...rest}>
-			<div
+		<div ref={outerRef} className={wrapCls} {...rest}>
+			<label
 				className={`${prefixCls}-label`}
 				style={{
 					width: labelAttrs.width
@@ -47,7 +49,7 @@ const Field = forwardRef<HTMLLabelElement, FieldProps>((props, outerRef) => {
 			>
 				{labelText}
 				{labelAttrs.suffix}
-			</div>
+			</label>
 			<div className={`${prefixCls}-control`}>
 				<div className={`${prefixCls}-control-inner`}>
 					{isValidElement(children) &&
@@ -58,7 +60,7 @@ const Field = forwardRef<HTMLLabelElement, FieldProps>((props, outerRef) => {
 				</div>
 				{/* <div className={`${prefixCls}-message`}>is required</div> */}
 			</div>
-		</label>
+		</div>
 	)
 })
 

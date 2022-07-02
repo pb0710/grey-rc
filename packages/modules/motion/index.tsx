@@ -4,15 +4,14 @@ import { CSSTransitionProps } from 'react-transition-group/CSSTransition'
 import './stretch.scss'
 import './slip.scss'
 
-export { Fade, Grow, Slide, Zoom } from '@mui/material'
+import { Fade, Grow, Slide, Zoom } from '@mui/material'
 import { Collapse } from '@mui/material'
-export const CollapseMotion = Collapse
 
 type StretchProps = Omit<CSSTransitionProps, 'addEventListener'> & {
 	direction?: 'top' | 'bottom' | 'left' | 'right'
 }
 
-export const Stretch: FC<StretchProps> = props => {
+const Stretch: FC<StretchProps> = props => {
 	const { children, direction = 'top', ...rest } = props
 
 	return (
@@ -26,7 +25,7 @@ type SlipProps = Omit<CSSTransitionProps, 'addEventListener'> & {
 	direction?: 'top' | 'bottom' | 'left' | 'right'
 }
 
-export const Slip: FC<SlipProps> = props => {
+const Slip: FC<SlipProps> = props => {
 	const { children, direction = 'top', ...rest } = props
 
 	return (
@@ -35,3 +34,14 @@ export const Slip: FC<SlipProps> = props => {
 		</CSSTransition>
 	)
 }
+
+const Motion = {
+	Fade,
+	Grow,
+	Slide,
+	Zoom,
+	Collapse,
+	Stretch,
+	Slip
+}
+export default Motion

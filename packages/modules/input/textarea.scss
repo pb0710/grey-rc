@@ -36,8 +36,8 @@
 	&-focus,
 	&:active {
 		&:not(.g-textarea-disabled) {
-			box-shadow: inset 0 0 0 2px #1890ff;
-			border-color: #1890ff;
+			box-shadow: inset 0 0 0 2px $primary-color;
+			border-color: $primary-color;
 		}
 	}
 }

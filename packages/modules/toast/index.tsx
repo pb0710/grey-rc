@@ -5,7 +5,7 @@ import './toast.scss'
 import ToastItem, { ToastItemProps } from './ToastItem'
 import { createRoot, Root } from 'react-dom/client'
 import { TransitionGroup } from 'react-transition-group'
-import { Slip } from '../motion'
+import Motion from '../motion'
 
 const prefixCls = `${UI_PREFIX}-toast`
 
@@ -82,7 +82,7 @@ export const Toast: FC & {
 					{toastList
 						.filter(toast => toast.position === position)
 						.map(({ id, title, ...rest }) => (
-							<Slip key={id} direction={direction}>
+							<Motion.Slip key={id} direction={direction}>
 								<ToastItem
 									title={title}
 									onClose={() => {
@@ -90,7 +90,7 @@ export const Toast: FC & {
 									}}
 									{...rest}
 								/>
-							</Slip>
+							</Motion.Slip>
 						))}
 				</TransitionGroup>
 			</div>

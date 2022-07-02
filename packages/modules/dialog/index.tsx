@@ -8,7 +8,7 @@ import { mdiClose } from '@mdi/js'
 import Space from '../basic/Space'
 import Button from '../button'
 import Card from '../card'
-import { Zoom } from '../motion'
+import Motion from '../motion'
 
 interface DialogProps extends ModalProps {
 	hasCancel?: boolean
@@ -47,7 +47,7 @@ const Dialog: FC<DialogProps> = props => {
 			onCancel={onCancel}
 			{...rest}
 		>
-			<Zoom in={visible}>
+			<Motion.Zoom in={visible}>
 				<Card
 					className={cls(className, prefixCls)}
 					shadow
@@ -77,7 +77,7 @@ const Dialog: FC<DialogProps> = props => {
 				>
 					<div className={`${prefixCls}-content`}>{children}</div>
 				</Card>
-			</Zoom>
+			</Motion.Zoom>
 		</Modal>
 	)
 }

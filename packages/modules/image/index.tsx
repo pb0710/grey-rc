@@ -6,7 +6,7 @@ import {
 	mdiRestore,
 	mdiBackupRestore
 } from '@mdi/js'
-import { Zoom } from '../motion'
+import Motion from '../motion'
 import { useLatestRef } from 'grey-rh'
 import { cls } from 'grey-utils'
 import React, {
@@ -14,7 +14,6 @@ import React, {
 	ImgHTMLAttributes,
 	MouseEventHandler,
 	useCallback,
-	useEffect,
 	useRef,
 	useState,
 	WheelEventHandler
@@ -31,6 +30,7 @@ type Coordinate = {
 	y: number
 } | null
 interface ImageProps extends ImgHTMLAttributes<HTMLImageElement> {
+	detailSrc?: string
 	toolbarVisible?: boolean
 	detailDisabled?: boolean
 	scaleRange?: number[]
@@ -40,6 +40,7 @@ const Image = forwardRef<HTMLImageElement, ImageProps>((props, outerRef) => {
 	const {
 		className,
 		src,
+		detailSrc = src,
 		toolbarVisible = true,
 		detailDisabled = false,
 		scaleRange = [0.25, 0.5, 0.75, 1, 1.5, 2, 3, 5, 8],
@@ -106,12 +107,6 @@ const Image = forwardRef<HTMLImageElement, ImageProps>((props, outerRef) => {
 		setOffset(null)
 	}, [originalScaleIndex, updateScale])
 
-	useEffect(() => {
-		if (!detailVisible) {
-			handleReset()
-		}
-	}, [detailVisible, handleReset])
-
 	const handleShowRatio = () => {
 		setRatioVisible(true)
 
@@ -153,7 +148,7 @@ const Image = forwardRef<HTMLImageElement, ImageProps>((props, outerRef) => {
 	}
 	const toolbarEle = toolbarVisible && (
 		<div className={`${prefixCls}-detail-toolbar`}>
-			<Space>
+			<Space size="small">
 				<Tooltip spacing={12} placement="top" content="向左旋转90°">
 					<Icon {...toolbarProps} path={mdiRestore} onClick={() => setRotate(pre => pre - 90)} />
 				</Tooltip>
@@ -178,7 +173,7 @@ const Image = forwardRef<HTMLImageElement, ImageProps>((props, outerRef) => {
 
 	const detailEle = detailDisabled || (
 		<Modal visible={detailVisible} onCancel={hideDetail} onWheel={handleWheel}>
-			<Zoom in={detailVisible}>
+			<Motion.Zoom in={detailVisible} onExited={handleReset} exit={false}>
 				<div
 					className={`${prefixCls}-detail`}
 					onClick={event => {
@@ -191,7 +186,7 @@ const Image = forwardRef<HTMLImageElement, ImageProps>((props, outerRef) => {
 					<img
 						ref={imgDetailRef}
 						className={`${prefixCls}-detail-pic`}
-						src={src}
+						src={detailSrc}
 						draggable={false}
 						style={{
 							transform: `scale(${scale}) rotate(${rotate}deg)`,
@@ -206,7 +201,7 @@ const Image = forwardRef<HTMLImageElement, ImageProps>((props, outerRef) => {
 						onMouseDown={handleDragDetailStart}
 					/>
 				</div>
-			</Zoom>
+			</Motion.Zoom>
 			{ratioVisible && <div className={`${prefixCls}-detail-ratio`}>{scalePercent}</div>}
 			{toolbarEle}
 		</Modal>
@@ -223,7 +218,7 @@ const Image = forwardRef<HTMLImageElement, ImageProps>((props, outerRef) => {
 				src={src}
 				onClick={event => {
 					onClick?.(event)
-					setDetailVisible(pre => !pre)
+					setDetailVisible(true)
 				}}
 				{...rest}
 			/>

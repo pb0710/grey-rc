@@ -16,7 +16,7 @@ import { cls, is } from 'grey-utils'
 import { UI_PREFIX } from '../../constants'
 import './popup.scss'
 import { createPortal } from 'react-dom'
-import { Stretch } from '../motion'
+import Motion from '../motion'
 
 let visibleHandlers: ((event: globalThis.MouseEvent) => void)[] = []
 
@@ -234,7 +234,7 @@ const Popup: FC<PopupProps> = props => {
 	const portal = disabled
 		? null
 		: createPortal(
-				<Stretch
+				<Motion.Stretch
 					direction={stretchDirection}
 					in={_visible}
 					mountOnEnter
@@ -263,7 +263,7 @@ const Popup: FC<PopupProps> = props => {
 							{isValidElement(content) ? content : <div className={`${prefixCls}-inner`}>{content}</div>}
 						</div>
 					</div>
-				</Stretch>,
+				</Motion.Stretch>,
 				document.body
 		  )
 
