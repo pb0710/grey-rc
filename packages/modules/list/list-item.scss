@@ -5,7 +5,12 @@
 	align-items: center;
 	justify-content: space-between;
 	padding: 0 16px;
-	gap: 12px;
+	&-mr {
+		margin-right: 12px;
+	}
+	&-ml {
+		margin-left: 12px;
+	}
 	&-bordered {
 		& + .g-list-item {
 			border-top: 1px solid #ddd;

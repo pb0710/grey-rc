@@ -3,7 +3,6 @@
 	@include basic;
 	display: flex;
 	align-items: center;
-	gap: 12px;
 	&-track {
 		background: #eee;
 		border-radius: $round;
@@ -18,6 +17,9 @@
 		width: 100%;
 		.g-progress-track {
 			width: 100%;
+			&.g-progress-track-spacing {
+				margin-right: 12px;
+			}
 		}
 		.g-progress-text {
 			min-width: 56px;
@@ -28,6 +30,9 @@
 		height: 100%;
 		.g-progress-track {
 			height: 100%;
+			&.g-progress-track-spacing {
+				margin-bottom: 12px;
+			}
 		}
 	}
 	&-small {

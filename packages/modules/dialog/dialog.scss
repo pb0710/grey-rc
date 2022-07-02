@@ -5,10 +5,10 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: baseline;
-		gap: 8px;
 		padding: 24px 24px 0 24px;
 		&-title {
 			font-size: 20px;
+			margin-right: 16px;
 		}
 		&-close-icon {
 			background: #fff;

@@ -3,7 +3,6 @@
 	@include basic;
 	display: inline-flex;
 	align-items: center;
-	gap: 8px;
 	user-select: none;
 	transition: filter 0.1s;
 	&-inner {
@@ -20,6 +19,7 @@
 		border-radius: $round;
 		background: #fff;
 		transition: all ease-out 0.1s;
+		margin-right: 8px;
 		&::after {
 			content: '';
 			border-radius: $round;
@@ -79,6 +79,7 @@
 			}
 		}
 	}
+
 	&-tab {
 		@include basic;
 		display: inline-flex;

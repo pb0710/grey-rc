@@ -54,7 +54,7 @@ const Progress = forwardRef<HTMLDivElement, ProgressProps>((props, outerRef) => 
 			className={cls(className, prefixCls, `${prefixCls}-${size}`, `${prefixCls}-${direction}`)}
 			{...rest}
 		>
-			<div className={`${prefixCls}-track`}>
+			<div className={cls(`${prefixCls}-track`, { 'g-progress-track-spacing': !is.null(format) })}>
 				<div className={`${prefixCls}-inset`} style={rectStyle}></div>
 			</div>
 			{is.null(format) || (

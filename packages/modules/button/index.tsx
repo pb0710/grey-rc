@@ -36,6 +36,30 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
 	const prefixCls = `${UI_PREFIX}-button`
 	const loadEle = <Loading size="inherit" style={{ color: 'inherit' }} />
 
+	const renderInnerEle = () => {
+		if (loading) {
+			if (circle || square) {
+				return loadEle
+			}
+			return (
+				<>
+					{loadEle}
+					<span className="g-button-inner-ml">{children}</span>
+				</>
+			)
+		}
+
+		if (icon) {
+			return (
+				<>
+					{icon}
+					<span className="g-button-inner-ml">{children}</span>
+				</>
+			)
+		}
+		return children
+	}
+
 	return (
 		<button
 			className={cls(className, prefixCls, `${prefixCls}-${size}`, {
@@ -50,23 +74,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
 			type={type}
 			{...rest}
 		>
-			{loading ? (
-				circle || square ? (
-					loadEle
-				) : (
-					<>
-						{loadEle}
-						{children}
-					</>
-				)
-			) : icon ? (
-				<>
-					{icon}
-					{children}
-				</>
-			) : (
-				children
-			)}
+			{renderInnerEle()}
 		</button>
 	)
 })

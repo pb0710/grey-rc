@@ -4,7 +4,6 @@
 	position: relative;
 	display: inline-flex;
 	align-items: center;
-	gap: 8px;
 	user-select: none;
 	transition: filter 0.1s;
 	&-input {
@@ -21,6 +20,7 @@
 		border-radius: 2px;
 		background: #fff;
 		transition: all ease-out 0.1s;
+		margin-right: 8px;
 		&-inner {
 			color: #fff;
 			transition: all ease-out 0.1s;

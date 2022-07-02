@@ -65,6 +65,37 @@ const RadioGroup = forwardRef<HTMLDivElement, RadioGroupProps>((props, outerRef)
 		return { defaultValue: defaultValue !== label }
 	}
 
+	const radiosEle = (
+		<>
+			{options.map(option => {
+				return (
+					<Radio
+						key={option.label}
+						label={option.label}
+						size={size}
+						type={type}
+						disabled={disabled || option.disabled}
+						onChange={getHandleSubChange(option.label)}
+						{...getValueProps(option.label)}
+					>
+						{option.child}
+					</Radio>
+				)
+			})}
+			{Children.map(children, child =>
+				isValidElement<RadioProps>(child)
+					? cloneElement(child, {
+							size,
+							type,
+							disabled: disabled || child.props.disabled,
+							onChange: getHandleSubChange(child.props.label),
+							...getValueProps(child.props.label)
+					  })
+					: child
+			)}
+		</>
+	)
+
 	return (
 		<div
 			ref={outerRef}
@@ -74,34 +105,7 @@ const RadioGroup = forwardRef<HTMLDivElement, RadioGroupProps>((props, outerRef)
 			})}
 			{...rest}
 		>
-			<Space direction={direction} style={{ gap: isTab ? 2 : 12, background: 'inherit' }}>
-				{options.map(option => {
-					return (
-						<Radio
-							key={option.label}
-							label={option.label}
-							size={size}
-							type={type}
-							disabled={disabled || option.disabled}
-							onChange={getHandleSubChange(option.label)}
-							{...getValueProps(option.label)}
-						>
-							{option.child}
-						</Radio>
-					)
-				})}
-				{Children.map(children, child =>
-					isValidElement<RadioProps>(child)
-						? cloneElement(child, {
-								size,
-								type,
-								disabled: disabled || child.props.disabled,
-								onChange: getHandleSubChange(child.props.label),
-								...getValueProps(child.props.label)
-						  })
-						: child
-				)}
-			</Space>
+			{isTab ? <div>{radiosEle}</div> : <Space direction={direction}>{radiosEle}</Space>}
 		</div>
 	)
 })
