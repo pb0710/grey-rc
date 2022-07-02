@@ -62,7 +62,7 @@ const RadioGroup = forwardRef<HTMLDivElement, RadioGroupProps>((props, outerRef)
 
 		if (isControlled) return { value: value === label }
 
-		return { defaultValue: defaultValue !== label }
+		return { defaultValue: defaultValue === label }
 	}
 
 	const radiosEle = (
