@@ -6,11 +6,21 @@
 	@include basic;
 	display: flex;
 	justify-content: center;
+	&-loading-icon {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%,-50%);
+	}
 	&-pic {
 		max-width: 90vw;
 		max-height: calc(100vh - 240px);
 		user-select: none;
 		transition: transform 0.2s ease-out;
+		opacity: 0;
+		&-loaded {
+			opacity: 1;
+		}
 	}
 	&-icon {
 		background: #fff;

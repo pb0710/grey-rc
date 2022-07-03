@@ -27,7 +27,7 @@ const TabPanel = forwardRef<HTMLDivElement, TabPanelProps>((props, outerRef) => 
 	if (lazyLoad && !isActive) {
 		return null
 	}
-	// TODO:
+
 	return (
 		<div
 			ref={outerRef}

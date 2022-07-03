@@ -7,8 +7,8 @@ import {
 	mdiBackupRestore
 } from '@mdi/js'
 import Motion from '../motion'
-import { useLatestRef } from 'grey-rh'
-import { cls } from 'grey-utils'
+import { useBoolean, useLatestRef } from 'grey-rh'
+import { cls, is } from 'grey-utils'
 import React, {
 	forwardRef,
 	ImgHTMLAttributes,
@@ -18,19 +18,20 @@ import React, {
 	useState,
 	WheelEventHandler
 } from 'react'
+import './image.scss'
 import { UI_PREFIX } from '../../constants'
 import Icon from '../basic/Icon'
 import Space from '../basic/Space'
 import Modal from '../modal'
 import Tooltip from '../tooltip'
-import './image.scss'
+import Loading from '../loading'
 
 type Coordinate = {
 	x: number
 	y: number
 } | null
 interface ImageProps extends ImgHTMLAttributes<HTMLImageElement> {
-	detailSrc?: string
+	detailSrc?: string | (() => Promise<string>)
 	toolbarVisible?: boolean
 	detailDisabled?: boolean
 	scaleRange?: number[]
@@ -39,7 +40,7 @@ interface ImageProps extends ImgHTMLAttributes<HTMLImageElement> {
 const Image = forwardRef<HTMLImageElement, ImageProps>((props, outerRef) => {
 	const {
 		className,
-		src,
+		src = '',
 		detailSrc = src,
 		toolbarVisible = true,
 		detailDisabled = false,
@@ -52,7 +53,7 @@ const Image = forwardRef<HTMLImageElement, ImageProps>((props, outerRef) => {
 	const imgRef = outerRef || innerRef
 	const imgDetailRef = useRef<HTMLImageElement>(null)
 
-	const [detailVisible, setDetailVisible] = useState(false)
+	const [detailVisible, { setTrue: showDetail, setFalse: hideDetail }] = useBoolean(false)
 
 	const scaleRangeRef = useLatestRef(scaleRange)
 	const originalScaleIndex = scaleRangeRef.current.indexOf(1)
@@ -61,8 +62,11 @@ const Image = forwardRef<HTMLImageElement, ImageProps>((props, outerRef) => {
 
 	const [rotate, setRotate] = useState(0)
 	const [offset, setOffset] = useState<Coordinate>(null)
-	const [ratioVisible, setRatioVisible] = useState(false)
+	const [ratioVisible, { setTrue: showRatio, setFalse: hideRatio }] = useBoolean(false)
 	const delayTimerRef = useRef(0)
+
+	const [detailLoaded, { setTrue: handleDetailLoaded }] = useBoolean(false)
+	const [_detailSrc, _setDetailSrc] = useState('')
 
 	const handleDragDetailStart: MouseEventHandler<HTMLImageElement> = event => {
 		let dragging = true
@@ -102,28 +106,48 @@ const Image = forwardRef<HTMLImageElement, ImageProps>((props, outerRef) => {
 	)
 
 	const handleReset = useCallback(() => {
+		if (!detailLoaded) return
+
 		updateScale(() => originalScaleIndex)
 		setRotate(0)
 		setOffset(null)
-	}, [originalScaleIndex, updateScale])
+	}, [detailLoaded, originalScaleIndex, updateScale])
 
 	const handleShowRatio = () => {
-		setRatioVisible(true)
+		if (!detailLoaded) return
+
+		showRatio()
 
 		const ONE_SECOND = 1000
 		clearTimeout(delayTimerRef.current)
 		delayTimerRef.current = window.setTimeout(() => {
-			setRatioVisible(false)
+			hideRatio()
 		}, ONE_SECOND)
 	}
 
 	const handleZoom = () => {
+		if (!detailLoaded) return
+
 		updateScale(pre => pre + 1)
 		handleShowRatio()
 	}
 	const handleShrink = () => {
+		if (!detailLoaded) return
+
 		updateScale(pre => pre - 1)
 		handleShowRatio()
+	}
+
+	const handleLeftRotate = () => {
+		if (!detailLoaded) return
+
+		setRotate(pre => pre - 90)
+	}
+
+	const handleRightRotate = () => {
+		if (!detailLoaded) return
+
+		setRotate(pre => pre + 90)
 	}
 
 	const handleWheel: WheelEventHandler<HTMLElement> = event => {
@@ -132,10 +156,6 @@ const Image = forwardRef<HTMLImageElement, ImageProps>((props, outerRef) => {
 		} else {
 			handleZoom()
 		}
-	}
-
-	const hideDetail = () => {
-		setDetailVisible(false)
 	}
 
 	const prefixCls = `${UI_PREFIX}-image`
@@ -150,10 +170,10 @@ const Image = forwardRef<HTMLImageElement, ImageProps>((props, outerRef) => {
 		<div className={`${prefixCls}-detail-toolbar`}>
 			<Space size="small">
 				<Tooltip spacing={12} placement="top" content="向左旋转90°">
-					<Icon {...toolbarProps} path={mdiRestore} onClick={() => setRotate(pre => pre - 90)} />
+					<Icon {...toolbarProps} path={mdiRestore} onClick={handleLeftRotate} />
 				</Tooltip>
 				<Tooltip spacing={12} placement="top" content="向右旋转90°">
-					<Icon {...toolbarProps} path={mdiReload} onClick={() => setRotate(pre => pre + 90)} />
+					<Icon {...toolbarProps} path={mdiReload} onClick={handleRightRotate} />
 				</Tooltip>
 				<Tooltip spacing={12} placement="top" content="缩小">
 					<Icon {...toolbarProps} path={mdiMagnifyMinusOutline} onClick={handleShrink} />
@@ -171,6 +191,8 @@ const Image = forwardRef<HTMLImageElement, ImageProps>((props, outerRef) => {
 		</div>
 	)
 
+	const detailLoading = !_detailSrc || !detailLoaded
+
 	const detailEle = detailDisabled || (
 		<Modal visible={detailVisible} onCancel={hideDetail} onWheel={handleWheel}>
 			<Motion.Zoom in={detailVisible} onExited={handleReset} exit={false}>
@@ -183,10 +205,13 @@ const Image = forwardRef<HTMLImageElement, ImageProps>((props, outerRef) => {
 						}
 					}}
 				>
+					{detailLoading && <Loading className={`${prefixCls}-detail-loading-icon`} size="large" />}
 					<img
 						ref={imgDetailRef}
-						className={`${prefixCls}-detail-pic`}
-						src={detailSrc}
+						className={cls(`${prefixCls}-detail-pic`, {
+							[`${prefixCls}-detail-pic-loaded`]: !detailLoading
+						})}
+						src={_detailSrc}
 						draggable={false}
 						style={{
 							transform: `scale(${scale}) rotate(${rotate}deg)`,
@@ -199,6 +224,7 @@ const Image = forwardRef<HTMLImageElement, ImageProps>((props, outerRef) => {
 								: {})
 						}}
 						onMouseDown={handleDragDetailStart}
+						onLoad={handleDetailLoaded}
 					/>
 				</div>
 			</Motion.Zoom>
@@ -218,7 +244,16 @@ const Image = forwardRef<HTMLImageElement, ImageProps>((props, outerRef) => {
 				src={src}
 				onClick={event => {
 					onClick?.(event)
-					setDetailVisible(true)
+
+					if (is.string(detailSrc)) {
+						_setDetailSrc(detailSrc)
+						showDetail()
+					} else {
+						detailSrc().then(url => {
+							_setDetailSrc(url)
+							showDetail()
+						})
+					}
 				}}
 				{...rest}
 			/>

@@ -4,13 +4,13 @@ import React, {
 	forwardRef,
 	MutableRefObject,
 	TextareaHTMLAttributes,
-	useRef,
-	useState
+	useRef
 } from 'react'
 import { cls, is } from 'grey-utils'
 import './textarea.scss'
 import TextareaAutosize from 'react-textarea-autosize'
 import { UI_PREFIX } from '../../constants'
+import { useBoolean } from 'grey-rh'
 
 interface TextareaProps extends Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, 'style'> {
 	autosize?: boolean
@@ -40,7 +40,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>((props, outerRef
 
 	const innerRef = useRef<HTMLTextAreaElement>(null)
 	const textareaRef = (outerRef || innerRef) as MutableRefObject<null>
-	const [focus, setFocus] = useState(false)
+	const [focus, { setTrue: setFocus, setFalse: setBlur }] = useBoolean(false)
 	const isControlled = !is.undefined(value)
 
 	const handleChange: ChangeEventHandler<HTMLTextAreaElement> = event => {
@@ -50,12 +50,12 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>((props, outerRef
 
 	const handleFocus: FocusEventHandler<HTMLTextAreaElement> = event => {
 		onFocus?.(event)
-		setFocus(true)
+		setFocus()
 	}
 
 	const handleBlur: FocusEventHandler<HTMLTextAreaElement> = event => {
 		onBlur?.(event)
-		setFocus(false)
+		setBlur()
 	}
 
 	const TextareaComp = autosize ? TextareaAutosize : 'textarea'

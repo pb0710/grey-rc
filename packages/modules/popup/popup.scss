@@ -1,9 +1,11 @@
 @use '../../styles/mixins.scss' as *;
 .g-popup {
-	@include basic;
-	z-index: 2000;
-	position: absolute;
-	&-inner {
+	&-content {
+		@include basic;
+		z-index: 2000;
+		position: absolute;
+	}
+	&-default {
 		padding: 12px 24px;
 		border: 1px solid #ddd;
 		border-bottom-color: #ccc;

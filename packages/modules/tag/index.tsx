@@ -1,9 +1,10 @@
-import React, { FC, forwardRef, HTMLAttributes, useState } from 'react'
+import React, { forwardRef, HTMLAttributes } from 'react'
 import { cls } from 'grey-utils'
 import { UI_PREFIX } from '../../constants'
 import './tag.scss'
 import Icon from '../basic/Icon'
 import { mdiClose, mdiLoading } from '@mdi/js'
+import { useBoolean } from 'grey-rh'
 
 interface TagProps extends HTMLAttributes<HTMLDivElement> {
 	size?: 'small' | 'medium' | 'large'
@@ -32,7 +33,7 @@ const Tag = forwardRef<HTMLDivElement, TagProps>((props, outerRef) => {
 		...rest
 	} = props
 
-	const [loading, setLoading] = useState(false)
+	const [loading, { setTrue: showLoading, setFalse: hideLoading }] = useBoolean(false)
 
 	const prefixCls = `${UI_PREFIX}-tag`
 
@@ -62,9 +63,9 @@ const Tag = forwardRef<HTMLDivElement, TagProps>((props, outerRef) => {
 							onClick={() => {
 								const res = onClose?.()
 								if (res instanceof Promise) {
-									setLoading(true)
+									showLoading()
 									res.then(() => {
-										setLoading(false)
+										hideLoading()
 									})
 								}
 							}}

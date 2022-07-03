@@ -1,4 +1,5 @@
 import { mdiCloseCircle } from '@mdi/js'
+import { useBoolean } from 'grey-rh'
 import { cls, is } from 'grey-utils'
 import React, {
 	ChangeEvent,
@@ -10,8 +11,7 @@ import React, {
 	MutableRefObject,
 	ReactNode,
 	useEffect,
-	useRef,
-	useState
+	useRef
 } from 'react'
 import { UI_PREFIX } from '../../constants'
 import Icon from '../basic/Icon'
@@ -50,17 +50,17 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props, outerRef) => {
 
 	const ref = useRef<HTMLInputElement>(null)
 	const inputRef = (outerRef ?? ref) as MutableRefObject<HTMLInputElement>
-	const [focus, setFocus] = useState(false)
-	const [clearVisible, setClearVisible] = useState(false)
+	const [focus, { setTrue: setFocus, setFalse: setBlur }] = useBoolean(false)
+	const [clearVisible, { setTrue: showClear, setFalse: hideClear, setBool: setClearVisible }] = useBoolean(false)
 	const isControlled = !is.undefined(value)
 
 	const handleFocus: FocusEventHandler<HTMLInputElement> = event => {
 		onFocus?.(event)
-		setFocus(true)
+		setFocus()
 	}
 	const handleBlur: FocusEventHandler<HTMLInputElement> = event => {
 		onBlur?.(event)
-		setFocus(false)
+		setBlur()
 	}
 	const handleChange: ChangeEventHandler<HTMLInputElement> = event => {
 		const { value } = event.target
@@ -76,7 +76,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props, outerRef) => {
 			inputRef.current.value = ''
 			onChange?.({ target: inputRef.current } as ChangeEvent<HTMLInputElement>)
 		}
-		setClearVisible(false)
+		hideClear()
 	}
 
 	const handleMouseDown: MouseEventHandler<HTMLElement> = event => {
@@ -86,8 +86,8 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props, outerRef) => {
 	}
 
 	useEffect(() => {
-		if (defaultValue) setClearVisible(true)
-	}, [defaultValue])
+		if (defaultValue) showClear()
+	}, [defaultValue, showClear])
 
 	const prefixCls = `${UI_PREFIX}-input`
 

@@ -5,7 +5,7 @@ import { createPortal } from 'react-dom'
 import { UI_PREFIX } from '../../constants'
 import './modal.scss'
 
-// TODO:
+// TODO: 弹出位置动画
 let mousePosition: { x: number; y: number } | null = null
 if (document) {
 	document.addEventListener('click', event => {

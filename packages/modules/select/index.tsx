@@ -16,6 +16,7 @@ import { SelectCtx } from './SelectCtx'
 import Option, { OptionProps } from './Option'
 import Icon from '../basic/Icon'
 import { mdiChevronDown } from '@mdi/js'
+import { useBoolean } from 'grey-rh'
 
 interface SelectProps extends Omit<HTMLAttributes<HTMLElement>, 'onChange'> {
 	block?: boolean
@@ -28,7 +29,7 @@ interface SelectProps extends Omit<HTMLAttributes<HTMLElement>, 'onChange'> {
 const Select = forwardRef<HTMLDivElement, SelectProps>((props, outerRef) => {
 	const { className, children, placeholder = '', value, onChange, block = false, multiple = false, ...rest } = props
 
-	const [visible, setVisible] = useState(false)
+	const [visible, { setFalse: hide, setBool: setVisible }] = useBoolean(false)
 	const defaultSelection = is.array(value) ? value : value ? [value] : []
 	const [selection, setSelection] = useState<(string | number)[]>(defaultSelection)
 
@@ -38,7 +39,7 @@ const Select = forwardRef<HTMLDivElement, SelectProps>((props, outerRef) => {
 	const [selectionLabel, setSelectionLabel] = useState<ReactNode>(null)
 
 	const handleHideDrop = () => {
-		setVisible(false)
+		hide()
 	}
 
 	const updateSelection = (val: string | number) => {

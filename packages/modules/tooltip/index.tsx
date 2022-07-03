@@ -9,7 +9,7 @@ interface TooltipProps extends PopupProps {
 }
 
 const Tooltip: FC<TooltipProps> = props => {
-	const { children, className, content, light = false, ...rest } = props
+	const { children, className, content, light = false, placement = 'top', ...rest } = props
 
 	const prefixCls = `${UI_PREFIX}-tooltip`
 
@@ -18,7 +18,7 @@ const Tooltip: FC<TooltipProps> = props => {
 	)
 
 	return (
-		<Popup className={cls(className, prefixCls)} content={contentEle} {...rest}>
+		<Popup className={cls(className, prefixCls)} content={contentEle} placement={placement} {...rest}>
 			{children}
 		</Popup>
 	)

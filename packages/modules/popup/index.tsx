@@ -65,8 +65,8 @@ const Popup: FC<PopupProps> = props => {
 		...rest
 	} = props
 
-	const wrapRef = useRef<HTMLElement>(null)
-	const popupRef = useRef<HTMLDivElement>(null)
+	const triggerRef = useRef<HTMLElement>(null)
+	const contentRef = useRef<HTMLDivElement>(null)
 
 	const isHover = trigger === 'hover'
 	const isClick = trigger === 'click'
@@ -78,8 +78,8 @@ const Popup: FC<PopupProps> = props => {
 	}, [isManual, visible])
 
 	const visibleHandlerRef = useRef((event: globalThis.MouseEvent) => {
-		const isInPopup = popupRef.current?.contains(event.target as Node)
-		const isInWrap = wrapRef.current?.contains(event.target as Node)
+		const isInPopup = contentRef.current?.contains(event.target as Node)
+		const isInWrap = triggerRef.current?.contains(event.target as Node)
 
 		if (isInPopup) return
 		if (isInWrap) {
@@ -99,8 +99,6 @@ const Popup: FC<PopupProps> = props => {
 	})
 
 	const [top, setTop] = useState<number | null>(null)
-	const [bottom, setBottom] = useState<number | null>(null)
-	const [right, setRight] = useState<number | null>(null)
 	const [left, setLeft] = useState<number | null>(null)
 
 	let stretchDirection: 'left' | 'top' | 'right' | 'bottom' = 'bottom'
@@ -120,91 +118,90 @@ const Popup: FC<PopupProps> = props => {
 	}
 
 	const updatePopupPos = useCallback(() => {
-		if (wrapRef.current && popupRef.current) {
+		if (triggerRef.current && contentRef.current) {
 			let left: number | undefined
 			let top: number | undefined
-			let right: number | undefined
-			let bottom: number | undefined
 
-			const wRect = wrapRef.current.getBoundingClientRect()
-			const { width: ww, height: wh, left: wl, top: wt } = wRect
-			const wb = window.innerHeight - wRect.bottom
-			const wr = window.innerWidth - wRect.right
+			// TODO: content 触及边界自动调整其位置
+			// clientHeight 考虑横向滚动条对高度的影响
+			// const windowHeight = document.documentElement?.clientHeight || window.innerHeight
+			// const windowWidth = document.documentElement?.clientWidth || window.innerWidth
 
-			const { width: pw, height: ph } = popupRef.current.getBoundingClientRect()
+			const { width: tw, height: th } = triggerRef.current.getBoundingClientRect()
+			let { left: tl, top: tt } = triggerRef.current.getBoundingClientRect()
+			tl += window.scrollX
+			tt += window.scrollY
+
+			const cw = contentRef.current.clientWidth
+			const ch = contentRef.current.clientHeight
 
 			switch (placement) {
 				case 'top-start':
-					left = wl
-					bottom = wb + wh
+					top = tt - ch
+					left = tl
 					break
 				case 'top':
-					left = wl - (pw - ww) / 2
-					bottom = wb + wh
+					top = tt - ch
+					left = tl + tw / 2 - cw / 2
 					break
 				case 'top-end':
-					left = wl + ww - pw
-					bottom = wb + wh
+					top = tt - ch
+					left = tl + tw - cw
 					break
 				case 'left-start':
-					right = wr + ww
-					top = wt
+					top = tt
+					left = tl - cw
 					break
 				case 'right-start':
-					left = wl + ww
-					top = wt
+					top = tt
+					left = tw + tl
 					break
 				case 'left':
-					right = wr + ww
-					top = wt - (ph - wh) / 2
+					top = tt + th / 2 - ch / 2
+					left = tl - cw
 					break
 				case 'right':
-					left = wl + ww
-					top = wt - (ph - wh) / 2
+					top = tt + th / 2 - ch / 2
+					left = tw + tl
 					break
 				case 'left-end':
-					right = wr + ww
-					top = wt + wh - ph
+					top = tt + th - ch
+					left = tl - cw
 					break
 				case 'right-end':
-					left = wl + ww
-					top = wt + wh - ph
+					top = tt + th - ch
+					left = tw + tl
 					break
 				case 'bottom-start':
-					left = wl
-					top = wt + wh
+					top = th + tt
+					left = tl
 					break
 				case 'bottom':
-					left = wl - (pw - ww) / 2
-					top = wt + wh
+					top = th + tt
+					left = tl + tw / 2 - cw / 2
 					break
 				case 'bottom-end':
-					left = wl + ww - pw
-					top = wt + wh
+					top = th + tt
+					left = tl + tw - cw
 					break
-
 				default:
 					break
 			}
 
 			if (!is.undefined(left)) setLeft(left)
 			if (!is.undefined(top)) setTop(top)
-			if (!is.undefined(right)) setRight(right)
-			if (!is.undefined(bottom)) setBottom(bottom)
 		}
 	}, [placement])
 
 	const popupStyle = {
 		...style,
 		...(is.number(left) ? { left } : {}),
-		...(is.number(right) ? { right } : {}),
-		...(is.number(top) ? { top } : {}),
-		...(is.number(bottom) ? { bottom } : {})
+		...(is.number(top) ? { top } : {})
 	}
 
 	const prefixCls = `${UI_PREFIX}-popup`
 
-	const getWrapProps = (onEnter?: MouseEventHandler, onLeave?: MouseEventHandler) => {
+	const getTriggerProps = (onEnter?: MouseEventHandler, onLeave?: MouseEventHandler) => {
 		if (isHover)
 			return {
 				onMouseEnter(event: MouseEvent) {
@@ -242,25 +239,27 @@ const Popup: FC<PopupProps> = props => {
 					onEnter={updatePopupPos}
 					onExited={() => {
 						setTop(null)
-						setBottom(null)
 						setLeft(null)
-						setRight(null)
 					}}
 				>
 					<div
-						ref={popupRef}
-						className={cls(className, prefixCls)}
+						ref={contentRef}
+						className={cls(className, `${prefixCls}-content`)}
 						style={popupStyle}
-						{...getWrapProps(onMouseEnter, onMouseLeave)}
+						{...getTriggerProps(onMouseEnter, onMouseLeave)}
 						{...rest}
 					>
 						<div
-							className={`${prefixCls}-content`}
+							className={`${prefixCls}-content-inner`}
 							style={{
 								[spacingName]: spacing
 							}}
 						>
-							{isValidElement(content) ? content : <div className={`${prefixCls}-inner`}>{content}</div>}
+							{isValidElement(content) ? (
+								content
+							) : (
+								<div className={`${prefixCls}-default`}>{content}</div>
+							)}
 						</div>
 					</div>
 				</Motion.Stretch>,
@@ -273,8 +272,8 @@ const Popup: FC<PopupProps> = props => {
 		<>
 			{isValidElement(child) &&
 				cloneElement(child, {
-					ref: wrapRef,
-					...getWrapProps(child.props.onMouseEnter, child.props.onMouseLeave)
+					ref: triggerRef,
+					...getTriggerProps(child.props.onMouseEnter, child.props.onMouseLeave)
 				})}
 			{portal}
 		</>
