@@ -1,6 +1,6 @@
 import Motion from '../motion'
 import { cls } from 'grey-utils'
-import React, { FC, HTMLAttributes, useEffect, useRef } from 'react'
+import React, { FC, HTMLAttributes, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import { UI_PREFIX } from '../../constants'
 import './modal.scss'
@@ -46,7 +46,7 @@ const Modal: FC<ModalProps> = props => {
 	return createPortal(
 		<Motion.Fade in={visible} mountOnEnter onEnter={setBodyOverflowHidden} onExited={resetBodyOverflowHidden}>
 			<div className={cls(className, prefixCls)} {...rest}>
-				<div className={cls(maskClassName, `${prefixCls}-mask`, { blur: visible })}></div>
+				<div className={cls(maskClassName, `${prefixCls}-mask`)}></div>
 				<div
 					className={`${prefixCls}-wrap`}
 					onClick={

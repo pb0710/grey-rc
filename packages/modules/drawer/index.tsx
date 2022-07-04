@@ -66,7 +66,7 @@ const Drawer: FC<DrawerProps> = props => {
 		>
 			<div className={prefixCls}>
 				<div
-					className={cls(maskClassName, `${prefixCls}-mask`, { blur: visible })}
+					className={cls(maskClassName, `${prefixCls}-mask`)}
 					onClick={() => {
 						if (maskClosable) onCancel?.()
 					}}
