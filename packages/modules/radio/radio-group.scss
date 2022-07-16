@@ -8,6 +8,6 @@
 		display: inline-flex;
 		background: #eee;
 		padding: 2px;
-		border-radius: 6px;
+		border-radius: calc($radius-m + 2px);
 	}
 }

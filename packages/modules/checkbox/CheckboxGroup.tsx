@@ -10,7 +10,7 @@ import React, {
 } from 'react'
 import Checkbox, { CheckboxProps } from '.'
 import { UI_PREFIX } from '../../constants'
-import Space from '../basic/Space'
+import Space from '../space'
 import './checkbox-group.scss'
 
 interface CheckboxGroupProps extends Omit<HTMLAttributes<HTMLElement>, 'onChange' | 'defaultValue'> {

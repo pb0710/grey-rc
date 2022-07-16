@@ -14,7 +14,7 @@ import React, {
 	useRef
 } from 'react'
 import { UI_PREFIX } from '../../constants'
-import Icon from '../basic/Icon'
+import Icon from '../icon'
 import './input.scss'
 import Textarea from './Textarea'
 

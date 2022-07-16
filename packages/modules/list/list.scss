@@ -4,6 +4,6 @@
 	background: #fff;
 	&-bordered {
 		border: 1px solid #ddd;
-		border-radius: 6px;
+		border-radius: $radius-l;
 	}
 }

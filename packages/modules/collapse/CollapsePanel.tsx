@@ -1,7 +1,7 @@
 import { mdiChevronDown } from '@mdi/js'
 import { cls, is, omit } from 'grey-utils'
 import React, { FC, HTMLAttributes, ReactNode } from 'react'
-import Icon from '../basic/Icon'
+import Icon from '../icon'
 import './collapse-panel.scss'
 import { UI_PREFIX } from '../../constants'
 import Motion from '../motion'

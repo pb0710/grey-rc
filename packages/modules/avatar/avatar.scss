@@ -5,7 +5,7 @@
 	display: inline-flex;
 	justify-content: center;
 	align-items: center;
-	border-radius: 4px;
+	border-radius: $radius-m;
 	color: #fff;
 	&-img {
 		width: 100%;
@@ -25,7 +25,7 @@
 		line-height: 1.4em;
 	}
 	&-round {
-		border-radius: 50%;
+		border-radius: $round;
 	}
 	&-small {
 		width: 24px;

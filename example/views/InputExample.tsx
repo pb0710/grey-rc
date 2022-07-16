@@ -1,9 +1,9 @@
 import React, { useRef, useState } from 'react'
 import Input from '../../packages/modules/input'
-import Space from '../../packages/modules/basic/Space'
+import Space from '../../packages/modules/space'
 import { mdiArrowUp, mdiMagnify } from '@mdi/js'
-import Icon from '../../packages/modules/basic/Icon'
-import Divider from '../../packages/modules/basic/Divider'
+import Icon from '../../packages/modules/icon'
+import Divider from '../../packages/modules/divider'
 import Button from '../../packages/modules/button'
 
 const InputExample = () => {

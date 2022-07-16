@@ -4,7 +4,8 @@ import {
 	mdiMagnifyPlusOutline,
 	mdiReload,
 	mdiRestore,
-	mdiBackupRestore
+	mdiBackupRestore,
+	mdiDownloadOutline
 } from '@mdi/js'
 import Motion from '../motion'
 import { useBoolean, useLatestRef } from 'grey-rh'
@@ -20,8 +21,8 @@ import React, {
 } from 'react'
 import './image.scss'
 import { UI_PREFIX } from '../../constants'
-import Icon from '../basic/Icon'
-import Space from '../basic/Space'
+import Icon from '../icon'
+import Space from '../space'
 import Modal from '../modal'
 import Tooltip from '../tooltip'
 import Loading from '../loading'
@@ -150,6 +151,29 @@ const Image = forwardRef<HTMLImageElement, ImageProps>((props, outerRef) => {
 		setRotate(pre => pre + 90)
 	}
 
+	const handleDownload = () => {
+		if (!detailLoaded) return
+
+		if (_detailSrc) {
+			const image = new window.Image()
+			image.setAttribute('crossOrigin', 'anonymous')
+			image.onload = function (): void {
+				const canvas = document.createElement('canvas')
+				canvas.width = image.width
+				canvas.height = image.height
+				const context = canvas.getContext('2d') as CanvasRenderingContext2D
+				context.drawImage(image, 0, 0, image.width, image.height)
+				const url = canvas.toDataURL('image/png')
+				const a = document.createElement('a')
+				const event = new MouseEvent('click')
+				a.download = 'picture'
+				a.href = url
+				a.dispatchEvent(event)
+			}
+			image.src = _detailSrc
+		}
+	}
+
 	const handleWheel: WheelEventHandler<HTMLElement> = event => {
 		if (event.deltaY < 0) {
 			handleShrink()
@@ -161,32 +185,64 @@ const Image = forwardRef<HTMLImageElement, ImageProps>((props, outerRef) => {
 	const prefixCls = `${UI_PREFIX}-image`
 	const scalePercent = `${scale * 100}%`
 
-	const toolbarProps = {
-		className: `${prefixCls}-detail-icon`,
-		size: '20px',
-		canHover: true
-	}
+	const toolbarList = [
+		{
+			id: 0,
+			content: '向左旋转90°',
+			iconPath: mdiRestore,
+			clickHandler: handleLeftRotate
+		},
+		{
+			id: 1,
+			content: '向右旋转90°',
+			iconPath: mdiReload,
+			clickHandler: handleRightRotate
+		},
+		{
+			id: 2,
+			content: '缩小',
+			iconPath: mdiMagnifyMinusOutline,
+			clickHandler: handleShrink
+		},
+		{
+			id: 3,
+			content: '放大',
+			iconPath: mdiMagnifyPlusOutline,
+			clickHandler: handleZoom
+		},
+		{
+			id: 4,
+			content: '重置',
+			iconPath: mdiBackupRestore,
+			clickHandler: handleReset
+		},
+		{
+			id: 5,
+			content: '下载',
+			iconPath: mdiDownloadOutline,
+			clickHandler: handleDownload
+		},
+		{
+			id: 6,
+			content: '关闭',
+			iconPath: mdiClose,
+			clickHandler: hideDetail
+		}
+	]
 	const toolbarEle = toolbarVisible && (
 		<div className={`${prefixCls}-detail-toolbar`}>
 			<Space size="small">
-				<Tooltip spacing={12} placement="top" content="向左旋转90°">
-					<Icon {...toolbarProps} path={mdiRestore} onClick={handleLeftRotate} />
-				</Tooltip>
-				<Tooltip spacing={12} placement="top" content="向右旋转90°">
-					<Icon {...toolbarProps} path={mdiReload} onClick={handleRightRotate} />
-				</Tooltip>
-				<Tooltip spacing={12} placement="top" content="缩小">
-					<Icon {...toolbarProps} path={mdiMagnifyMinusOutline} onClick={handleShrink} />
-				</Tooltip>
-				<Tooltip spacing={12} placement="top" content="放大">
-					<Icon {...toolbarProps} path={mdiMagnifyPlusOutline} onClick={handleZoom} />
-				</Tooltip>
-				<Tooltip spacing={12} placement="top" content="重置">
-					<Icon {...toolbarProps} path={mdiBackupRestore} onClick={handleReset} />
-				</Tooltip>
-				<Tooltip spacing={12} placement="top" content="关闭">
-					<Icon {...toolbarProps} path={mdiClose} onClick={hideDetail} />
-				</Tooltip>
+				{toolbarList.map(item => (
+					<Tooltip key={item.id} spacing={12} placement="top" content={item.content}>
+						<Icon
+							className={`${prefixCls}-detail-icon`}
+							size="20px"
+							canHover
+							path={item.iconPath}
+							onClick={item.clickHandler}
+						/>
+					</Tooltip>
+				))}
 			</Space>
 		</div>
 	)
@@ -225,6 +281,11 @@ const Image = forwardRef<HTMLImageElement, ImageProps>((props, outerRef) => {
 						}}
 						onMouseDown={handleDragDetailStart}
 						onLoad={handleDetailLoaded}
+						onClick={() => {
+							if (detailLoading) {
+								hideDetail()
+							}
+						}}
 					/>
 				</div>
 			</Motion.Zoom>

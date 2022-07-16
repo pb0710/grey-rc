@@ -5,8 +5,8 @@
 .g-tooltip-content {
 	@include basic;
 	padding: 6px 12px;
-	border-radius: 4px;
-	box-shadow: $shadow-medium;
+	border-radius: $radius-m;
+	box-shadow: $shadow-m;
 	&-light {
 		color: #333;
 		background: #fff;

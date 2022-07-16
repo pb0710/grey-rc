@@ -2,7 +2,7 @@ import React, { forwardRef, HTMLAttributes } from 'react'
 import { cls } from 'grey-utils'
 import { UI_PREFIX } from '../../constants'
 import './tag.scss'
-import Icon from '../basic/Icon'
+import Icon from '../icon'
 import { mdiClose, mdiLoading } from '@mdi/js'
 import { useBoolean } from 'grey-rh'
 

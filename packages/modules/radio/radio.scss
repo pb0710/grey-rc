@@ -30,8 +30,8 @@
 	}
 	&-checked {
 		.g-radio-icon {
-			background: $primary-color;
-			border-color: $primary-color;
+			background: $color-primary;
+			border-color: $color-primary;
 			&::after {
 				transform: scale(1);
 			}
@@ -39,7 +39,7 @@
 	}
 	&-disabled {
 		cursor: not-allowed;
-		opacity: 0.4;
+		opacity: $opacity-disabled;
 	}
 	&:not(&-checked):not(&-disabled) {
 		&:hover {
@@ -85,11 +85,11 @@
 		display: inline-flex;
 		align-items: center;
 		background: #eee;
-		border-radius: 4px;
+		border-radius: $radius-m;
 		user-select: none;
 		&-disabled {
 			cursor: not-allowed;
-			opacity: 0.4;
+			opacity: $opacity-disabled;
 		}
 		&-checked {
 			background: #fff;

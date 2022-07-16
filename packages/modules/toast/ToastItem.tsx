@@ -2,7 +2,7 @@ import React, { forwardRef, HTMLAttributes, ReactNode } from 'react'
 import { cls } from 'grey-utils'
 import { UI_PREFIX } from '../../constants'
 import './toast-item.scss'
-import Icon from '../basic/Icon'
+import Icon from '../icon'
 import { mdiClose } from '@mdi/js'
 
 export interface ToastItemProps extends Omit<HTMLAttributes<HTMLDivElement>, 'title'> {

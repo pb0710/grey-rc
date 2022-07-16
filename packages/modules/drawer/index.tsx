@@ -3,7 +3,7 @@ import { cls } from 'grey-utils'
 import { UI_PREFIX } from '../../constants'
 import './drawer.scss'
 import { createPortal } from 'react-dom'
-import Icon from '../basic/Icon'
+import Icon from '../icon'
 import { mdiClose } from '@mdi/js'
 import Motion from '../motion'
 
@@ -16,6 +16,7 @@ interface DrawerProps extends HTMLAttributes<HTMLElement> {
 	maskClassName?: string
 	maskClosable?: boolean
 	closable?: boolean
+	destroy?: boolean
 	onCancel?: () => void
 }
 
@@ -31,6 +32,7 @@ const Drawer: FC<DrawerProps> = props => {
 		maskClosable = true,
 		maskStyle,
 		closable = false,
+		destroy = false,
 		onCancel,
 		style,
 		...rest
@@ -60,7 +62,7 @@ const Drawer: FC<DrawerProps> = props => {
 		<Motion.Fade
 			in={visible}
 			mountOnEnter
-			unmountOnExit
+			unmountOnExit={destroy}
 			onEnter={setBodyOverflowHidden}
 			onExited={resetBodyOverflowHidden}
 		>

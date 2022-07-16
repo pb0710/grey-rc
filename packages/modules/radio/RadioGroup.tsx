@@ -10,7 +10,7 @@ import React, {
 } from 'react'
 import Radio, { RadioProps } from '.'
 import { UI_PREFIX } from '../../constants'
-import Space from '../basic/Space'
+import Space from '../space'
 import './radio-group.scss'
 
 interface RadioGroupProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange' | 'defaultValue'> {

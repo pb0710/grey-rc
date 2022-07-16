@@ -14,7 +14,7 @@ import './select.scss'
 import Popup from '../popup'
 import { SelectCtx } from './SelectCtx'
 import Option, { OptionProps } from './Option'
-import Icon from '../basic/Icon'
+import Icon from '../icon'
 import { mdiChevronDown } from '@mdi/js'
 import { useBoolean } from 'grey-rh'
 

@@ -8,8 +8,8 @@
 	background: #fff;
 	border: 1px solid #ddd;
 	border-bottom-color: #ccc;
-	border-radius: 6px;
-	box-shadow: $shadow-medium;
+	border-radius: $radius-m;
+	box-shadow: $shadow-m;
 	& + .g-toast-item {
 		margin-top: 8px;
 	}

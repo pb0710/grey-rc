@@ -10,7 +10,7 @@ import React, {
 } from 'react'
 import './checkbox.scss'
 import { mdiCheckBold } from '@mdi/js'
-import Icon from '../basic/Icon'
+import Icon from '../icon'
 import CheckboxGroup from './CheckboxGroup'
 import { UI_PREFIX } from '../../constants'
 

@@ -3,7 +3,7 @@
 	@include basic;
 	display: inline-flex;
 	align-items: center;
-	border-radius: 4px;
+	border-radius: $radius-m;
 	background: #eee;
 	&-close {
 		display: flex;

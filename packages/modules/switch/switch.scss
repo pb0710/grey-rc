@@ -18,7 +18,7 @@
 	}
 	&-disabled {
 		cursor: not-allowed;
-		opacity: 0.4;
+		opacity: $opacity-disabled;
 	}
 	&-small {
 		width: 24px;
@@ -28,7 +28,7 @@
 			height: 12px;
 		}
 		&.g-switch-checked {
-			background: $primary-color;
+			background: $color-primary;
 			&::after {
 				left: 10px;
 			}
@@ -54,7 +54,7 @@
 			height: 18px;
 		}
 		&.g-switch-checked {
-			background: $primary-color;
+			background: $color-primary;
 			&::after {
 				left: 14px;
 			}
@@ -80,7 +80,7 @@
 			height: 24px;
 		}
 		&.g-switch-checked {
-			background: $primary-color;
+			background: $color-primary;
 			&::after {
 				left: 18px;
 			}

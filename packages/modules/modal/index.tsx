@@ -24,11 +24,21 @@ export interface ModalProps extends HTMLAttributes<HTMLElement> {
 	visible?: boolean
 	maskClassName?: string
 	maskClosable?: boolean
+	destroy?: boolean
 	onCancel?: () => void
 }
 
 const Modal: FC<ModalProps> = props => {
-	const { children, className, maskClassName, maskClosable = true, visible = false, onCancel, ...rest } = props
+	const {
+		children,
+		className,
+		maskClassName,
+		maskClosable = true,
+		destroy = false,
+		visible = false,
+		onCancel,
+		...rest
+	} = props
 
 	const preBodyOverflowRef = useRef('')
 
@@ -44,7 +54,13 @@ const Modal: FC<ModalProps> = props => {
 	const prefixCls = `${UI_PREFIX}-modal`
 
 	return createPortal(
-		<Motion.Fade in={visible} mountOnEnter onEnter={setBodyOverflowHidden} onExited={resetBodyOverflowHidden}>
+		<Motion.Fade
+			in={visible}
+			mountOnEnter
+			unmountOnExit={destroy}
+			onEnter={setBodyOverflowHidden}
+			onExited={resetBodyOverflowHidden}
+		>
 			<div className={cls(className, prefixCls)} {...rest}>
 				<div className={cls(maskClassName, `${prefixCls}-mask`)}></div>
 				<div

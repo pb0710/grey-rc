@@ -1,7 +1,7 @@
 @use '../../styles/mixins.scss' as *;
 .g-loading {
 	@include basic;
-	color: $primary-color;
+	color: $color-primary;
 	display: inline-block;
 	&-inherit {
 		font-size: inherit;
@@ -40,7 +40,7 @@
 		}
 		&.g-loading-spinning {
 			.g-loading-content {
-				filter: opacity(0.4);
+				filter: opacity($opacity-disabled);
 				user-select: none;
 				pointer-events: none;
 			}

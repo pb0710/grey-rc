@@ -1,5 +1,3 @@
-// polyfills.scss
-
 @use 'sass:math';
 @mixin _flex-gap($gap, $row: true) {
 	$margin: math.div($gap, 2);
