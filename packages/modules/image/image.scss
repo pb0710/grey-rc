@@ -16,7 +16,7 @@
 		max-width: 90vw;
 		max-height: calc(100vh - 240px);
 		user-select: none;
-		transition: transform 0.2s ease-out;
+		transition: transform $duration-n ease-out;
 		opacity: 0;
 		&-loaded {
 			opacity: 1;

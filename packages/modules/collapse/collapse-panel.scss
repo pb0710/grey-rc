@@ -12,12 +12,12 @@
 		&-icon {
 			background-color: inherit;
 			> svg {
-				transition: transform 0.2s;
+				transition: transform $duration-n;
 			}
 		}
 	}
 	&-box {
-		transition: max-height 0.2s ease-out, opacity 0.2s ease-out;
+		transition: max-height $duration-n ease-out, opacity $duration-n ease-out;
 		overflow: hidden;
 		&-entered {
 			opacity: 1;

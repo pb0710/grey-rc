@@ -8,7 +8,7 @@
 	padding: 4px;
 	border: 1px solid #ddd;
 	border-bottom-color: #ccc;
-	transition: all 0.2s ease-out;
+	transition: all $duration-n ease-out;
 	&-inner {
 		flex: 1;
 		min-height: 22px;

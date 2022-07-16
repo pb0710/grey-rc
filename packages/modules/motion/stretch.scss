@@ -1,3 +1,4 @@
+@use '../../styles/vars.scss' as *;
 .stretch {
   // enter
 	&-top-enter,
@@ -25,7 +26,7 @@
 	&-bottom-enter-active,
 	&-right-enter-active {
 		opacity: 1;
-		transition: opacity 150ms cubic-bezier(0.4, 0, 0.2, 1), transform 150ms cubic-bezier(0.4, 0, 0.2, 1);
+		transition: opacity $duration-f cubic-bezier(0.4, 0, 0.2, 1), transform $duration-f cubic-bezier(0.4, 0, 0.2, 1);
 	}
 
 	&-top-enter-active {
@@ -70,7 +71,7 @@
 	&-bottom-exit-active,
 	&-right-exit-active {
 		opacity: 0;
-		transition: opacity 150ms cubic-bezier(0.4, 0, 0.2, 1), transform 150ms cubic-bezier(0.4, 0, 0.2, 1);
+		transition: opacity $duration-f cubic-bezier(0.4, 0, 0.2, 1), transform $duration-f cubic-bezier(0.4, 0, 0.2, 1);
 	}
 
 	&-top-exit-active {

@@ -10,7 +10,7 @@
 	&-inset {
 		background: $color-primary;
 		border-radius: $round;
-		transition: all 0.2s;
+		transition: all $duration-n;
 	}
 	&-horizontal {
 		flex-direction: row;

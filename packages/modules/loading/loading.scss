@@ -36,11 +36,11 @@
 			transform: translate(-50%, -50%);
 		}
 		.g-loading-content {
-			transition: filter 0.2s ease-out;
+			transition: opacity $duration-n ease-out;
 		}
 		&.g-loading-spinning {
 			.g-loading-content {
-				filter: opacity($opacity-disabled);
+				opacity: $opacity-disabled;
 				user-select: none;
 				pointer-events: none;
 			}

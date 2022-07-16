@@ -4,7 +4,7 @@
 	display: inline-flex;
 	align-items: center;
 	user-select: none;
-	transition: filter 0.1s;
+	transition: filter $duration-f;
 	&-inner {
 		padding: 0;
 		outline: 0;
@@ -18,13 +18,13 @@
 		border-bottom-color: #ccc;
 		border-radius: $round;
 		background: #fff;
-		transition: all ease-out 0.1s;
+		transition: all ease-out $duration-f;
 		margin-right: 8px;
 		&::after {
 			content: '';
 			border-radius: $round;
 			background: #fff;
-			transition: all ease-out 0.1s;
+			transition: all ease-out $duration-f;
 			transform: scale(0);
 		}
 	}
